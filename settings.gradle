@@ -1,4 +1,4 @@
 include ':network'
-include ':movies'
+include ':features:movies'
 include ':app'
 rootProject.name = "Paging 3"
