@@ -2,10 +2,19 @@ package com.example.paging.network
 
 import retrofit2.Response
 
-object NetworkRepositoryRequest {
+/**
+ * Esta classe é para auxiliar uma chamada de rede
+ * onde a resposta é um [Response]
+ * Caso der sucesso, retorna o objeto.
+ * Caso der erro, trata o codigo e lança a exceçãoo
+ * //TODO IMPLEMENTAR EXCESSOES
+ */
+object NetworkRepositoryManager {
 
-    const val MOVIESTBAPI = "5280df22b26d2d69e023be5658c0ed0d"
-    const val BASE_BACKDROP_IMAGE_PATTER = "http://image.tmdb.org/t/p/w500/"
+    /**
+     * Persiste a fução suspensa e retorna o ojeto
+     * @return OBJETO PERSISTIDO
+     */
     suspend fun <S> getData(
         api: suspend () -> Response<S>
     ): S {

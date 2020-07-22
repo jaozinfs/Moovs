@@ -1,15 +1,15 @@
-package com.example.paging.movies.data.network.client
+package com.example.paging.network.client
 
-import com.google.gson.GsonBuilder
+import com.example.paging.network.utils.GJsonExtension.addLogInterceptor
+import com.example.paging.network.utils.GjsonUtils.gsonDefault
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitFactory {
 
-    inline fun <T> factoryApiClient(
+    fun <T> factoryApiClient(
         api: Class<T>,
         baseUrl: String
     ): T {
@@ -31,14 +31,3 @@ object RetrofitFactory {
 
 }
 
-internal const val apiDataFormat = "yyyy-MM-dd'T'HH:mm:ss"
-val gsonDefault = GsonBuilder()
-    .setDateFormat(apiDataFormat)
-    .create()
-
-fun OkHttpClient.Builder.addLogInterceptor(): OkHttpClient.Builder {
-        val logging = HttpLoggingInterceptor()
-        logging.level = HttpLoggingInterceptor.Level.BODY
-        addNetworkInterceptor(logging)
-    return this
-}
