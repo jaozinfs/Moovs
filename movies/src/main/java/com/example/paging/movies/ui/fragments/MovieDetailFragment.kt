@@ -4,8 +4,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import com.example.paging.movies.data.local.entities.MovieEntity
 import com.example.paging.movies.R
+import com.example.paging.movies.data.local.entities.MovieEntity
+import com.example.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.example.paging.ui.loadImageUrl
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 
@@ -29,7 +30,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val uri = Uri.parse(com.example.paging.network.NetworkRepositoryManager.BASE_BACKDROP_IMAGE_PATTER)
+        val uri = Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
             .buildUpon()
             .appendEncodedPath(movieEntity?.backdrop_path)
             .build()

@@ -4,8 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
+import com.example.paging.movies.data.MoviesPagingSource
 import com.example.paging.movies.data.network.movies.MoviesRepository
-import com.example.paging.datasource.MoviesRemoteMediator
 
 class MoviesViewModel(
     private val moviesRepository: MoviesRepository
@@ -20,7 +21,11 @@ class MoviesViewModel(
                 pageSize = NETWORK_PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { MoviesRemoteMediator(moviesRepository) }
+            pagingSourceFactory = {
+                MoviesPagingSource(
+                    moviesRepository
+                )
+            }
         ).flow.cachedIn(viewModelScope)
 
 
