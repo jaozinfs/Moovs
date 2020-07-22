@@ -1,4 +1,4 @@
-package com.example.paging.data.repository.local.entities
+package com.example.paging.movies.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

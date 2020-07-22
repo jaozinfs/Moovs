@@ -25,7 +25,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = MoviesAdapter {
-            findNavController().navigate(R.id.nav_movies, MovieDetailFragment.getBundle(it))
+            findNavController().navigate(R.id.nav_movies_detail, MovieDetailFragment.getBundle(it))
         }
         movies_rv.layoutManager = GridLayoutManager(context, 2)
         movies_rv.adapter = adapter.withLoadStateHeaderAndFooter(

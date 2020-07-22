@@ -14,8 +14,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.paging.data.repository.local.entities.MovieEntity
-import com.example.paging.data.repository.network.NetworkRepositoryRequest.BASE_BACKDROP_IMAGE_PATTER
+import com.example.paging.movies.data.local.entities.MovieEntity
+import com.example.paging.network.NetworkRepositoryRequest.BASE_BACKDROP_IMAGE_PATTER
 import com.example.paging.movies.R
 import com.example.paging.ui.lazyFindView
 import com.example.paging.ui.loadImageUrl

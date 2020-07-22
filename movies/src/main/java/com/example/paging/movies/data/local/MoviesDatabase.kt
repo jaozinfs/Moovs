@@ -1,4 +1,4 @@
-package com.example.paging.data.repository.local
+package com.example.paging.movies.data.local
 
 //@Database(entities = [MovieEntity::class], version = 1)
 //abstract class MoviesDatabase : RoomDatabase() {

@@ -2,8 +2,8 @@ package com.example.paging.datasource
 
 import android.util.Log
 import androidx.paging.PagingSource
-import com.example.paging.data.repository.local.entities.MovieEntity
-import com.example.paging.data.repository.network.movies.MoviesRepository
+import com.example.paging.movies.data.local.entities.MovieEntity
+import com.example.paging.movies.data.network.movies.MoviesRepository
 
 class MoviesRemoteMediator(
     val service: MoviesRepository

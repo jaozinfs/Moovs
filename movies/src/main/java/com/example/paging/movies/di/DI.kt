@@ -1,10 +1,10 @@
 package com.example.paging.movies.di
 
-import com.example.paging.data.repository.network.client.RetrofitFactory
-import com.example.paging.data.repository.network.movies.MoviesApi
-import com.example.paging.data.repository.network.movies.MoviesRepository
-import com.example.paging.data.repository.network.movies.MoviesRepositoryImpl
-import com.example.movies.ui.MainActivityViewModel
+import com.example.paging.movies.data.network.client.RetrofitFactory
+import com.example.paging.movies.data.network.movies.MoviesApi
+import com.example.paging.movies.data.network.movies.MoviesRepository
+import com.example.paging.movies.data.network.movies.MoviesRepositoryImpl
+import com.example.paging.movies.ui.MoviesViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -16,6 +16,6 @@ val moviesModules = module {
         MoviesRepositoryImpl(get()) as MoviesRepository
     }
     viewModel {
-        com.example.movies.ui.MainActivityViewModel(get())
+        MoviesViewModel(get())
     }
 }

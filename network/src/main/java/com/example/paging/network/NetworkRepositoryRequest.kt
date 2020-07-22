@@ -1,4 +1,4 @@
-package com.example.paging.data.repository.network
+package com.example.paging.network
 
 import retrofit2.Response
 

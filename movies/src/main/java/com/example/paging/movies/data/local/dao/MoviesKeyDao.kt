@@ -1,10 +1,10 @@
-package com.example.paging.data.repository.local.dao
+package com.example.paging.movies.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.paging.data.repository.local.entities.MoviesKeyId
+import com.example.paging.movies.data.local.entities.MoviesKeyId
 
 @Dao
 interface MoviesKeyDao {

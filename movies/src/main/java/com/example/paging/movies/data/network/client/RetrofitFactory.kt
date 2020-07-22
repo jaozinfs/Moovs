@@ -1,4 +1,4 @@
-package com.example.paging.data.repository.network.client
+package com.example.paging.movies.data.network.client
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

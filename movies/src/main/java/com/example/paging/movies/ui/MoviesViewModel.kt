@@ -4,8 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import androidx.paging.cachedIn
-import com.example.paging.data.repository.network.movies.MoviesRepository
+import com.example.paging.movies.data.network.movies.MoviesRepository
 import com.example.paging.datasource.MoviesRemoteMediator
 
 class MoviesViewModel(

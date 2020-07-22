@@ -1,9 +1,9 @@
-package com.example.paging.data.repository.local.dao
+package com.example.paging.movies.data.local.dao
 
 import androidx.paging.PagingSource
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.paging.data.repository.local.entities.MovieEntity
+import com.example.paging.movies.data.local.entities.MovieEntity
 
 interface MoviesDao {
     @Insert
