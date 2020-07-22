@@ -7,8 +7,17 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+/**
+ * Este objeto auxilia na criação de api
+ *
+ */
 object RetrofitFactory {
 
+    /**
+     * Cria a api a partir da interface com as anotações dos endpoints
+     * @param baseUrl a partir da base url é criada a API
+     * @return API
+     */
     fun <T> factoryApiClient(
         api: Class<T>,
         baseUrl: String
