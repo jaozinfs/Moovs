@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_base.xml"
+    app:startDestination="@id/nav_features_movies">
+
+    <activity
+        android:id="@+id/nav_features_movies"
+        android:name="com.example.paging.movies.ui.MoviesActivity"
+        android:label="@string/title_movies"
+        app:moduleName="@string/module_movies" />
+
+</navigation>

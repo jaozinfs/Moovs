@@ -4,18 +4,21 @@
 
     <dist:module
         dist:instant="false"
+        dist:onDemand="false"
         dist:title="@string/title_movies">
-        <dist:delivery>
-            <dist:on-demand />
-        </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>
+
+
     <application>
         <activity
             android:name=".ui.MoviesActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
-
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="mobile.features.movies" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 </manifest>

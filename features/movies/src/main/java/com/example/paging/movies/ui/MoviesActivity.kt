@@ -7,6 +7,7 @@ import com.example.paging.movies.di.moviesModules
 import kotlinx.android.synthetic.main.activity_movies.*
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 import org.koin.dsl.koinApplication
 
 class MoviesActivity : AppCompatActivity() {
@@ -24,7 +25,8 @@ class MoviesActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         koinApplication {
-            unloadModules(moviesModules)
+            unloadKoinModules(moviesModules)
         }
     }
+
 }

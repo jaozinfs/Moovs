@@ -2,26 +2,31 @@ package com.example.paging
 
 import android.app.Application
 import android.content.Context
-import android.content.Intent
-import android.util.Log
 import com.google.android.play.core.splitcompat.SplitCompat
-import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
-import com.google.android.play.core.splitinstall.SplitInstallRequest
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
 class MainApp : Application() {
+
     override fun onCreate() {
         super.onCreate()
-        startKoin {
-            androidContext(this@MainApp)
-        }
+        startKoin()
     }
 
+    /**
+     * Initilize Dynimic SplitCompat
+     */
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(base)
         SplitCompat.install(this)
     }
 
+    /**
+     * Initialize Koin with Android Application Context Singleton
+     *
+     */
+    private fun startKoin() = startKoin {
+        androidContext(this@MainApp)
+    }
 
 }

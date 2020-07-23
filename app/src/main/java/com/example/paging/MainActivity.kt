@@ -1,39 +1,24 @@
 package com.example.paging
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.play.core.splitinstall.SplitInstallManagerFactory
-import com.google.android.play.core.splitinstall.SplitInstallRequest
+import androidx.navigation.findNavController
+import kotlinx.android.synthetic.main.main.*
 
 class MainActivity : AppCompatActivity() {
+//    private val navHostFragment by lazy {
+//        supportFragmentManager
+//            .findFragmentById(R.id.main_fragmnet_container) as NavHostFragment?
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
-        install()
-    }
-    fun install() {
-        val splitInstallManager = SplitInstallManagerFactory.create(this)
-
-        val request = SplitInstallRequest.newBuilder()
-            .addModule("movies")
-            .build()
-
-        splitInstallManager.startInstall(request)
-            .addOnSuccessListener {
-                Log.d("Teste", it.toString())
-            }
-            .addOnFailureListener {
-                Log.e("Teste", it.toString())
-            }
-        if (splitInstallManager.installedModules.contains("movies")) {
-            val i = Intent()
-            i.setClassName(BuildConfig.APPLICATION_ID, "com.example.paging.movies.ui.MoviesActivity")
-            startActivity(i)
-        } else {
-            Log.e("Teste", "Registration feature is not installed")
+        teste.setOnClickListener {
+            main_fragmnet_container.findNavController().navigate(R.id.nav_features_movies)
         }
+
     }
+
+
 }
