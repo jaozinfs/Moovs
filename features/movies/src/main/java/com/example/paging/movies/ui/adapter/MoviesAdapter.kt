@@ -1,6 +1,7 @@
 package com.example.paging.movies.ui.adapter
 
 import android.net.Uri
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,20 +25,28 @@ import com.example.paging.ui.view.RatingView
 import java.util.concurrent.atomic.AtomicBoolean
 
 
-class MoviesAdapter(private val itemClickListener: (MovieEntity) -> Unit) :
+class MoviesAdapter(private val itemClickListener: (Int, MovieEntity, ImageView, RatingView) -> Unit) :
     PagingDataAdapter<MovieEntity, MoviesAdapter.MoviesViewHolder>(
         MoviesDiffUtils
     ) {
-
+    companion object {
+        fun getMOVIE_BANNER_TRANSITIONTAG(position: Int) = "movie_image_transition$position"
+    }
 
     inner class MoviesViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+
         val imageview by view.lazyFindView<ImageView>(R.id.imageView)
         val rating by view.lazyFindView<RatingView>(R.id.rating)
 
         val atomicBoolean = AtomicBoolean(true)
 
-        fun bind(moviesEntity: MovieEntity) {
-            view.setClickListener { itemClickListener.invoke(moviesEntity) }
+        fun bind(moviesEntity: MovieEntity, position: Int) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                imageview.transitionName = moviesEntity.backdrop_path
+                rating.transitionName = moviesEntity.poster_path
+            }
+
+            view.setClickListener { itemClickListener.invoke(position, moviesEntity, imageview, rating) }
 
             rating.setPercent(moviesEntity.vote_average.toFloat(), atomicBoolean.getAndSet(false))
 
@@ -46,7 +55,7 @@ class MoviesAdapter(private val itemClickListener: (MovieEntity) -> Unit) :
                 .appendEncodedPath(moviesEntity.backdrop_path)
                 .build()
 
-            imageview loadImageUrl uri
+            imageview.loadImageUrl(uri)
         }
     }
 
@@ -60,7 +69,7 @@ class MoviesAdapter(private val itemClickListener: (MovieEntity) -> Unit) :
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
 
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(it, position) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesViewHolder {

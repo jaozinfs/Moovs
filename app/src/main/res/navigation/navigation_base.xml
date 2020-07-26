@@ -9,5 +9,9 @@
         android:name="com.example.paging.movies.ui.MoviesActivity"
         android:label="@string/title_movies"
         app:moduleName="@string/module_movies" />
+    <action
+        android:id="@+id/navigate_features_movies"
+        app:destination="@+id/nav_features_movies"
+        app:popUpToInclusive="true"/>
 
 </navigation>

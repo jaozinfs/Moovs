@@ -22,4 +22,13 @@
         app:layout_constraintTop_toBottomOf="@+id/banner"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Coringa" />
+
+    <com.example.paging.ui.view.RatingView
+        android:id="@+id/rating_view"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="16dp"
+        app:primaryColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/banner"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

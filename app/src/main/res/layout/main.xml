@@ -9,8 +9,7 @@
         android:name="androidx.navigation.dynamicfeatures.fragment.DynamicNavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/navigation_base" />
+       />
 
     <Button
         android:id="@+id/teste"

@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.Log
 import android.util.TypedValue
 import android.view.View
+import com.example.paging.R
 import kotlin.math.min
 import kotlin.math.round
 
@@ -22,7 +23,6 @@ class RatingView(
         }
     }
     private val paintCircle = Paint().apply {
-        color = Color.RED
         flags = Paint.ANTI_ALIAS_FLAG
     }
     private val paintRating = Paint().apply {
@@ -31,7 +31,7 @@ class RatingView(
         flags = Paint.ANTI_ALIAS_FLAG
 
     }
-    private  val Float.toSp
+    private val Float.toSp
         get() = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_SP,
             this, resources.displayMetrics
@@ -39,8 +39,22 @@ class RatingView(
     private var rating = "0.0"
     private var percent = 0F
 
+    init {
 
-    fun setPercent(p: Float, anim: Boolean) {
+
+        context.obtainStyledAttributes(attrs, R.styleable.RatingView).apply {
+            if (hasValue(R.styleable.RatingView_primaryColor))
+               paintCircle.color =  getColor(R.styleable.RatingView_primaryColor, Color.WHITE)
+
+            if (hasValue(R.styleable.RatingView_progressColor))
+                paintRating.color = getColor(R.styleable.RatingView_progressColor, Color.WHITE)
+
+        }.recycle()
+
+
+    }
+
+    fun setPercent(p: Float, anim: Boolean = true) {
         ValueAnimator.ofFloat(0f, p).takeIf { anim }?.apply {
             duration = 1000
             addUpdateListener {
@@ -49,16 +63,26 @@ class RatingView(
         }?.start() ?: setPercent(p)
     }
 
+    fun setPercent(p: Double?, anim: Boolean = true) {
+        p ?: return
+        ValueAnimator.ofFloat(0f, p.toFloat()).takeIf { anim }?.apply {
+            duration = 1000
+            addUpdateListener {
+                setPercent(it.animatedValue as Float)
+            }
+        }?.start() ?: setPercent(p.toFloat())
+    }
+
     private fun setPercent(p: Float) {
         percent = p
         rating = p.toDouble().round(1).toString()
         Log.d("Teste", "Percent $p")
-        when(p){
-            in 0.toDouble()..3.toDouble()->
+        when (p) {
+            in 0.toDouble()..3.toDouble() ->
                 progressPaint.color = Color.GRAY
-            in 4.toDouble()..6.toDouble()->
+            in 4.toDouble()..6.toDouble() ->
                 progressPaint.color = Color.YELLOW
-            in 7.toDouble()..10.toDouble()->
+            in 7.toDouble()..10.toDouble() ->
                 progressPaint.color = Color.CYAN
         }
         invalidate()
