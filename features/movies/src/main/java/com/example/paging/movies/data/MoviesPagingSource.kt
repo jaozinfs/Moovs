@@ -2,11 +2,11 @@ package com.example.paging.movies.data
 
 import android.util.Log
 import androidx.paging.PagingSource
-import com.example.paging.movies.data.local.entities.MovieEntity
+import com.example.paging.database.local.entities.MovieEntity
 import com.example.paging.movies.data.network.movies.MoviesRepository
 
 class MoviesPagingSource(
-    val service: MoviesRepository
+    private val service: MoviesRepository
 ) : PagingSource<Int, MovieEntity>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
         return try {

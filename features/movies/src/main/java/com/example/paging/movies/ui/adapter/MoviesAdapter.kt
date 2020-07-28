@@ -15,8 +15,8 @@ import androidx.paging.LoadStateAdapter
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.paging.database.local.entities.MovieEntity
 import com.example.paging.movies.R
-import com.example.paging.movies.data.local.entities.MovieEntity
 import com.example.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.example.paging.ui.lazyFindView
 import com.example.paging.ui.loadImageUrl
@@ -25,10 +25,12 @@ import com.example.paging.ui.view.RatingView
 import java.util.concurrent.atomic.AtomicBoolean
 
 
-class MoviesAdapter(private val itemClickListener: (Int, MovieEntity, ImageView, RatingView) -> Unit) :
+class MoviesAdapter() :
     PagingDataAdapter<MovieEntity, MoviesAdapter.MoviesViewHolder>(
         MoviesDiffUtils
     ) {
+    private var clickListener: ((Int, MovieEntity, ImageView, RatingView) -> Unit)? = null
+
     companion object {
         fun getMOVIE_BANNER_TRANSITIONTAG(position: Int) = "movie_image_transition$position"
     }
@@ -46,7 +48,14 @@ class MoviesAdapter(private val itemClickListener: (Int, MovieEntity, ImageView,
                 rating.transitionName = moviesEntity.poster_path
             }
 
-            view.setClickListener { itemClickListener.invoke(position, moviesEntity, imageview, rating) }
+            view.setClickListener {
+                clickListener?.invoke(
+                    position,
+                    moviesEntity,
+                    imageview,
+                    rating
+                )
+            }
 
             rating.setPercent(moviesEntity.vote_average.toFloat(), atomicBoolean.getAndSet(false))
 
@@ -80,6 +89,10 @@ class MoviesAdapter(private val itemClickListener: (Int, MovieEntity, ImageView,
                 false
             )
         )
+    }
+
+    fun setMovieClickListener(clickListener: (Int, MovieEntity, ImageView, RatingView) -> Unit) {
+        this@MoviesAdapter.clickListener = clickListener
     }
 }
 

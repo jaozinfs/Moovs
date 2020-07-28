@@ -1,4 +1,4 @@
-package com.example.paging.movies.data.local.dao
+package com.example.paging.database.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

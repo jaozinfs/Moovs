@@ -16,5 +16,9 @@
         android:name="com.example.paging.movies.ui.fragments.MovieDetailFragment"
         android:label="@string/title_movies"
         />
-
+    <fragment
+        android:id="@+id/nav_movies_filter"
+        android:name="com.example.paging.movies.ui.fragments.MoviesFilterFragment"
+        android:label="@string/title_movies"
+        />
 </navigation>

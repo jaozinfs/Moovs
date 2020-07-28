@@ -7,7 +7,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionInflater
 import com.example.paging.movies.R
-import com.example.paging.movies.data.local.entities.MovieEntity
+import com.example.paging.database.local.entities.MovieEntity
 import com.example.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.example.paging.ui.loadImageUrl
 import kotlinx.android.synthetic.main.fragment_movie_details.*
@@ -63,6 +63,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         movie_name.text = movieEntity?.title
 
         rating_view.setPercent(movieEntity?.vote_average)
+
+
     }
 
     private fun setSharedElementTransitionOnEnter() {
