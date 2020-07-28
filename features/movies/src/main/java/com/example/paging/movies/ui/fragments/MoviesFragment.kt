@@ -1,11 +1,5 @@
 package com.example.paging.movies.ui.fragments
 
-import android.Manifest
-import android.content.Context
-import android.content.pm.PackageManager
-import android.location.Location
-import android.location.LocationListener
-import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
@@ -15,7 +9,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.widget.SearchView
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -42,10 +35,11 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
 
     private lateinit var searchView: SearchView
 
-    val viewModel: MoviesViewModel by sharedViewModel()
+    private val viewModel: MoviesViewModel by sharedViewModel()
 
     private var searchJob: Job? = null
-    val adapter = MoviesAdapter()
+    private val adapter = MoviesAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -53,27 +47,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        context?.let {
-            if (ActivityCompat.checkSelfPermission(
-                    it,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
-                    it,
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) != PackageManager.PERMISSION_GRANTED
-            ) {
-                requestPermissions( //Method of Fragment
-                    arrayOf(
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.ACCESS_COARSE_LOCATION
-                    ),
-                    9934
-                );
-            } else {
-                initLocation()
-            }
-        }
-
 
         setAdapterClickListener(savedInstanceState)
 
@@ -184,41 +157,5 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         })
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == 9934) {
-            if ((permissions[0] == Manifest.permission.ACCESS_FINE_LOCATION || permissions[0] == Manifest.permission.ACCESS_COARSE_LOCATION)
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED
-            ) {
-                initLocation()
-            }
-        }
-    }
 
-    private fun initLocation() {
-        ClassLocaltionListener.initAll()
-        val locationManager =
-            context?.getSystemService(Context.LOCATION_SERVICE) as? LocationManager
-        locationManager?.let {
-            val provider = LocationManager.NETWORK_PROVIDER
-            it.requestLocationUpdates(provider, 0, 0f, ClassLocaltionListener.locationListener)
-        }
-    }
-}
-
-object ClassLocaltionListener {
-
-    lateinit var locationListener: LocationListener
-
-    fun initAll() {
-        locationListener = LocationListener { p0 -> printLocation(p0) }
-    }
-
-    private fun printLocation(location: Location) {
-        Log.d("LocationListener", "Location Lat:${location.latitude}")
-        Log.d("LocationListener", "Location Long:${location.longitude}")
-    }
 }
