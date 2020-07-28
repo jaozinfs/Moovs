@@ -1,6 +1,4 @@
 include ':database'
-include ':navigator'
-include ':features:teste'
 include ':network'
 include ':features:movies'
 include ':app'

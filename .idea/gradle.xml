@@ -15,8 +15,6 @@
             <option value="$PROJECT_DIR$/database" />
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/movies" />
-            <option value="$PROJECT_DIR$/features/teste" />
-            <option value="$PROJECT_DIR$/navigator" />
             <option value="$PROJECT_DIR$/network" />
           </set>
         </option>
