@@ -1,5 +1,6 @@
 package com.example.paging.movies.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -19,7 +20,10 @@ class MoviesViewModel(
         private const val NETWORK_PAGE_SIZE = 20
     }
 
-    fun getMovies(voteAvarage: Int? = null): Flow<PagingData<MovieEntity>> {
+    fun getMovies(
+        voteAvarage: Int? = null,
+        nameFilter: String? = null
+    ): Flow<PagingData<MovieEntity>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NETWORK_PAGE_SIZE,
@@ -29,10 +33,18 @@ class MoviesViewModel(
                 MoviesPagingSource(moviesRepository)
             }
         ).flow.cachedIn(viewModelScope).map { paginData ->
+            Log.d("Teste", "Name Filter $nameFilter")
             paginData.filter {
-                it.vote_average >= voteAvarage ?: 0
+
+                it.vote_average >= voteAvarage ?: 0 &&
+                        if (!nameFilter.isNullOrEmpty()) it.original_title.contains(
+                            nameFilter,
+                            true
+                        ) else true
+
             }
         }
 
     }
+
 }

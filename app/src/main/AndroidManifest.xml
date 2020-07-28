@@ -3,6 +3,7 @@
     package="com.example.paging">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.example.paging.MainApp"
         android:allowBackup="true"
