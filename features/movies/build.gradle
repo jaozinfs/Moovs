@@ -36,6 +36,11 @@ dependencies {
     implementation "androidx.navigation:navigation-dynamic-features-fragment:2.3.0"
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
     androidTestImplementation 'androidx.annotation:annotation:1.1.0'
+
+    //ui
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    
     def paging_version = "3.0.0-alpha02"
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "com.squareup.retrofit2:retrofit:2.7.1"

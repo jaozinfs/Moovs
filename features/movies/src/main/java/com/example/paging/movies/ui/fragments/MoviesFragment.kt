@@ -41,17 +41,25 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setAdapterClickListener(savedInstanceState)
+        setSwipeRefreshListener()
         initList()
         getMovies()
         observeFilter()
     }
 
+    //Set listener of swipe refresh layout to refresh list of movies
+    private fun setSwipeRefreshListener() {
+        swipe_refresh_layout.setOnRefreshListener {
+            adapter.refresh()
+        }
+    }
 
     private fun initList() {
         movies_rv.layoutManager = GridLayoutManager(context, 2)
         //Add Loading state on middle of view
         adapter.addLoadStateListener { loadState ->
             progress_load.isVisible = loadState.source.refresh is LoadState.Loading
+            swipe_refresh_layout.isRefreshing = loadState.source.refresh is LoadState.Loading
         }
         //set adapter on recycler view and set adapter in header and footer
         movies_rv.adapter = adapter.withLoadStateHeaderAndFooter(
@@ -105,12 +113,11 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
                     getMovies(nameFilter = query)
                     return false
                 }
-
                 override fun onQueryTextChange(newText: String?): Boolean {
-                    newText?.let {
-                        if (it.isEmpty())
-                            getMovies()
-                    }
+//                    newText?.let {
+//                        if (it.isEmpty())
+//                            getMovies()
+//                    }
                     return false
                 }
             })

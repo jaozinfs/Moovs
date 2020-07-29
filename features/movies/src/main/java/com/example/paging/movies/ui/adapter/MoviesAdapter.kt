@@ -31,13 +31,10 @@ class MoviesAdapter() :
     ) {
     private var clickListener: ((Int, MovieEntity, ImageView, RatingView) -> Unit)? = null
 
-    companion object {
-        fun getMOVIE_BANNER_TRANSITIONTAG(position: Int) = "movie_image_transition$position"
-    }
 
     inner class MoviesViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
-        val imageview by view.lazyFindView<ImageView>(R.id.imageView)
+        val imageview by view.lazyFindView<ImageView>(R.id.image_view)
         val rating by view.lazyFindView<RatingView>(R.id.rating)
 
         val atomicBoolean = AtomicBoolean(true)
@@ -116,9 +113,9 @@ class ReposLoadStateAdapter(private val retry: () -> Unit) :
         private val view: View,
         retry: () -> Unit
     ) : RecyclerView.ViewHolder(view) {
-        val retryButton by view.lazyFindView<Button>(R.id.retry_button)
-        val progressBar by view.lazyFindView<ProgressBar>(R.id.progress_bar)
-        val errorMsg by view.lazyFindView<TextView>(R.id.error_msg)
+        private val retryButton by view.lazyFindView<Button>(R.id.retry_button)
+        private val progressBar by view.lazyFindView<ProgressBar>(R.id.progress_bar)
+        private val errorMsg by view.lazyFindView<TextView>(R.id.error_msg)
 
         init {
             retryButton.setOnClickListener {
