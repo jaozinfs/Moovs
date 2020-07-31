@@ -1,4 +1,4 @@
-package com.example.paging.movies
+package com.jaozinfs.paging.movies
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test

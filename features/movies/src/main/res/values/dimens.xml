@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="movies_space">16sp</dimen>
+    <dimen name="movies_space_medium">8dp</dimen>
     <dimen name="text_size">18sp</dimen>
+    <dimen name="text_size_subtitle">12sp</dimen>
+    <dimen name="text_size_description">9sp</dimen>
+    <dimen name="pageMargin">20dp</dimen>
+    <dimen name="offset">30dp</dimen>
 </resources>

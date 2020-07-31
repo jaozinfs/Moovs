@@ -16,4 +16,17 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--  Estilização do Chip  -->
+    <style name="ChipTheme" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:fontFamily">@font/alfa_slab_one</item>
+        <item name="chipBackgroundColor">@color/chip_background_color_selected</item>
+        <item name="android:textColor">@color/chip_text_color_selected</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="ChipTheme.TextAppearance" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/alfa_slab_one</item>
+    </style>
+
 </resources>

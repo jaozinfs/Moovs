@@ -8,10 +8,10 @@ android {
     buildToolsVersion "30.0.0"
 
     defaultConfig {
-        applicationId "com.example.paging"
+        applicationId "com.jaozinfs.paging"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode System.getenv("BITRISE_BUILD_NUMBER") as Integer ?: 1
+        versionCode System.getenv("BITRISE_BUILD_NUMBER") as Integer ?: 2
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

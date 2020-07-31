@@ -4,5 +4,7 @@
         <attr name="primaryColor" format="color" />
         <attr name="progressColor" format="color" />
     </declare-styleable>
-
+    <declare-styleable name="AgeView">
+        <attr name="age" format="string" />
+    </declare-styleable>
 </resources>

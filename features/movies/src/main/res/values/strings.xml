@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="title_filter">Filter</string>
+    <string name="hint_vote_avarage_filter">Média de votos</string>
+    <string name="adult_label">Adultos</string>
 </resources>

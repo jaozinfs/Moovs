@@ -6,7 +6,7 @@
 
     <activity
         android:id="@+id/nav_features_movies"
-        android:name="com.example.paging.movies.ui.MoviesActivity"
+        android:name="com.jaozinfs.paging.movies.ui.MoviesActivity"
         android:label="@string/title_movies"
         app:moduleName="@string/module_movies" />
     <action

@@ -1,34 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/banner"
+        android:id="@+id/background"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="390dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@tools:sample/backgrounds/scenic" />
+
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="390dp"
+        android:background="#945E5E5E" />
+
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="200dp"
+        android:layout_height="350dp"
+        android:layout_margin="@dimen/movies_space"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/movie_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/banner"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/movies_space"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="@dimen/movies_space"
+        android:fontFamily="@font/alfa_slab_one"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/banner"
+        app:layout_constraintTop_toTopOf="@+id/banner"
         tools:text="Coringa" />
 
-    <com.example.paging.ui.view.RatingView
+    <TextView
+        android:id="@+id/movie_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/movies_space"
+        android:layout_marginTop="@dimen/movies_space_medium"
+        android:layout_marginEnd="@dimen/movies_space"
+        android:fontFamily="@font/alfa_slab_one"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_size_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/banner"
+        app:layout_constraintTop_toBottomOf="@+id/movie_name"
+        tools:text="Coringa é um filme muito bom que eu gosto" />
+
+    <TextView
+        android:id="@+id/movie_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/movies_space"
+        android:fontFamily="@font/alfa_slab_one"
+        android:textSize="@dimen/text_size_subtitle"
+        app:layout_constraintBottom_toTopOf="@+id/movie_name"
+        app:layout_constraintStart_toEndOf="@+id/banner"
+        tools:text="(2020)" />
+
+    <TextView
+        android:id="@+id/movie_details"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/movies_space"
+        android:layout_marginTop="@dimen/movies_space"
+        android:layout_marginEnd="@dimen/movies_space"
+        android:fontFamily="@font/alfa_slab_one"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_size_description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/banner"
+        app:layout_constraintTop_toBottomOf="@+id/movie_subtitle"
+        tools:text="10/07/2020 (BR)
+Guerra, Ação, Drama
+1h 31m" />
+
+    <com.jaozinfs.paging.movies.ui.customview.FollowCustomView
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/banner"
+        app:layout_constraintTop_toBottomOf="@id/movie_details" />
+    <com.jaozinfs.paging.ui.view.RatingView
         android:id="@+id/rating_view"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_margin="16dp"
-        app:primaryColor="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="@+id/banner"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="@dimen/movies_space"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="@+id/banner"
+        app:primaryColor="@color/colorPrimary" />
+
+    <com.jaozinfs.paging.ui.view.AgeView
+        android:id="@+id/age_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="@dimen/text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="@dimen/movies_space"
+        app:layout_constraintTop_toBottomOf="@+id/background" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
