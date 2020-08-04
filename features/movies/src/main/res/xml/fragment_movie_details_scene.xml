@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <!-- Transitions -->
+    <Transition
+        android:id="@+id/bannerExpand"
+        app:constraintSetEnd="@+id/constraintEnd"
+        app:constraintSetStart="@id/constraintStart"
+        app:duration="500">
+        <OnClick app:targetId="@id/pager" />
+    </Transition>
+    <Transition
+        android:id="@+id/bannerDown"
+        app:constraintSetEnd="@+id/transLationEnd"
+        app:constraintSetStart="@id/transLationStart"
+        app:duration="1000">
+        <OnClick app:targetId="@id/pager" />
+    </Transition>
+    <Transition
+        android:id="@+id/bannerReturn"
+        app:constraintSetEnd="@+id/bannerReturnEnd"
+        app:constraintSetStart="@+id/bannerReturnStart"
+        app:duration="1000">
+        <OnClick app:targetId="@id/pager" />
+    </Transition>
+
+
+    <ConstraintSet android:id="@+id/bannerReturnStart">
+        <Constraint
+            android:id="@+id/banner"
+            android:layout_width="200dp"
+            android:layout_height="350dp"
+            android:layout_marginStart="@dimen/movies_space"
+            android:layout_marginTop="@dimen/movies_space"
+            android:alpha="0"
+            android:translationY="-350dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/bannerReturnEnd">
+        <Constraint
+            android:id="@+id/banner"
+            android:layout_width="200dp"
+            android:layout_height="350dp"
+            android:layout_marginStart="@dimen/movies_space"
+            android:layout_marginTop="@dimen/movies_space"
+            android:alpha="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/followCustomView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/movies_space"
+            android:layout_marginTop="@dimen/movies_space"
+            android:layout_marginEnd="@dimen/movies_space"
+            android:layout_marginBottom="@dimen/movies_space"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/banner"
+            app:layout_constraintTop_toBottomOf="@id/movie_details">
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="#6200EE" />
+            <CustomAttribute
+                app:attributeName="text"
+                app:customStringValue="@string/title_remove_favorite" />
+            <CustomAttribute
+                app:attributeName="textColor"
+                app:customColorValue="@color/colorWhite" />
+        </Constraint>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/constraintStart">
+        <Constraint
+            android:id="@+id/banner"
+            android:layout_width="200dp"
+            android:layout_height="350dp"
+            android:layout_marginStart="@dimen/movies_space"
+            android:layout_marginTop="@dimen/movies_space"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/constraintEnd">
+        <Constraint
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <Constraint
+            android:id="@+id/rating_view"
+            android:visibility="gone" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/transLationStart">
+        <Constraint
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/transLationEnd">
+        <Constraint
+            android:id="@+id/banner"
+            android:layout_width="100dp"
+            android:layout_height="250dp"
+
+            android:translationY="350dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/returnStart">
+        <Constraint
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:translationY="2000dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/returnEnd">
+        <Constraint
+            android:id="@+id/banner"
+            android:layout_width="200dp"
+            android:layout_height="350dp"
+            android:layout_marginStart="@dimen/movies_space"
+            android:layout_marginTop="@dimen/movies_space"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/pagerStart">
+        <Constraint
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_margin="@dimen/movies_space"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/background" />
+    </ConstraintSet>
+    <ConstraintSet android:id="@+id/pagerEnd">
+        <Constraint
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_marginStart="@dimen/movies_space"
+            android:layout_marginEnd="@dimen/movies_space"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+
+
+</MotionScene>

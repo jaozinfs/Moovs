@@ -1,6 +1,8 @@
 package com.jaozinfs.paging.network
 
+import com.jaozinfs.paging.network.exceptions.BadRequestException
 import retrofit2.Response
+import java.net.UnknownHostException
 
 /**
  * Esta classe é para auxiliar uma chamada de rede
@@ -18,13 +20,23 @@ object NetworkRepositoryManager {
     suspend fun <S> getData(
         api: suspend () -> Response<S>
     ): S {
-        try {
+        val genericMessageException by lazy {
+            "Tente novamente mais tarde."
+        }
+        return try {
+
             val response = api()
-            return response.takeIf { it.isSuccessful }?.body()
-                ?: throw Exception("Error in request")
+            response.takeIf { it.isSuccessful }?.body()
+                ?: throw when (response.code()) {
+                    404 -> BadRequestException(response.code(), genericMessageException)
+                    else -> Exception("Error in request")
+                }
         } catch (error: Exception) {
             error.printStackTrace()
-            throw error
+            throw if (error is UnknownHostException)
+                BadRequestException(404, genericMessageException)
+            else
+                error
         }
     }
 

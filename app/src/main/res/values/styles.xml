@@ -29,4 +29,22 @@
         <item name="fontFamily">@font/alfa_slab_one</item>
     </style>
 
+    <style name="OutlineDeselected" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="fontFamily">@font/alfa_slab_one</item>
+        <item name="background">@color/chip_background_color_selected</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+    </style>
+    <style name="OutlineSelected" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="fontFamily">@font/alfa_slab_one</item>
+        <item name="background">@color/colorAccent</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="strokeColor">@color/colorAccent</item>
+    </style>
+    <!--  Estilização do Texto do item no BottomNavigationView  -->
+    <style name="NavTextAppearanceTheme" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/alfa_slab_one</item>
+        <item name="android:textSize">12sp</item>
+        <item name="elevation">8dp</item>
+    </style>
 </resources>

@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -20,6 +19,7 @@ import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.ui.MoviesViewModel
 import com.jaozinfs.paging.movies.ui.adapter.MoviesAdapter
 import com.jaozinfs.paging.movies.ui.adapter.ReposLoadStateAdapter
+import kotlinx.android.synthetic.main.activity_movies.*
 import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -41,7 +41,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setAdapterClickListener(savedInstanceState)
+        setAdapterClickListener()
         setSwipeRefreshListener()
         initList()
         getMovies()
@@ -60,7 +60,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         movies_rv.layoutManager = GridLayoutManager(context, 2)
         //Add Loading state on middle of view
         adapter.addLoadStateListener { loadState ->
-            progress_load.isVisible = loadState.source.refresh is LoadState.Loading
             swipe_refresh_layout.isRefreshing = loadState.source.refresh is LoadState.Loading
         }
         //set adapter on recycler view and set adapter in header and footer
@@ -71,7 +70,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     }
 
     //Click lister of adapter movies
-    private fun setAdapterClickListener(savedInstanceState: Bundle?) {
+    private fun setAdapterClickListener() {
         adapter.setMovieClickListener { _, movieEntity, bannerImageView, ratingView ->
             val extras = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 FragmentNavigatorExtras(
@@ -91,7 +90,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
                 null,
                 extras
             )
-            savedInstanceState?.let { Bundle() }
         }
     }
 
@@ -167,12 +165,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         })
     }
 
-    //Seta o titulo do fragment
-    private fun setToolbarTitle(title: String?) {
-        (activity as? AppCompatActivity)
-            ?.supportActionBar
-            ?.title = title
-    }
 
     private fun resetFilter() {
         findNavController().currentBackStackEntry?.savedStateHandle?.set(

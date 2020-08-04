@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorWhite">#FFF</color>
+    <color name="colorGrey">#989898</color>
 
     <!--  Color Chip  -->
     <color name="colorChipBackgroundSelected">@color/colorPrimary</color>

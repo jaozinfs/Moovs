@@ -1,6 +1,9 @@
 package com.jaozinfs.paging.network.utils
 
 import com.google.gson.GsonBuilder
+import com.google.gson.JsonSyntaxException
+import com.google.gson.reflect.TypeToken
+import com.jaozinfs.paging.network.utils.GjsonUtils.gsonDefault
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 
@@ -20,4 +23,8 @@ object GJsonExtension {
         addNetworkInterceptor(logging)
         return this
     }
+}
+@Throws(JsonSyntaxException::class)
+inline fun <reified T> fromJson(json: String): T {
+    return gsonDefault.fromJson(json, object : TypeToken<T>() {}.type)
 }

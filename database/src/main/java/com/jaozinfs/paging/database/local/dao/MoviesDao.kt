@@ -1,6 +1,5 @@
 package com.jaozinfs.paging.database.local.dao
 
-import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,14 +10,15 @@ import com.jaozinfs.paging.database.local.entities.MovieEntity
 @Dao
 interface MoviesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addAll(movies: List<MovieEntity>)
+    fun addMovie(movies: MovieEntity): Long
 
-//    @Query("SELECT * from movieentity")
-//    fun getMovies(): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM movieentity ORDER by id DESC")
+    fun getMoviesFavorited(): List<MovieEntity>
 
-    @Query("SELECT * FROM movieentity WHERE original_title LIKE :query ORDER BY vote_average DESC, original_title ASC")
-    fun getMoviesByName(query: String): PagingSource<Int, MovieEntity>
+    @Query("DELETE from movieentity WHERE id is :movieId")
+    fun removeMovieFavorite(movieId: Int): Int
 
-    @Query("DELETE from movieentity")
-    fun clearRepos()
+    @Query("SELECT * FROM movieentity WHERE id is :movieId")
+    fun getMovieFavorited(movieId: Int): MovieEntity?
+
 }

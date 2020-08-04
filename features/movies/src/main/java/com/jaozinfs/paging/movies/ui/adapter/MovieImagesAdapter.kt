@@ -14,6 +14,8 @@ import com.jaozinfs.paging.ui.loadImageUrl
 class MovieImagesAdapter : RecyclerView.Adapter<MovieImagesAdapter.PageHolder>() {
     private var listBackgroundsImages = emptyList<String>()
     fun getAdapterSize() = listBackgroundsImages.size
+    private var clickListener: (() -> Unit)? = null
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -32,10 +34,15 @@ class MovieImagesAdapter : RecyclerView.Adapter<MovieImagesAdapter.PageHolder>()
         holder.bindItem(listBackgroundsImages[position])
     }
 
-    inner class PageHolder(root: View) : RecyclerView.ViewHolder(root) {
+    inner class PageHolder(val root: View) : RecyclerView.ViewHolder(root) {
         val image_bg by root.lazyFindView<ImageView>(R.id.image_bg)
 
         internal fun bindItem(filePath: String) {
+            //set listener
+            root.setOnClickListener {
+                clickListener?.invoke()
+            }
+
             val uriBackground = Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
                 .buildUpon()
                 .appendEncodedPath(filePath)
@@ -47,6 +54,10 @@ class MovieImagesAdapter : RecyclerView.Adapter<MovieImagesAdapter.PageHolder>()
     fun setList(listImages: List<String>) {
         this@MovieImagesAdapter.listBackgroundsImages = listImages
         notifyDataSetChanged()
+    }
+
+    fun setOnItemClickListener(function: () -> Unit) {
+        clickListener = function
     }
 
 

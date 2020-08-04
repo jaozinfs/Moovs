@@ -34,21 +34,30 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         app:navGraph="@navigation/navigation_movies"
         tools:layout="@layout/fragment_movies" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_gravity="bottom"
+        app:labelVisibilityMode="labeled"
+        app:itemTextColor="@color/bottom_sheet_navigation_color"
+        app:itemIconTint="@color/bottom_sheet_navigation_color"
+        android:background="@drawable/shape_corners"
+        app:itemTextAppearanceActive="@style/NavTextAppearanceTheme"
+        app:itemTextAppearanceInactive="@style/NavTextAppearanceTheme"
+        android:foregroundTint="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/movies_activity_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

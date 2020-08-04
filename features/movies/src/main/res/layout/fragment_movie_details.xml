@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_details_motion_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/fragment_movie_details_scene">
 
     <ImageView
         android:id="@+id/background"
@@ -16,19 +18,11 @@
 
     <View
 
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="390dp"
         android:background="#945E5E5E" />
 
-    <ImageView
-        android:id="@+id/banner"
-        android:layout_width="200dp"
-        android:layout_height="350dp"
-        android:layout_margin="@dimen/movies_space"
-        android:scaleType="centerCrop"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <TextView
         android:id="@+id/movie_name"
@@ -87,20 +81,16 @@
 Guerra, Ação, Drama
 1h 31m" />
 
-    <com.jaozinfs.paging.movies.ui.customview.FollowCustomView
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/followCustomView"
+        style="@style/OutlineDeselected"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/movies_space"
+        android:text="@string/title_favorite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/banner"
         app:layout_constraintTop_toBottomOf="@id/movie_details" />
-    <com.jaozinfs.paging.ui.view.RatingView
-        android:id="@+id/rating_view"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="@dimen/movies_space"
-        app:layout_constraintBottom_toBottomOf="@+id/background"
-        app:layout_constraintEnd_toEndOf="@+id/banner"
-        app:primaryColor="@color/colorPrimary" />
 
     <com.jaozinfs.paging.ui.view.AgeView
         android:id="@+id/age_view"
@@ -114,9 +104,53 @@ Guerra, Ação, Drama
         android:id="@+id/pager"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:layout_margin="@dimen/movies_space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_margin="@dimen/movies_space"
         app:layout_constraintTop_toBottomOf="@+id/background" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/banner"
+        android:layout_width="200dp"
+        android:layout_height="350dp"
+        android:layout_margin="@dimen/movies_space"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <com.jaozinfs.paging.ui.view.RatingView
+        android:id="@+id/rating_view"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="@dimen/movies_space"
+        app:layout_constraintBottom_toBottomOf="@+id/background"
+        app:layout_constraintEnd_toEndOf="@+id/banner"
+        app:primaryColor="@color/colorPrimary" />
+
+
+    <TextView
+        android:id="@+id/retry_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ops"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/pager"
+        app:layout_constraintEnd_toEndOf="@+id/pager"
+        app:layout_constraintStart_toStartOf="@+id/pager"
+        app:layout_constraintTop_toTopOf="@+id/pager"
+        tools:visibility="visible" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/retry_button"
+        style="@style/OutlineDeselected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title_retry_images"
+        android:visibility="gone"
+        android:layout_margin="@dimen/movies_space"
+        app:layout_constraintEnd_toStartOf="@+id/retry_text"
+        app:layout_constraintStart_toEndOf="@+id/retry_text"
+        app:layout_constraintTop_toBottomOf="@+id/retry_text"
+        tools:visibility="visible" />
+</androidx.constraintlayout.motion.widget.MotionLayout>
