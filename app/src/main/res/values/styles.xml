@@ -47,4 +47,11 @@
         <item name="android:textSize">12sp</item>
         <item name="elevation">8dp</item>
     </style>
+    <style name="TextAppearance">
+        <item name="fontFamily">@font/alfa_slab_one</item>
+        <item name="android:textSize">@dimen/default_title_text_size</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <dimen name="default_title_text_size">22sp</dimen>
 </resources>

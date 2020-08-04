@@ -3,7 +3,9 @@ package com.jaozinfs.paging.movies.ui.fragments
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -26,7 +28,7 @@ class MoviesFavoritesFragment : Fragment(R.layout.fragment_movies_favorites) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        observeEvents()
         configureList()
         getMovies()
     }
@@ -47,7 +49,7 @@ class MoviesFavoritesFragment : Fragment(R.layout.fragment_movies_favorites) {
     /**
      * persiste movies favorited
      */
-    private fun getMovies(){
+    private fun getMovies() {
         jobMovies?.cancel()
         lifecycleScope.launchWhenCreated {
             movieViewModel.getMovies().collectLatest {
@@ -80,4 +82,10 @@ class MoviesFavoritesFragment : Fragment(R.layout.fragment_movies_favorites) {
         }
     }
 
+    private fun observeEvents() {
+        movieViewModel.emptyMoviesObservable.observe(viewLifecycleOwner, Observer {
+            lav_android_wave_json.isVisible = it
+            title_favorite_empty.isVisible = it
+        })
+    }
 }

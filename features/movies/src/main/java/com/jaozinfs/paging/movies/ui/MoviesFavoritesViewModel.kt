@@ -1,13 +1,22 @@
 package com.jaozinfs.paging.movies.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.jaozinfs.paging.movies.domain.usecase.GetMoviesFavoritesUseCase
-import com.jaozinfs.paging.movies.domain.usecase.RemoveMovieFavoriteUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.onEach
 
 class MoviesFavoritesViewModel(
     private val getMoviesFavoritesUseCase: GetMoviesFavoritesUseCase
 ) : ViewModel() {
-    fun getMovies() = getMoviesFavoritesUseCase.execute(null).flowOn(Dispatchers.IO)
+    private val _emptyMovies = MutableLiveData<Boolean>()
+    val emptyMoviesObservable: LiveData<Boolean> = _emptyMovies
+
+    fun getMovies() = getMoviesFavoritesUseCase.execute(null)
+        .flowOn(Dispatchers.IO)
+        .onEach {
+            _emptyMovies.value = it.isEmpty()
+        }.flowOn(Dispatchers.Main)
 }

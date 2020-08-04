@@ -8,4 +8,5 @@
     <string name="title_retry_images">Recarregar imagens</string>
     <string name="ops">Oops</string>
     <string name="title_favorites">Favoritos</string>
+    <string name="title_empty_movies_favorited">Favorite um filme :D</string>
 </resources>
