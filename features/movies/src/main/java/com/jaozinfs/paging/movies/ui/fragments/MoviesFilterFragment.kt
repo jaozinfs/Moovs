@@ -1,6 +1,9 @@
 package com.jaozinfs.paging.movies.ui.fragments
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
@@ -30,6 +33,10 @@ class MoviesFilterFragment : Fragment(R.layout.fragment_movies_filter) {
 
     private val movieViewModel: MoviesViewModel by sharedViewModel()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setCurrentVoteAvarege()
@@ -86,5 +93,26 @@ class MoviesFilterFragment : Fragment(R.layout.fragment_movies_filter) {
 
     private fun setChipsSelected(listSelected: List<Int>) {
         genres_chip_group.setChipsSelectedByIds(listSelected)
+    }
+
+    //inflate menu on fragment
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.movies_filter_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    //listener menu item click
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.movies_filter_remove_filters ->
+                closeAndRemoveFilter()
+        }
+        return true
+    }
+
+    private fun closeAndRemoveFilter() {
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(
+            FILTER_OBJECT, null)
+        findNavController().popBackStack()
     }
 }

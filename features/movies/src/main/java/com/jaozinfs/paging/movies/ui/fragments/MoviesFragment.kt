@@ -2,12 +2,13 @@ package com.jaozinfs.paging.movies.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
@@ -19,11 +20,9 @@ import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.ui.MoviesViewModel
 import com.jaozinfs.paging.movies.ui.adapter.MoviesAdapter
 import com.jaozinfs.paging.movies.ui.adapter.ReposLoadStateAdapter
-import kotlinx.android.synthetic.main.activity_movies.*
 import kotlinx.android.synthetic.main.fragment_movies.*
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
@@ -44,7 +43,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         setAdapterClickListener()
         setSwipeRefreshListener()
         initList()
-        getMovies()
         observeFilter()
     }
 
@@ -61,6 +59,11 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         //Add Loading state on middle of view
         adapter.addLoadStateListener { loadState ->
             swipe_refresh_layout.isRefreshing = loadState.source.refresh is LoadState.Loading
+        }
+        //empty state
+        adapter.addDataRefreshListener {
+            Log.d("Teste", it.toString())
+            movies_empty_animation.isVisible = it
         }
         //set adapter on recycler view and set adapter in header and footer
         movies_rv.adapter = adapter.withLoadStateHeaderAndFooter(
@@ -157,12 +160,21 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     //Observe when fragment backstack returns of FilterFragment
     //if have value, persiste list with filter object
     private fun observeFilter() {
+        if (findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<MoviesFilterFragment.FilterObject>(
+                MoviesFilterFragment.FILTER_OBJECT
+            )?.value == null
+        ) {
+            getMovies()
+            return
+        }
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<MoviesFilterFragment.FilterObject>(
             MoviesFilterFragment.FILTER_OBJECT
         )?.observe(viewLifecycleOwner, Observer {
-            it ?: return@Observer
-            getMovies(it.voteAvarege, isAdult = it.isAdult, genres = it.genres)
+            it?.let {
+                getMovies(it.voteAvarege, isAdult = it.isAdult, genres = it.genres)
+            }
         })
+
     }
 
 

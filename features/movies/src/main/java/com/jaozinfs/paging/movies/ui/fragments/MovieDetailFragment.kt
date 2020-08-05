@@ -182,7 +182,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
                     startPostponedEnterTransition()
                 }
             }
-            background.loadImageCoil(uriBackground, true)
+            background.loadImageCoil(uriBackground)
         }
         movie_name.text = movie.title
         movie_age.text = movie.release_date.substringBefore("-", "")
