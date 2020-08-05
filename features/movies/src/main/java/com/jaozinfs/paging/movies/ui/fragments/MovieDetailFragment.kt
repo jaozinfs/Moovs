@@ -4,6 +4,7 @@ import android.gesture.GestureOverlayView.ORIENTATION_HORIZONTAL
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -21,8 +22,7 @@ import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.movies.domain.movies.MovieUi
 import com.jaozinfs.paging.movies.ui.MoviesViewModel
 import com.jaozinfs.paging.movies.ui.adapter.MovieImagesAdapter
-import com.jaozinfs.paging.ui.Ajustments
-import com.jaozinfs.paging.ui.loadImageUrl
+import com.jaozinfs.paging.ui.loadImageCoil
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -174,11 +174,15 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
                 //1
                 transitionName = bannerTransitionName
                 //2
-                loadImageUrl(uri, Ajustments.FitXY) {
+//                loadImageUrl(uri, Ajustments.FitXY) {
+//                    startPostponedEnterTransition()
+//                }
+                loadImageCoil(uri) {
+                    Log.d("Teste", "aq")
                     startPostponedEnterTransition()
                 }
             }
-            background.loadImageUrl(uriBackground)
+            background.loadImageCoil(uriBackground, true)
         }
         movie_name.text = movie.title
         movie_age.text = movie.release_date.substringBefore("-", "")

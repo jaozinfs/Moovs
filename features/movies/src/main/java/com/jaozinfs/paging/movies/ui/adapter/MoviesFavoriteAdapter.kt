@@ -14,7 +14,7 @@ import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.movies.domain.movies.MovieUi
 import com.jaozinfs.paging.ui.lazyFindView
-import com.jaozinfs.paging.ui.loadImageUrl
+import com.jaozinfs.paging.ui.loadImageCoil
 import com.jaozinfs.paging.ui.setClickListener
 import com.jaozinfs.paging.ui.view.RatingView
 import java.util.concurrent.atomic.AtomicBoolean
@@ -56,7 +56,7 @@ class MoviesFavoriteAdapter() :
                 .appendEncodedPath(moviesEntity.poster_path)
                 .build()
 
-            imageview.loadImageUrl(uri)
+            imageview.loadImageCoil(uri)
         }
     }
 

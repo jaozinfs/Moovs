@@ -20,7 +20,7 @@ import com.jaozinfs.paging.database.local.entities.MovieEntity
 import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.ui.lazyFindView
-import com.jaozinfs.paging.ui.loadImageUrl
+import com.jaozinfs.paging.ui.loadImageCoil
 import com.jaozinfs.paging.ui.setClickListener
 import com.jaozinfs.paging.ui.view.RatingView
 import java.util.concurrent.atomic.AtomicBoolean
@@ -57,12 +57,13 @@ class MoviesAdapter() :
             LocationManager.PASSIVE_PROVIDER
             rating.setPercent(moviesEntity.vote_average.toFloat(), atomicBoolean.getAndSet(false))
 
-            val uri = Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
+            Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
                 .buildUpon()
                 .appendEncodedPath(moviesEntity.poster_path)
-                .build()
+                .build().apply {
+                    imageview.loadImageCoil(this)
+                }
 
-            imageview.loadImageUrl(uri)
         }
     }
 

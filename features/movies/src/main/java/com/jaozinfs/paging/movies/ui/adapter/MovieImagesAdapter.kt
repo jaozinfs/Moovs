@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.ui.lazyFindView
-import com.jaozinfs.paging.ui.loadImageUrl
+import com.jaozinfs.paging.ui.loadImageCoil
 
 class MovieImagesAdapter : RecyclerView.Adapter<MovieImagesAdapter.PageHolder>() {
     private var listBackgroundsImages = emptyList<String>()
@@ -47,7 +47,7 @@ class MovieImagesAdapter : RecyclerView.Adapter<MovieImagesAdapter.PageHolder>()
                 .buildUpon()
                 .appendEncodedPath(filePath)
                 .build()
-            image_bg.loadImageUrl(uriBackground, animate = true)
+            image_bg.loadImageCoil(uriBackground)
         }
     }
 
