@@ -11,8 +11,8 @@ android {
         applicationId "com.jaozinfs.paging"
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode System.getenv("BITRISE_BUILD_NUMBER") as Integer ?: 2
-        versionName "1.0"
+        versionCode System.getenv("BITRISE_BUILD_NUMBER") as Integer ?: 3
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
