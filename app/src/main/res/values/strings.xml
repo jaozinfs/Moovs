@@ -15,4 +15,5 @@
 
     <!-- modules -->
     <string name="module_movies">movies</string>
+    <string name="title_splash">splash</string>
 </resources>

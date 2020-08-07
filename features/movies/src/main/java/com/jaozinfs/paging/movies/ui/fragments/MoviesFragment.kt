@@ -16,13 +16,16 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.transition.platform.Hold
+import com.google.android.material.transition.platform.MaterialElevationScale
 import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.ui.MoviesViewModel
 import com.jaozinfs.paging.movies.ui.adapter.MoviesAdapter
 import com.jaozinfs.paging.movies.ui.adapter.ReposLoadStateAdapter
 import kotlinx.android.synthetic.main.fragment_movies.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
@@ -36,6 +39,10 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            exitTransition = MaterialElevationScale(/* growing= */ false)
+            reenterTransition = MaterialElevationScale(/* growing= */ true)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,22 +82,15 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     //Click lister of adapter movies
     private fun setAdapterClickListener() {
         adapter.setMovieClickListener { _, movieEntity, bannerImageView, ratingView ->
-            val extras = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                FragmentNavigatorExtras(
-                    bannerImageView to bannerImageView.transitionName,
-                    ratingView to ratingView.transitionName
-                )
-            } else {
-                null
-            }
+            val extras = FragmentNavigatorExtras(
+                bannerImageView to MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME,
+                ratingView to MovieDetailFragment.RATING_ENTER_TRANSITION_NAME
+            )
+            val direction =
+                MoviesFragmentDirections.actionNavMoviesToNavMoviesDetail(movieEntity.id)
+
             findNavController().navigate(
-                R.id.nav_movies_detail,
-                MovieDetailFragment.getBundle(
-                    movieEntity.id,
-                    movieEntity.backdrop_path,
-                    movieEntity.poster_path
-                ),
-                null,
+                direction,
                 extras
             )
         }

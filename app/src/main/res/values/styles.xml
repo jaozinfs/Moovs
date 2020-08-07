@@ -54,4 +54,11 @@
     </style>
 
     <dimen name="default_title_text_size">22sp</dimen>
+
+    <!-- Splash screen theme -->
+    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 </resources>

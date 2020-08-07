@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_movies_graph"
-    app:startDestination="@+id/nav_movies"
-    >
+    app:startDestination="@+id/nav_movies">
     <fragment
         android:id="@+id/nav_movies"
         android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesFragment"
         android:label="@string/title_movies"
-        />
+        tools:layout="@layout/fragment_movies"
+        >
+        <action
+            android:id="@+id/action_nav_movies_to_nav_movies_detail"
+            app:destination="@id/nav_movies_detail"
+          />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_movies_detail"
         android:name="com.jaozinfs.paging.movies.ui.fragments.MovieDetailFragment"
         android:label="@string/title_movies"
-        />
+        tools:layout="@layout/fragment_movie_details"
+        >
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            />
+    </fragment>
     <fragment
         android:id="@+id/nav_movies_filter"
         android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesFilterFragment"
         android:label="@string/title_movies"
+        tools:layout="@layout/fragment_movies_filter"
         />
     <fragment
         android:id="@+id/nav_movies_favorites"
         android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesFavoritesFragment"
         android:label="@string/title_movies"
-        />
+        tools:layout="@layout/fragment_movies_favorites"
+        >
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            />
+        <action
+            android:id="@+id/action_nav_movies_favorites_to_nav_movies_detail"
+            app:destination="@id/nav_movies_detail"
+            />
+    </fragment>
 </navigation>

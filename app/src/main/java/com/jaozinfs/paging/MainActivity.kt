@@ -17,14 +17,11 @@ class MainActivity : AppCompatActivity() {
 
         val navController = navHostFragment!!.navController
 
-        val navInflater = navController.navInflater
-        val graph = navInflater.inflate(R.navigation.navigation_base)
-        graph.startDestination = R.id.nav_features_movies
-
-        finish()
-
-        navController.graph = graph
     }
 
+    override fun onPause() {
+        super.onPause()
+        finish()
+    }
 
 }

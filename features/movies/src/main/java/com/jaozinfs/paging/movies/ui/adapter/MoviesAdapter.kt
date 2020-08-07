@@ -1,6 +1,5 @@
 package com.jaozinfs.paging.movies.ui.adapter
 
-import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
 import android.view.LayoutInflater
@@ -17,11 +16,12 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.jaozinfs.paging.database.local.entities.MovieEntity
+import com.jaozinfs.paging.extensions.lazyFindView
+import com.jaozinfs.paging.extensions.loadImageCoil
+import com.jaozinfs.paging.extensions.setClickListener
 import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
-import com.jaozinfs.paging.ui.lazyFindView
-import com.jaozinfs.paging.ui.loadImageCoil
-import com.jaozinfs.paging.ui.setClickListener
+import com.jaozinfs.paging.movies.ui.fragments.MovieDetailFragment
 import com.jaozinfs.paging.ui.view.RatingView
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -41,9 +41,12 @@ class MoviesAdapter() :
         val atomicBoolean = AtomicBoolean(true)
 
         fun bind(moviesEntity: MovieEntity, position: Int) {
+            //set views transition name of each different view
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                imageview.transitionName = moviesEntity.backdrop_path
-                rating.transitionName = moviesEntity.poster_path
+                imageview.transitionName =
+                    "${MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME}-${moviesEntity.id}"
+                rating.transitionName =
+                    "${MovieDetailFragment.RATING_ENTER_TRANSITION_NAME}-${moviesEntity.id}"
             }
 
             view.setClickListener {
@@ -54,16 +57,13 @@ class MoviesAdapter() :
                     rating
                 )
             }
-            LocationManager.PASSIVE_PROVIDER
             rating.setPercent(moviesEntity.vote_average.toFloat(), atomicBoolean.getAndSet(false))
-
             Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
                 .buildUpon()
                 .appendEncodedPath(moviesEntity.poster_path)
                 .build().apply {
                     imageview.loadImageCoil(this)
                 }
-
         }
     }
 

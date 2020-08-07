@@ -8,8 +8,8 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
-import com.jaozinfs.paging.ui.lazyFindView
-import com.jaozinfs.paging.ui.loadImageCoil
+import com.jaozinfs.paging.extensions.lazyFindView
+import com.jaozinfs.paging.extensions.loadImageCoil
 
 class MovieImagesAdapter : RecyclerView.Adapter<MovieImagesAdapter.PageHolder>() {
     private var listBackgroundsImages = emptyList<String>()

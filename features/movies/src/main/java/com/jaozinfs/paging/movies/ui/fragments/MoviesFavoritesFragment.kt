@@ -1,6 +1,5 @@
 package com.jaozinfs.paging.movies.ui.fragments
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -61,22 +60,17 @@ class MoviesFavoritesFragment : Fragment(R.layout.fragment_movies_favorites) {
     //Click lister of adapter movies
     private fun setAdapterClickListener() {
         adapter.setMovieClickListener { _, movieEntity, bannerImageView, ratingView ->
-            val extras = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                FragmentNavigatorExtras(
-                    bannerImageView to bannerImageView.transitionName,
-                    ratingView to ratingView.transitionName
+            val extras = FragmentNavigatorExtras(
+                bannerImageView to MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME,
+                ratingView to MovieDetailFragment.RATING_ENTER_TRANSITION_NAME
+            )
+            val direction =
+                MoviesFavoritesFragmentDirections.actionNavMoviesFavoritesToNavMoviesDetail(
+                    movieEntity.id
                 )
-            } else {
-                null
-            }
+
             findNavController().navigate(
-                R.id.nav_movies_detail,
-                MovieDetailFragment.getBundle(
-                    movieEntity.id,
-                    movieEntity.backdrop_path,
-                    movieEntity.poster_path
-                ),
-                null,
+                direction,
                 extras
             )
         }

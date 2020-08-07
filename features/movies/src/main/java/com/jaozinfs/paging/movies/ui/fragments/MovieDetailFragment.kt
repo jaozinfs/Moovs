@@ -4,7 +4,6 @@ import android.gesture.GestureOverlayView.ORIENTATION_HORIZONTAL
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,16 +12,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.transition.TransitionInflater
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
-import com.jaozinfs.paging.extensions.argument
+import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.jaozinfs.paging.extensions.flipModuleFlow
+import com.jaozinfs.paging.extensions.loadImageCoil
 import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.movies.domain.movies.MovieUi
 import com.jaozinfs.paging.movies.ui.MoviesViewModel
 import com.jaozinfs.paging.movies.ui.adapter.MovieImagesAdapter
-import com.jaozinfs.paging.ui.loadImageCoil
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -33,17 +32,10 @@ import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
-    companion object {
-        fun getBundle(movieId: Int, backdrop_path: String, poster_path: String): Bundle =
-            Bundle().apply {
-                putString(MOVIE_BANNER_ANIMATION_ARG, backdrop_path)
-                putString(MOVIE_RATING_ANIMATION_ARG, poster_path)
-                putInt(MOVIE_ID_ARG, movieId)
-            }
 
-        const val MOVIE_ID_ARG = "MOVIES_ARG"
-        const val MOVIE_BANNER_ANIMATION_ARG = "MOVIES_ANIM_ARG"
-        const val MOVIE_RATING_ANIMATION_ARG = "MOVIESRATING_ANIM_ARG"
+    companion object {
+        const val BANNER_ENTER_TRANSITION_NAME = "bannerEnterTransition"
+        const val RATING_ENTER_TRANSITION_NAME = "ratingEnterTransition"
     }
 
     private enum class Animations(val id: Int) {
@@ -52,9 +44,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         BANNER_RETURN(R.id.bannerReturn)
     }
 
-    private val bannerTransitionName by argument<String?>(MOVIE_BANNER_ANIMATION_ARG) { null }
-    private val ratingTransitionName by argument<String?>(MOVIE_RATING_ANIMATION_ARG) { null }
-    private val movieId by argument<Int?>(MOVIE_ID_ARG) { null }
+    private val args: MovieDetailFragmentArgs by navArgs()
     private val movieViewModel: MoviesViewModel by sharedViewModel()
     private val movieImagesAdapter = MovieImagesAdapter()
     private var slideJob: Job? = null
@@ -62,25 +52,38 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
     private var removeMovieFavorite: Job? = null
     private lateinit var movieUi: MovieUi
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setSharedElementTransitionOnEnter()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //post transition until load image with coil
+        postponeEnterTransition()
         //set trailers
+        setViewTransitionsNames()
         setMovieImagesAdapter()
         observeEvents()
-        postponeEnterTransition()
 
         //collect data for this view
-        movieId?.let {
+        args.movieId.let {
             lifecycleScope.launch {
                 movieViewModel.getMovieDetails(it).collectLatest {
                     movieUi = it
-                    setSharedElementTransitionOnEnter()
                     updateView(it)
                     checkIsFavorited()
                 }
             }
             getImagesJob(it)
             setRetryCollectImagesListener(it)
+        }
+    }
+
+    private fun setViewTransitionsNames(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            banner.transitionName = BANNER_ENTER_TRANSITION_NAME
+            rating_view.transitionName = RATING_ENTER_TRANSITION_NAME
         }
     }
 
@@ -130,8 +133,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
     private fun removeMovieFavorited() {
         removeMovieFavorite?.cancel()
         lifecycleScope.launch {
-            movieId ?: return@launch
-            movieViewModel.removeMovieFavorited(movieId!!).collectLatest {
+            movieViewModel.removeMovieFavorited(args.movieId).collectLatest {
                 checkIsFavorited()
             }
         }
@@ -141,8 +143,9 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
      * Transition start image view
      */
     private fun setSharedElementTransitionOnEnter() {
-        sharedElementEnterTransition = TransitionInflater.from(context)
-            .inflateTransition(R.transition.shared_element_transition)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            sharedElementEnterTransition = MaterialContainerTransform()
+        }
     }
 
     /**
@@ -168,22 +171,11 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
             .appendEncodedPath(movie.backdrop_path)
             .build()
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            rating_view.transitionName = ratingTransitionName
-            banner.apply {
-                //1
-                transitionName = bannerTransitionName
-                //2
-//                loadImageUrl(uri, Ajustments.FitXY) {
-//                    startPostponedEnterTransition()
-//                }
-                loadImageCoil(uri) {
-                    Log.d("Teste", "aq")
-                    startPostponedEnterTransition()
-                }
-            }
-            background.loadImageCoil(uriBackground)
+        banner.loadImageCoil(uri) {
+            //after load image start animation of banner transition
+            startPostponedEnterTransition()
         }
+        background.loadImageCoil(uriBackground)
         movie_name.text = movie.title
         movie_age.text = movie.release_date.substringBefore("-", "")
         rating_view.setPercent(movie.vote_average)
