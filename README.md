@@ -11,7 +11,7 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * MVVM
 * Clean Architecture
 
-### Dependecy
+#### Dependecy
 
 * Coroutines Flow
 * Retrofit 
