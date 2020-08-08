@@ -65,8 +65,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         setViewTransitionsNames()
         setMovieImagesAdapter()
         observeEvents()
-
-        //collect data for this view
+//
+//        //collect data for this view
         args.movieId.let {
             lifecycleScope.launch {
                 movieViewModel.getMovieDetails(it).collectLatest {

@@ -6,4 +6,7 @@
     <item android:title="@string/title_favorites"
         android:id="@+id/nav_movies_favorites"
         android:icon="@drawable/ic_baseline_star_24"/>
+    <item android:title="@string/title_cinema"
+        android:id="@+id/nav_movies_cinema"
+        android:icon="@drawable/ic_baseline_videocam_24"/>
 </menu>

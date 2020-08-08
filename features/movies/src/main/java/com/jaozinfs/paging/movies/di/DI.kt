@@ -10,7 +10,16 @@ import com.jaozinfs.paging.movies.data.network.MoviesApi
 import com.jaozinfs.paging.movies.data.network.MoviesRepositoryImpl
 import com.jaozinfs.paging.movies.domain.movies.MoviesLocalRepository
 import com.jaozinfs.paging.movies.domain.movies.MoviesRepository
-import com.jaozinfs.paging.movies.domain.usecase.*
+import com.jaozinfs.paging.movies.domain.usecase.cinema.GetMoviesCinemaUseCase
+import com.jaozinfs.paging.movies.domain.usecase.favorites.CheckIsMovieFavoritedUseCase
+import com.jaozinfs.paging.movies.domain.usecase.favorites.GetMoviesFavoritesUseCase
+import com.jaozinfs.paging.movies.domain.usecase.favorites.RemoveMovieFavoriteUseCase
+import com.jaozinfs.paging.movies.domain.usecase.favorites.SaveMovieFavoriteUseCase
+import com.jaozinfs.paging.movies.domain.usecase.movies.GetGenresUseCase
+import com.jaozinfs.paging.movies.domain.usecase.movies.GetGenresUseResultCase
+import com.jaozinfs.paging.movies.domain.usecase.movies.GetMovieDetailsUseCase
+import com.jaozinfs.paging.movies.domain.usecase.movies.GetMovieImagesUseCase
+import com.jaozinfs.paging.movies.ui.MoviesCinemaViewModel
 import com.jaozinfs.paging.movies.ui.MoviesFavoritesViewModel
 import com.jaozinfs.paging.movies.ui.MoviesViewModel
 import com.jaozinfs.paging.network.client.RetrofitFactory
@@ -46,28 +55,51 @@ val moviesModules = module {
 
     //Use cases
     factory {
-        GetGenresUseCase(get(), get())
+        GetGenresUseCase(
+            get(),
+            get()
+        )
     }
     factory {
-        GetGenresUseResultCase(get(), get())
+        GetGenresUseResultCase(
+            get(),
+            get()
+        )
     }
     factory {
-        GetMovieDetailsUseCase(get())
+        GetMovieDetailsUseCase(
+            get()
+        )
     }
     factory {
-        GetMovieImagesUseCase(get())
+        GetMovieImagesUseCase(
+            get()
+        )
     }
     factory {
-        SaveMovieFavoriteUseCase(get())
+        SaveMovieFavoriteUseCase(
+            get()
+        )
     }
     factory {
-        CheckIsMovieFavoritedUseCase(get())
+        CheckIsMovieFavoritedUseCase(
+            get()
+        )
     }
     factory {
-        GetMoviesFavoritesUseCase(get())
+        GetMoviesFavoritesUseCase(
+            get()
+        )
     }
     factory {
-        RemoveMovieFavoriteUseCase(get())
+        RemoveMovieFavoriteUseCase(
+            get()
+        )
+    }
+    factory {
+        GetMoviesCinemaUseCase(
+            get()
+        )
     }
 
     //ViewModels
@@ -76,5 +108,8 @@ val moviesModules = module {
     }
     viewModel {
         MoviesFavoritesViewModel(get())
+    }
+    viewModel {
+        MoviesCinemaViewModel(get())
     }
 }

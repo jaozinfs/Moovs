@@ -7,10 +7,11 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import com.jaozinfs.paging.database.local.entities.Response as MoviesResponse
 
 interface MoviesApi {
     @GET("movie/popular")
-    suspend fun getMovies(@Query("page") page: Int, @Query("api_key") key: String = MOVIESTBAPI): Response<com.jaozinfs.paging.database.local.entities.Response<MovieEntity>>
+    suspend fun getMovies(@Query("page") page: Int, @Query("api_key") key: String = MOVIESTBAPI): Response<MoviesResponse<MovieEntity>>
 
     @GET("genre/movie/list")
     suspend fun getGenres(
@@ -30,4 +31,10 @@ interface MoviesApi {
         @Path("movieId") movieId: Int,
         @Query("api_key") key: String = MOVIESTBAPI
     ): Response<MovieImagesNetwork>
+
+    @GET("movie/now_playing")
+    suspend fun getMoviesNowPlaying(
+        @Query("api_key") key: String = MOVIESTBAPI,
+        @Query("language") language: String = DEFAULT_LANGUAGE
+    ): Response<MoviesResponse<MovieEntity>>
 }

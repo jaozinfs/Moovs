@@ -7,4 +7,5 @@ interface MoviesRepository {
     suspend fun getMovieDetails(movieId: Int): MovieUi
     suspend fun getMovieImages(movieId: Int): MovieImagesUI
     suspend fun getGenres(): List<GenreUI>
+    suspend fun getMoviesCinema(): List<MovieUi>
 }

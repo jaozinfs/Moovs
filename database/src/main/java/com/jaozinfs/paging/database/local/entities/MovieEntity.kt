@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class MovieEntity(
     val adult: Boolean,
-    val backdrop_path: String,
+    val backdrop_path: String?,
     val genre_ids: List<Int>,
     @PrimaryKey(autoGenerate = true)
     val id: Int,
@@ -23,7 +23,7 @@ data class MovieEntity(
     val vote_count: Int,
     val runtime: Int? = null,
     val tagline: String? = null,
-    val genres: List<GenreEntity> = emptyList()
+    val genres: List<GenreEntity>? = emptyList()
 )
 
 data class Response<T>(

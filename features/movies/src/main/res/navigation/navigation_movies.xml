@@ -48,4 +48,9 @@
             app:destination="@id/nav_movies_detail"
             />
     </fragment>
+    <fragment
+        android:id="@+id/nav_movies_cinema"
+        android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesCinemaFragment"
+        android:label="@string/title_cinema"
+        tools:layout="@layout/fragment_movies_cinema"/>
 </navigation>

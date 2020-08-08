@@ -12,7 +12,13 @@ import com.jaozinfs.paging.extensions.handleErrors
 import com.jaozinfs.paging.movies.data.MoviesPagingSource
 import com.jaozinfs.paging.movies.domain.movies.MovieUi
 import com.jaozinfs.paging.movies.domain.movies.MoviesRepository
-import com.jaozinfs.paging.movies.domain.usecase.*
+import com.jaozinfs.paging.movies.domain.usecase.favorites.CheckIsMovieFavoritedUseCase
+import com.jaozinfs.paging.movies.domain.usecase.favorites.RemoveMovieFavoriteUseCase
+import com.jaozinfs.paging.movies.domain.usecase.favorites.SaveMovieFavoriteUseCase
+import com.jaozinfs.paging.movies.domain.usecase.movies.GetGenresUseCase
+import com.jaozinfs.paging.movies.domain.usecase.movies.GetGenresUseResultCase
+import com.jaozinfs.paging.movies.domain.usecase.movies.GetMovieDetailsUseCase
+import com.jaozinfs.paging.movies.domain.usecase.movies.GetMovieImagesUseCase
 import com.jaozinfs.paging.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

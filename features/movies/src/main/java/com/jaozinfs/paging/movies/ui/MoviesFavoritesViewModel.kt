@@ -3,7 +3,7 @@ package com.jaozinfs.paging.movies.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.jaozinfs.paging.movies.domain.usecase.GetMoviesFavoritesUseCase
+import com.jaozinfs.paging.movies.domain.usecase.favorites.GetMoviesFavoritesUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onEach

@@ -1,4 +1,4 @@
-package com.jaozinfs.paging.movies.domain.usecase
+package com.jaozinfs.paging.movies.domain.usecase.movies
 
 import com.jaozinfs.paging.database.local.entities.MovieEntity
 import com.jaozinfs.paging.movies.domain.BaseUseCase

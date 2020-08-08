@@ -11,4 +11,5 @@
     <string name="title_empty_movies_favorited">Favorite um filme :D</string>
     <string name="title_movies_empty">Nenhum filme encontrado</string>
     <string name="title_remove_filter">Remover Filtros</string>
+    <string name="title_cinema">Cinema</string>
 </resources>

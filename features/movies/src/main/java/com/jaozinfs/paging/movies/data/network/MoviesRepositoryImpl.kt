@@ -31,4 +31,8 @@ class MoviesRepositoryImpl(private val moviesApi: MoviesApi) :
         moviesApi.getGenres()
     }.genres.map { it.toUI() }
 
+    override suspend fun getMoviesCinema(): List<MovieUi> = NetworkRepositoryManager.getData {
+        moviesApi.getMoviesNowPlaying()
+    }.results.map { it.toUI() }
+
 }

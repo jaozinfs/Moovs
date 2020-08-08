@@ -1,4 +1,4 @@
-package com.jaozinfs.paging.movies.domain.usecase
+package com.jaozinfs.paging.movies.domain.usecase.favorites
 
 import com.jaozinfs.paging.movies.domain.BaseUseCase
 import com.jaozinfs.paging.movies.domain.movies.MoviesLocalRepository

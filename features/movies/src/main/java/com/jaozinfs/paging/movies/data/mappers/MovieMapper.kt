@@ -16,7 +16,7 @@ fun MovieImagesNetwork.toUI(): MovieImagesUI =
 fun MovieEntity.toUI(): MovieUi {
     return MovieUi(
         adult,
-        backdrop_path,
+        backdrop_path ?: poster_path,
         genre_ids,
         id,
         original_language,
@@ -31,6 +31,6 @@ fun MovieEntity.toUI(): MovieUi {
         vote_count,
         runtime,
         tagline,
-        genres
+        genres ?: emptyList()
     )
 }
