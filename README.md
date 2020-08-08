@@ -18,7 +18,7 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Gson 
 
 
-* [Android Jetpack]
+* [Android Jetpack] 
 #### Architecture
 * Lifecycle
 * LiveData
