@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
             <PropertySet
                 android:alpha="0"
-                android:visibility="gone" />
+                android:visibility="invisible" />
         </Constraint>
     </ConstraintSet>
 </MotionScene>

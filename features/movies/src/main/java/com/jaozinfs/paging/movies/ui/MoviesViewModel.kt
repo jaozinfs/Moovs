@@ -42,6 +42,8 @@ class MoviesViewModel(
     val handleErrorImages = SingleLiveEvent<String>()
     val handlerErrorMovieDetails = SingleLiveEvent<Unit?>()
     val disableFavoriteButton = SingleLiveEvent<Unit?>()
+    val handleErroMovies = SingleLiveEvent<String?>()
+
 
 
     fun getMovies(
@@ -83,6 +85,7 @@ class MoviesViewModel(
         }?.apply {
             flow = this
         }
+
         return flow
     }
 

@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,6 +17,8 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
+import com.airbnb.lottie.LottieAnimationView
+import com.airbnb.lottie.LottieDrawable
 import com.google.android.material.transition.platform.Hold
 import com.google.android.material.transition.platform.MaterialElevationScale
 import com.jaozinfs.paging.movies.R
@@ -66,6 +69,8 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         //Add Loading state on middle of view
         adapter.addLoadStateListener { loadState ->
             swipe_refresh_layout.isRefreshing = loadState.source.refresh is LoadState.Loading
+            if(loadState.source.refresh is LoadState.Error)
+                setNoConnectionNetworkError()
         }
         //empty state
         adapter.addDataRefreshListener {
@@ -77,6 +82,14 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
             header = ReposLoadStateAdapter { adapter.retry() },
             footer = ReposLoadStateAdapter { adapter.retry() }
         )
+    }
+
+    private fun setNoConnectionNetworkError() {
+        with(movies_empty_animation){
+            setAnimation("not-network.json")
+            isVisible = true
+            repeatCount = LottieDrawable.INFINITE
+        }
     }
 
     //Click lister of adapter movies

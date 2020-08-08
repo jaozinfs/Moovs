@@ -7,15 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.jaozinfs.paging.movies.R
-import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
-import com.jaozinfs.paging.movies.domain.movies.MovieUi
 import com.jaozinfs.paging.extensions.lazyFindView
 import com.jaozinfs.paging.extensions.loadImageCoil
 import com.jaozinfs.paging.extensions.setClickListener
+import com.jaozinfs.paging.movies.R
+import com.jaozinfs.paging.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
+import com.jaozinfs.paging.movies.domain.movies.MovieUi
+import com.jaozinfs.paging.movies.ui.animation.MovieFavoriteTransition
 import com.jaozinfs.paging.movies.ui.fragments.MovieDetailFragment
 import com.jaozinfs.paging.ui.view.RatingView
 import java.util.concurrent.atomic.AtomicBoolean
@@ -27,15 +29,17 @@ class MoviesCinemaAdapter() :
     ) {
     private var clickListener: ((Int, MovieUi, ImageView, RatingView) -> Unit)? = null
 
+    private var motionEvent: MotionLayout.TransitionListener? = null
 
     inner class MoviesViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
 
         val imageview by view.lazyFindView<ImageView>(R.id.image_view)
         val rating by view.lazyFindView<RatingView>(R.id.rating)
-
         val atomicBoolean = AtomicBoolean(true)
 
         fun bind(moviesEntity: MovieUi, position: Int) {
+
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageview.transitionName =
                     "${MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME}-${moviesEntity.id}"
@@ -88,5 +92,8 @@ class MoviesCinemaAdapter() :
     fun setMovieClickListener(clickListener: (Int, MovieUi, ImageView, RatingView) -> Unit) {
         this@MoviesCinemaAdapter.clickListener = clickListener
     }
+
+    
+
 }
 
