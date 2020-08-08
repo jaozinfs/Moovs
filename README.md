@@ -6,10 +6,35 @@ A Simple app with features using [Api TMDB][themoviedb] and publish on Play Stor
 ## Link:
 https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 
-#Dependencies
-## Navigation componentes
-## Koin
-## Paging 3
-## Retrofit
-## MVVM
-## Modularization
+## Arquitecture and Pattern's
+* Modularization
+* MVVM
+* Clean Architecture
+
+### Dependecy
+
+* Coroutines Flow
+* Retrofit 
+* Gson 
+
+
+#### Android Jetpack
+[Architecture]
+* Lifecycle
+* LiveData
+* Navigation Components
+* Motion Layout
+* Room Database
+* Paging 3
+
+[Base]
+* Android KTX
+
+[UI]
+* Motion Layout
+* Constraint Layout
+* Fragment Animations
+* Material Design
+
+## Dependecy Injection
+* Koin
