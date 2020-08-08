@@ -18,8 +18,8 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Gson 
 
 
-#### Android Jetpack
-[Architecture]
+* [Android Jetpack]
+#### Architecture
 * Lifecycle
 * LiveData
 * Navigation Components
@@ -27,10 +27,10 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Room Database
 * Paging 3
 
-[Base]
+#### Base
 * Android KTX
 
-[UI]
+#### UI
 * Motion Layout
 * Constraint Layout
 * Fragment Animations
