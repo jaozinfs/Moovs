@@ -6,7 +6,7 @@ A Simple app with features using [Api TMDB][themoviedb] and published on Play St
 ## Link:
 https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 
-##Features
+## Features
 #### Movies
 * Tranding Movies
 * Movie Details
