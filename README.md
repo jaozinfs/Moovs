@@ -1,6 +1,6 @@
 
 <p align="center">
-  <imgsrc="/img/Frame 2.png" width="250" height="250" alt="Sublime's custom image"/>
+  <imgsrc="/img/Frame 2.png" width="250" height="250"/>
 </p>
 
 
