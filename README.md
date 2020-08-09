@@ -1,10 +1,11 @@
 <p align="center">
   <img src="/img/Frame 2.png" width="250" height="250"/>
+# Moovs
+[![Build Status](https://app.bitrise.io/app/4d5958d333c0abb0/status.svg?token=_-R4niE95TSDhgSu7lRYlg&branch=master)](https://app.bitrise.io/app/4d5958d333c0abb0)
 </p>
 
 
-# Moovs
-[![Build Status](https://app.bitrise.io/app/4d5958d333c0abb0/status.svg?token=_-R4niE95TSDhgSu7lRYlg&branch=master)](https://app.bitrise.io/app/4d5958d333c0abb0)
+
 
 A Simple app with features using [Api TMDB][themoviedb] and published on Play Store.
 
