@@ -6,5 +6,6 @@
     </declare-styleable>
     <declare-styleable name="AgeView">
         <attr name="age" format="string" />
+        <attr name="ageview_conrner_radius" format="float"/>
     </declare-styleable>
 </resources>

@@ -29,23 +29,38 @@
     <ConstraintSet android:id="@+id/bannerReturnStart">
         <Constraint
             android:id="@+id/banner"
-            android:layout_width="200dp"
-            android:layout_height="350dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
             android:layout_marginStart="@dimen/movies_space"
             android:layout_marginTop="@dimen/movies_space"
             android:alpha="0"
             android:translationY="-350dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/rating_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="@dimen/movies_space"
+            app:layout_constraintTop_toBottomOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="@+id/banner"
+            android:visibility="gone"
+            app:primaryColor="@color/colorPrimary" />
     </ConstraintSet>
     <ConstraintSet android:id="@+id/bannerReturnEnd">
         <Constraint
             android:id="@+id/banner"
-            android:layout_width="200dp"
-            android:layout_height="350dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
             android:layout_marginStart="@dimen/movies_space"
             android:layout_marginTop="@dimen/movies_space"
             android:alpha="1"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
         <Constraint
@@ -69,17 +84,31 @@
                 app:attributeName="textColor"
                 app:customColorValue="@color/colorWhite" />
         </Constraint>
+        <Constraint
+            android:id="@+id/rating_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="@dimen/movies_space"
+            app:layout_constraintTop_toBottomOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="@+id/banner"
+            android:visibility="visible"
+            app:primaryColor="@color/colorPrimary" />
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/constraintStart">
         <Constraint
             android:id="@+id/banner"
-            android:layout_width="200dp"
-            android:layout_height="350dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
             android:layout_marginStart="@dimen/movies_space"
             android:layout_marginTop="@dimen/movies_space"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
     </ConstraintSet>
     <ConstraintSet android:id="@+id/constraintEnd">
@@ -98,7 +127,13 @@
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
         <Constraint
             android:id="@+id/rating_view"
-            android:visibility="gone" />
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="@dimen/movies_space"
+            app:layout_constraintTop_toBottomOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="@+id/banner"
+            android:visibility="gone"
+            app:primaryColor="@color/colorPrimary" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/transLationStart">
@@ -147,12 +182,14 @@
     <ConstraintSet android:id="@+id/returnEnd">
         <Constraint
             android:id="@+id/banner"
-            android:layout_width="200dp"
-            android:layout_height="350dp"
-            android:layout_marginStart="@dimen/movies_space"
-            android:layout_marginTop="@dimen/movies_space"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/movies_space"
+            android:layout_marginTop="@dimen/movies_space"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
     </ConstraintSet>
 

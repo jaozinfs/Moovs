@@ -29,18 +29,24 @@ class AgeView(
 
     private val paintAge = Paint().apply {
         color = Color.WHITE
-        textSize = 20F.toSp
+        textSize = 18F.toSp
         flags = Paint.ANTI_ALIAS_FLAG
 
     }
 
     private var age = "18"
 
+    /**
+     * Value referent the corner of view
+     */
+    private var ageCorner: Float
+
     init {
         context.obtainStyledAttributes(attributeSet, R.styleable.AgeView).apply {
             if (hasValue(R.styleable.AgeView_age))
                 setAgeDetails(getString(R.styleable.AgeView_age))
 
+            ageCorner = getFloat(R.styleable.AgeView_ageview_conrner_radius, 8f).dp
 
         }.recycle()
     }
@@ -61,6 +67,14 @@ class AgeView(
         invalidate()
     }
 
+
+    val Float.dp
+        get() = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            this,
+            resources.displayMetrics
+        )
+
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
@@ -70,8 +84,8 @@ class AgeView(
 
         canvas?.drawRoundRect(
             cX - radius, cY - radius, cX + radius, cY + radius,
-            26f,
-            26f,
+            ageCorner,
+            ageCorner,
             paint
         )
         val bounds = Rect()
