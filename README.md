@@ -6,11 +6,7 @@
 </p>
 
 <div align="center">
-  
-#### Moovs
-
 A Simple app with features using [Api TMDB][themoviedb] and published on Play Store.
-
 </div>
 
 ## Link:
