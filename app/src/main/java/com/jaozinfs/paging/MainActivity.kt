@@ -5,12 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
+import com.jaozinfs.paging.extensions.setupWithNavController
 import kotlinx.android.synthetic.main.main.*
-import org.koin.core.context.loadKoinModules
-import org.koin.core.context.unloadKoinModules
-import org.koin.dsl.koinApplication
-
 
 
 class MainActivity : AppCompatActivity() {

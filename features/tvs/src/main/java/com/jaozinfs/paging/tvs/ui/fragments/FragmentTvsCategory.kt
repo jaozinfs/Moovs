@@ -28,6 +28,7 @@ class FragmentTvsCategory : Fragment(R.layout.fragment_tvs_category) {
         lifecycleScope.launch {
             tvsViewModel.getTvsByCategory(args.category).collect {
                 adapter.submitList(it)
+                tvs_category_rv.scheduleLayoutAnimation()
             }
         }
     }

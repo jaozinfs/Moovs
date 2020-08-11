@@ -14,7 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/default_margin_tvs"
-        style="@style/TextAppearance"/>
+        style="@style/TextAppearance"
+        />
 
     <TextView
         android:id="@+id/see_more_popular"
@@ -28,12 +29,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvs_carousel_rv"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        android:layoutAnimation="@anim/animation_right"/>
 
     <TextView
         android:id="@+id/title_on_the_air"
@@ -59,10 +61,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/tvs_on_air_carousel_rv"
         android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_on_the_air" />
+        app:layout_constraintTop_toBottomOf="@+id/title_on_the_air"
+        android:layoutAnimation="@anim/animation_right"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

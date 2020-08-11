@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,6 @@ import com.jaozinfs.paging.extensions.loadImageCoil
 import com.jaozinfs.paging.tvs.R
 import com.jaozinfs.paging.tvs.data.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.tvs.domain.model.TvUI
-import java.util.concurrent.atomic.AtomicBoolean
 
 
 class TvsCarouselAdapter(private val clickListener: (Int) -> Unit) :
@@ -24,11 +24,13 @@ class TvsCarouselAdapter(private val clickListener: (Int) -> Unit) :
 
     inner class MoviesViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         val imageview by view.lazyFindView<ImageView>(R.id.backdrop)
+        val title by view.lazyFindView<TextView>(R.id.title)
 
         fun bind(tvUI: TvUI) {
 
             view.setOnClickListener { clickListener.invoke(tvUI.id) }
 
+            title.text = tvUI.name
             val uriBg = Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
                 .buildUpon()
                 .appendEncodedPath(tvUI.poster_path)

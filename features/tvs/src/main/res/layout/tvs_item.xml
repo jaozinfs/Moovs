@@ -4,16 +4,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="100dp"
-    android:layout_height="130dp"
+    android:layout_height="190dp"
     android:layout_margin="@dimen/default_margin_tvs">
 
     <ImageView
         android:id="@+id/backdrop"
+        android:layout_width="100dp"
+        android:layout_height="130dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@tools:sample/avatars"/>
+
+    <TextView
+        android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/backdrop"
+        tools:text="Flash o retorno dos mares profundo de bao de mais né rara" />
 </androidx.constraintlayout.widget.ConstraintLayout>

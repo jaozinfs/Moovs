@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:alpha="0"
+        android:textAppearance="@style/TextAppearance"
         android:textSize="22sp"
         android:layout_marginStart="@dimen/default_margin_tvs"
         android:layout_marginBottom="@dimen/default_margin_tvs"
@@ -44,6 +45,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:listitem="@layout/item_tvs_seasons"
+        android:layout_marginBottom="@dimen/margin_bottom_navigation"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/backdrop" />
 

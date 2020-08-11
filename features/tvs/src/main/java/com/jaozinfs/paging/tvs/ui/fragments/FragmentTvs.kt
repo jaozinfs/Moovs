@@ -42,9 +42,11 @@ class FragmentTvs : Fragment(R.layout.fragment_tvs) {
         lifecycleScope.launch {
             tvsViewModel.getTvsPopularFirstItem().collectLatest {
                 tvsCarouselAdapter.submitList(it)
+                tvs_carousel_rv.scheduleLayoutAnimation()
             }
             tvsViewModel.getTvsOnAir().collectLatest {
                 tvsOnAirAdapter.submitList(it)
+                tvs_on_air_carousel_rv.scheduleLayoutAnimation()
             }
         }
 
