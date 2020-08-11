@@ -11,9 +11,13 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="retry">Recarregar</string>
     <string name="title_movies">Movies</string>
-
+    <string name="title_favorites">Favoritos</string>
+    <string name="title_cinema">Cinema</string>
 
     <!-- modules -->
     <string name="module_movies">movies</string>
+    <string name="module_tvs">tvs</string>
+
     <string name="title_splash">splash</string>
+    <string name="title_tvs">Series</string>
 </resources>

@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -17,11 +16,10 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
-import com.airbnb.lottie.LottieAnimationView
 import com.airbnb.lottie.LottieDrawable
-import com.google.android.material.transition.platform.Hold
 import com.google.android.material.transition.platform.MaterialElevationScale
 import com.jaozinfs.paging.movies.R
+import com.jaozinfs.paging.movies.di.moviesModules
 import com.jaozinfs.paging.movies.ui.MoviesViewModel
 import com.jaozinfs.paging.movies.ui.adapter.MoviesAdapter
 import com.jaozinfs.paging.movies.ui.adapter.ReposLoadStateAdapter
@@ -30,6 +28,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.sharedViewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
+import org.koin.dsl.koinApplication
 
 
 class MoviesFragment : Fragment(R.layout.fragment_movies) {
@@ -41,6 +42,11 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        koinApplication {
+            unloadKoinModules(moviesModules)
+            loadKoinModules(moviesModules)
+        }
+
         setHasOptionsMenu(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             exitTransition = MaterialElevationScale(/* growing= */ false)
@@ -68,8 +74,8 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         movies_rv.layoutManager = GridLayoutManager(context, 2)
         //Add Loading state on middle of view
         adapter.addLoadStateListener { loadState ->
-            swipe_refresh_layout.isRefreshing = loadState.source.refresh is LoadState.Loading
-            if(loadState.source.refresh is LoadState.Error)
+            swipe_refresh_layout?.isRefreshing = loadState.source.refresh is LoadState.Loading
+            if (loadState.source.refresh is LoadState.Error)
                 setNoConnectionNetworkError()
         }
         //empty state
@@ -85,7 +91,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     }
 
     private fun setNoConnectionNetworkError() {
-        with(movies_empty_animation){
+        with(movies_empty_animation) {
             setAnimation("not-network.json")
             isVisible = true
             repeatCount = LottieDrawable.INFINITE

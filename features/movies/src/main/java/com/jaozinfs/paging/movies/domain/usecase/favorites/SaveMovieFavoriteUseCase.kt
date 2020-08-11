@@ -1,6 +1,6 @@
 package com.jaozinfs.paging.movies.domain.usecase.favorites
 
-import com.jaozinfs.paging.movies.domain.BaseUseCase
+import com.jaozinfs.paging.network.BaseUseCase
 import com.jaozinfs.paging.movies.domain.movies.MovieUi
 import com.jaozinfs.paging.movies.domain.movies.MoviesLocalRepository
 import kotlinx.coroutines.flow.Flow

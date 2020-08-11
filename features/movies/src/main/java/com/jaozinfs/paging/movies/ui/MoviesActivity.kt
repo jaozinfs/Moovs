@@ -20,26 +20,13 @@ class MoviesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movies)
         setSupportActionBar(toolbar)
-        koinApplication {
-            loadKoinModules(moviesModules)
-        }
 
-        setupNavigationBar()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        koinApplication {
-            unloadKoinModules(moviesModules)
-        }
+
     }
 
-    private fun setupNavigationBar(){
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.recharge_phone_fragment_content) as NavHostFragment?
-        NavigationUI.setupWithNavController(
-            bottom_navigation,
-            navHostFragment!!.navController
-        )
-    }
+
 }

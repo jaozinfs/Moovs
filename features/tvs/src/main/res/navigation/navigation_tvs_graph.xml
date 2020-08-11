@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_tvs">
+    <fragment
+        android:id="@+id/nav_tvs"
+        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvs"
+        tools:layout="@layout/fragment_tvs">
+        <action
+            android:id="@+id/action_nav_tvs_to_nav_tvs_category"
+            app:destination="@id/nav_tvs_category" />
+        <action
+            android:id="@+id/action_nav_tvs_to_nav_tv_details"
+            app:destination="@id/nav_tv_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_tvs_category"
+        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvsCategory"
+        tools:layout="@layout/fragment_tvs_category">
+        <argument android:name="category"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_nav_tvs_category_to_nav_tv_details"
+            app:destination="@id/nav_tv_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_tv_details"
+        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvDetails"
+        tools:layout="@layout/fragment_tv_details">
+        <argument
+            android:name="tvID"
+            app:argType="integer"/>
+    </fragment>
+</navigation>

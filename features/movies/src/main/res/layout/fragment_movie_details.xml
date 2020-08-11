@@ -19,7 +19,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@tools:sample/backgrounds/scenic" />
 
-    r
 
     <View
 

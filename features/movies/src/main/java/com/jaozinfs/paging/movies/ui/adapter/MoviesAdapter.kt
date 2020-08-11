@@ -62,7 +62,10 @@ class MoviesAdapter() :
                 .buildUpon()
                 .appendEncodedPath(moviesEntity.poster_path)
                 .build().apply {
-                    imageview.loadImageCoil(this)
+                    imageview.loadImageCoil{
+                        uri = this@apply
+                        corners = true
+                    }
                 }
         }
     }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="default_margin_tvs">16dp</dimen>
+    <dimen name="margin_bottom_navigation">50dp</dimen>
+    <dimen name="tvs_topics_size">18sp</dimen>
+</resources>

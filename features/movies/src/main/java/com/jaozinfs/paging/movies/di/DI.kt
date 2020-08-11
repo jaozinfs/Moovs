@@ -110,6 +110,6 @@ val moviesModules = module {
         MoviesFavoritesViewModel(get())
     }
     viewModel {
-        MoviesCinemaViewModel(get())
+        MoviesCinemaViewModel(get(), get())
     }
 }

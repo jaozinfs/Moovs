@@ -2,8 +2,11 @@ package com.jaozinfs.paging.movies.ui.fragments
 
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.jaozinfs.paging.movies.R
 import com.jaozinfs.paging.movies.ui.MoviesCinemaViewModel
 import com.jaozinfs.paging.movies.ui.adapter.MoviesCinemaAdapter
@@ -32,6 +35,21 @@ class MoviesCinemaFragment : Fragment(R.layout.fragment_movies_cinema) {
     }
 
     private fun configureAdapter() {
+        moviesAdapter.setMovieClickListener { i, movieUi, rootView ->
+            val extras = FragmentNavigatorExtras(
+                rootView to MovieCinemaDetails.ROOT_VIEW_CONTAINER_TRANSITION_NAME
+            )
+
+            val direction =
+                MoviesCinemaFragmentDirections.actionNavMoviesCinemaToNavMovieCinemaDetails(
+                    movieUi.id
+                )
+
+            findNavController().navigate(
+                direction,
+                extras
+            )
+        }
         recycler_view.adapter = moviesAdapter
     }
 

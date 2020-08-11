@@ -38,7 +38,6 @@ class MoviesViewModel(
     companion object {
         private const val NETWORK_PAGE_SIZE = 20
     }
-
     val handleErrorImages = SingleLiveEvent<String>()
     val handlerErrorMovieDetails = SingleLiveEvent<Unit?>()
     val disableFavoriteButton = SingleLiveEvent<Unit?>()

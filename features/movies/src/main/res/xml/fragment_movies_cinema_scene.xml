@@ -16,7 +16,7 @@
         <Constraint
             android:id="@+id/movies_empty_animation"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_margin="@dimen/movies_space"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
             style="@style/TextAppearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="100dp"
             android:text="@string/title_cinema"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

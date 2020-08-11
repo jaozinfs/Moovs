@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_movies_graph"
     app:startDestination="@+id/nav_movies">
     <fragment
         android:id="@+id/nav_movies"
@@ -52,5 +51,19 @@
         android:id="@+id/nav_movies_cinema"
         android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesCinemaFragment"
         android:label="@string/title_cinema"
-        tools:layout="@layout/fragment_movies_cinema"/>
+        tools:layout="@layout/fragment_movies_cinema">
+        <action
+            android:id="@+id/action_nav_movies_cinema_to_nav_movie_cinema_details"
+            app:destination="@id/nav_movie_cinema_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_movie_cinema_details"
+        android:name="com.jaozinfs.paging.movies.ui.fragments.MovieCinemaDetails"
+        android:label="@string/title_cinema"
+        tools:layout="@layout/fragment_movie_cinema_details">
+        <argument
+            android:name="movieId"
+            app:argType="integer"
+            />
+    </fragment>
 </navigation>

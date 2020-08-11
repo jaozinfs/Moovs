@@ -1,3 +1,4 @@
+include ':features:tvs'
 include ':database'
 include ':network'
 include ':features:movies'

@@ -8,8 +8,9 @@
     <string name="title_retry_images">Recarregar imagens</string>
     <string name="ops">Oops</string>
     <string name="title_favorites">Favoritos</string>
+    <string name="title_cinema">Cinema</string>
     <string name="title_empty_movies_favorited">Favorite um filme :D</string>
     <string name="title_movies_empty">Nenhum filme encontrado</string>
     <string name="title_remove_filter">Remover Filtros</string>
-    <string name="title_cinema">Cinema</string>
+
 </resources>
