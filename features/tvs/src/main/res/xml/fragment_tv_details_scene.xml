@@ -12,6 +12,24 @@
     </Transition>
     <ConstraintSet android:id="@+id/start">
         <Constraint
+            android:id="@+id/fab_full_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/backdrop"
+            app:layout_constraintBottom_toBottomOf="@id/backdrop"
+            android:layout_marginEnd="@dimen/default_margin_tvs"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/fab_btn_corner"
+            android:backgroundTint="@color/colorPrimary"
+            android:clipToPadding="false"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:outlineProvider="none"
+            android:outlineSpotShadowColor="@android:color/transparent"/>
+
+
+        <Constraint
             android:id="@id/backdrop"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -29,18 +47,15 @@
             android:layout_marginBottom="@dimen/default_margin_tvs"
             android:alpha="0.3"
             app:layout_constraintBottom_toTopOf="@+id/seasons_rv"
-            app:layout_constraintStart_toStartOf="parent"
-
-
-            />
+            app:layout_constraintStart_toStartOf="parent" />
         <Constraint
             android:id="@+id/seasons_rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/margin_bottom_navigation"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginBottom="@dimen/margin_bottom_navigation"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/backdrop" />
 
@@ -59,20 +74,19 @@
             <PropertySet android:alpha="0.3" />
         </Constraint>
 
-        <Constraint
-            android:id="@+id/title_tv"
-
-            >
+        <Constraint android:id="@+id/title_tv">
             <Layout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/default_margin_tvs"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@+id/seasons_rv"
-                app:layout_constraintStart_toStartOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
             <PropertySet android:alpha="1" />
 
         </Constraint>
+
+
     </ConstraintSet>
 
 

@@ -3,6 +3,7 @@ package com.jaozinfs.paging.tvs.ui.fragments
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -12,6 +13,7 @@ import com.jaozinfs.paging.tvs.data.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.tvs.domain.model.TvDetailsUI
 import com.jaozinfs.paging.tvs.ui.adapter.SeasonsAdapter
 import com.jaozinfs.paging.tvs.ui.viewmodels.TvsViewModel
+import com.jaozinfs.paging.utils.MotionTransitionListener
 import kotlinx.android.synthetic.main.fragment_tv_details.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,10 +23,15 @@ class FragmentTvDetails : Fragment(R.layout.fragment_tv_details) {
     private val tvsViewModel: TvsViewModel by viewModel()
     private val args: FragmentTvDetailsArgs by navArgs()
     private val adapter = SeasonsAdapter {}
+    private val listener = MotionTransitionListener {
+        chat_fab_text.isVisible = it != R.id.end
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupList()
+        fragment_tv_details_motion_container.addTransitionListener(listener)
         lifecycleScope.launch {
             tvsViewModel.getTvDetails(args.tvID).collect {
                 constructDetails(it)
@@ -48,5 +55,6 @@ class FragmentTvDetails : Fragment(R.layout.fragment_tv_details) {
     private fun setupList() {
         seasons_rv.adapter = adapter
     }
+
 
 }

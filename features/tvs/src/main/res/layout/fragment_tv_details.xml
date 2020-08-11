@@ -2,6 +2,7 @@
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_tv_details_motion_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/fragment_tv_details_scene">
@@ -15,17 +16,18 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:background="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_tvs"
+        android:layout_marginBottom="@dimen/default_margin_tvs"
         android:alpha="0"
         android:textAppearance="@style/TextAppearance"
         android:textSize="22sp"
-        android:layout_marginStart="@dimen/default_margin_tvs"
-        android:layout_marginBottom="@dimen/default_margin_tvs"
         app:layout_constraintBottom_toTopOf="@+id/seasons_rv"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="Dark" />
@@ -41,13 +43,61 @@
         android:id="@+id/seasons_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/margin_bottom_navigation"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/item_tvs_seasons"
-        android:layout_marginBottom="@dimen/margin_bottom_navigation"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/backdrop" />
+        app:layout_constraintTop_toBottomOf="@id/backdrop"
+        tools:listitem="@layout/item_tvs_seasons" />
 
+
+
+
+
+    <LinearLayout
+        android:id="@+id/fab_full_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backdrop"
+        app:layout_constraintBottom_toBottomOf="@id/backdrop"
+        android:layout_marginEnd="@dimen/default_margin_tvs"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/fab_btn_corner"
+        android:backgroundTint="@color/colorPrimary"
+        android:clipToPadding="false"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:outlineProvider="none"
+        android:outlineSpotShadowColor="@android:color/transparent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/chat_fab"
+            style="@style/Widget.MaterialComponents.FloatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:backgroundTint="@color/colorPrimary"
+            app:borderWidth="0dp"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:srcCompat="@drawable/ic_baseline_star_24"
+            app:tint="@color/colorWhite"
+            app:useCompatPadding="false"/>
+
+        <TextView
+            android:id="@+id/chat_fab_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:paddingStart="0dp"
+            android:paddingEnd="20dp"
+            android:text="@string/label_favorite"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Button"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

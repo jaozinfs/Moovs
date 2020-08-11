@@ -3,4 +3,5 @@
     <string name="title_tvs_popular">Pupulares</string>
     <string name="see_more">Ver mais</string>
     <string name="title_on_air">No ar</string>
+    <string name="label_favorite">Favoritar</string>
 </resources>
