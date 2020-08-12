@@ -10,7 +10,7 @@ import com.jaozinfs.paging.tvs.di.tvsFeatureDI
 import com.jaozinfs.paging.tvs.ui.adapter.TvsCarouselAdapter
 import com.jaozinfs.paging.tvs.ui.viewmodels.TvsViewModel
 import kotlinx.android.synthetic.main.fragment_tvs.*
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -24,6 +24,9 @@ class FragmentTvs : Fragment(R.layout.fragment_tvs) {
         findNavController().navigate(FragmentTvsDirections.actionNavTvsToNavTvDetails(it))
     }
     private val tvsOnAirAdapter = TvsCarouselAdapter {
+        findNavController().navigate(FragmentTvsDirections.actionNavTvsToNavTvDetails(it))
+    }
+    private val tvsFavoritesAdapter = TvsCarouselAdapter {
         findNavController().navigate(FragmentTvsDirections.actionNavTvsToNavTvDetails(it))
     }
 
@@ -40,14 +43,17 @@ class FragmentTvs : Fragment(R.layout.fragment_tvs) {
         setAdapter()
         setListeners()
         lifecycleScope.launch {
-            tvsViewModel.getTvsPopularFirstItem().collectLatest {
-                tvsCarouselAdapter.submitList(it)
+            tvsViewModel.getCategoriesCombined().collect {
+                tvsCarouselAdapter.submitList(it.first)
                 tvs_carousel_rv.scheduleLayoutAnimation()
-            }
-            tvsViewModel.getTvsOnAir().collectLatest {
-                tvsOnAirAdapter.submitList(it)
+
+                tvsOnAirAdapter.submitList(it.second)
                 tvs_on_air_carousel_rv.scheduleLayoutAnimation()
+
+                tvsFavoritesAdapter.submitList(it.third)
+                tvs_favorited_rv.scheduleLayoutAnimation()
             }
+
         }
 
     }
@@ -70,6 +76,7 @@ class FragmentTvs : Fragment(R.layout.fragment_tvs) {
     private fun setAdapter() {
         tvs_carousel_rv.adapter = tvsCarouselAdapter
         tvs_on_air_carousel_rv.adapter = tvsOnAirAdapter
+        tvs_favorited_rv.adapter = tvsFavoritesAdapter
     }
 
 }
