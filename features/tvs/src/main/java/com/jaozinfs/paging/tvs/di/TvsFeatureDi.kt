@@ -44,16 +44,22 @@ val tvsFeatureDI = module {
     factory {
         GetTvsOnAirUseCase(get())
     }
+    factory {
+        CheckTvIsFavoriteUseCase(get())
+    }
 
     //local
     factory {
         SaveTvFavoriteUseCase(get())
     }
     factory {
+        RemoveTvFavoriteUseCase(get())
+    }
+    factory {
         GetTvsFavoritedUseCase(get())
     }
 
     viewModel {
-        TvsViewModel(get(), get(), get(), get(), get())
+        TvsViewModel(get(), get(), get(), get(), get(), get(),get())
     }
 }

@@ -3,8 +3,6 @@ package com.jaozinfs.paging
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.jaozinfs.paging.extensions.setupWithNavController
 import kotlinx.android.synthetic.main.main.*
 
@@ -20,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
         setupNavigationBar()
+
     }
 
 
@@ -30,8 +29,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    override fun onPause() {
-        super.onPause()
-        finish()
-    }
 }

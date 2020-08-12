@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.Bridge">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -56,9 +56,22 @@
     <dimen name="default_title_text_size">22sp</dimen>
 
     <!-- Splash screen theme -->
-    <style name="SplashScreenTheme" parent="Theme.MaterialComponents.NoActionBar">
+    <style name="SplashScreenTheme" parent="AppTheme">
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="RecyclerViewFadeEdgeHorizontal">
+        <item name="android:requiresFadingEdge">horizontal</item>
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:fadingEdgeLength">@dimen/default_fade_edge</item>
+    </style>
+    <style name="RecyclerViewFadeEdgeVertical">
+        <item name="android:requiresFadingEdge">vertical</item>
+        <item name="android:fadingEdge">vertical</item>
+        <item name="android:fadeScrollbars">true</item>
+        <item name="android:fadingEdgeLength">@dimen/default_fade_edge</item>
     </style>
 </resources>

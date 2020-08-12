@@ -6,11 +6,11 @@
 >
 
     <androidx.recyclerview.widget.RecyclerView
+        style="@style/RecyclerViewFadeEdgeVertical"
         android:id="@+id/tvs_category_rv"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/default_margin_tvs"
-        android:layout_marginBottom="@dimen/margin_bottom_navigation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

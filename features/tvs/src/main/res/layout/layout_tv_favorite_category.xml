@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title_favorited"
+        style="@style/TextAppearance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_tvs"
+        android:text="@string/title_favorites"
+        android:textSize="@dimen/tvs_topics_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvs_on_air_carousel_rv" />
+
+    <TextView
+        android:id="@+id/see_more_favorited"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin_tvs"
+        android:text="@string/see_more"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/tvs_favorited_rv"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/tvs_favorited_rv"
+        style="@style/RecyclerViewFadeEdgeHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/default_tv_category_height"
+        android:layoutAnimation="@anim/animation_right"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_favorited"
+        tools:listitem="@layout/tvs_item" />
+</androidx.constraintlayout.widget.ConstraintLayout>

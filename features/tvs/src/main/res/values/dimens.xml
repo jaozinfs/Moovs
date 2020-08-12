@@ -5,4 +5,5 @@
     <dimen name="margin_bottom_navigation_medium">55dp</dimen>
     <dimen name="margin_bottom_navigation_text">70dp</dimen>
     <dimen name="tvs_topics_size">18sp</dimen>
+    <dimen name="default_tv_category_height">190dp</dimen>
 </resources>

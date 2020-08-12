@@ -2,6 +2,8 @@ package com.jaozinfs.paging.tvs.ui.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import com.jaozinfs.paging.extensions.handleErrors
 import com.jaozinfs.paging.tvs.domain.model.TvDetailsUI
 import com.jaozinfs.paging.tvs.domain.model.TvUI
@@ -17,12 +19,19 @@ class TvsViewModel(
     private val getTvsOnAirUseCase: GetTvsOnAirUseCase,
     private val getTvDetailsUseCase: GetTvDetailsUseCase,
     private val getTvsFavoritedUseCase: GetTvsFavoritedUseCase,
-    private val saveTvFavoriteUseCase: SaveTvFavoriteUseCase
+    private val saveTvFavoriteUseCase: SaveTvFavoriteUseCase,
+    private val removeTvFavoriteUseCase: RemoveTvFavoriteUseCase,
+    private val checkTvIsFavoriteUseCase: CheckTvIsFavoriteUseCase
 ) : ViewModel() {
     companion object {
         const val POPULAR = "popular"
         const val ON_AIR = "onTheAir"
+        const val FAVORITED = "favs"
     }
+
+    fun observeTvIsFavorite(tvId: Int) =
+        checkTvIsFavoriteUseCase.execute(tvId).asLiveData(viewModelScope.coroutineContext)
+
 
     fun getTvsPopularFirstItem() = getTvsPopularUseCase.execute(null).map { it.take(10) }
     fun getTvsOnAir() = getTvsOnAirUseCase.execute(null).map { it.take(10) }
@@ -50,18 +59,31 @@ class TvsViewModel(
             ON_AIR -> {
                 getTvsOnAirUseCase.execute(null)
             }
+            FAVORITED -> {
+                getTvsFavoritedUseCase.execute(Unit)
+            }
             else -> {
                 throw NotImplementedError("Categoria não implementada")
             }
         }
     }
 
-    fun saveTvFavorite(tvUI: TvDetailsUI) = saveTvFavoriteUseCase
-        .execute(tvUI)
-        .handleErrors {
-            Log.d("Teste", "Error: $it")
-        }
-        .flowOn(Dispatchers.IO)
+
+    fun saveTvFavorite(tvUI: TvDetailsUI) =
+        saveTvFavoriteUseCase
+            .execute(tvUI)
+            .handleErrors {
+                Log.d("Teste", "Error: $it")
+            }
+            .flowOn(Dispatchers.IO)
+
+    fun removeTvFavorite(tvId: Int) =
+        removeTvFavoriteUseCase
+            .execute(tvId)
+            .handleErrors {
+                Log.d("Teste", "Error: $it")
+            }
+            .flowOn(Dispatchers.IO)
 
 
     fun getTvsFavorite(tvUI: TvUI) = getTvsFavoritedUseCase.execute(Unit).flowOn(Dispatchers.IO)

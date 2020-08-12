@@ -16,6 +16,11 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    android {
+        dataBinding {
+            enabled = true
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -45,7 +50,7 @@ dependencies {
     implementation "com.google.android.material:material:1.1.0"
     implementation 'com.airbnb.android:lottie:3.0.0'
     
-    def paging_version = "3.0.0-alpha02"
+    def paging_version = "3.0.0-alpha04"
     implementation "androidx.paging:paging-runtime:$paging_version"
     implementation "com.squareup.retrofit2:retrofit:2.7.1"
     implementation "com.squareup.okhttp3:okhttp:4.3.1"

@@ -4,4 +4,7 @@
     <string name="see_more">Ver mais</string>
     <string name="title_on_air">No ar</string>
     <string name="label_favorite">Favoritar</string>
+    <string name="label_unfavorite">Desfavoritar</string>
+    <string name="msg_favorite_tv">Série favoritada :D</string>
+    <string name="msg_unfavorite_tv">Série desfavoritada :(</string>
 </resources>

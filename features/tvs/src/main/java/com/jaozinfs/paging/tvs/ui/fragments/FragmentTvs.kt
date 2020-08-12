@@ -1,15 +1,21 @@
 package com.jaozinfs.paging.tvs.ui.fragments
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.View
+import androidx.core.animation.doOnEnd
+import androidx.core.animation.doOnStart
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.jaozinfs.paging.tvs.R
 import com.jaozinfs.paging.tvs.di.tvsFeatureDI
+import com.jaozinfs.paging.tvs.domain.model.TvUI
 import com.jaozinfs.paging.tvs.ui.adapter.TvsCarouselAdapter
 import com.jaozinfs.paging.tvs.ui.viewmodels.TvsViewModel
 import kotlinx.android.synthetic.main.fragment_tvs.*
+import kotlinx.android.synthetic.main.layout_tv_favorite_category.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -50,8 +56,9 @@ class FragmentTvs : Fragment(R.layout.fragment_tvs) {
                 tvsOnAirAdapter.submitList(it.second)
                 tvs_on_air_carousel_rv.scheduleLayoutAnimation()
 
-                tvsFavoritesAdapter.submitList(it.third)
-                tvs_favorited_rv.scheduleLayoutAnimation()
+                if (it.third.isNotEmpty())
+                    showFavorites(it.third)
+
             }
 
         }
@@ -64,6 +71,9 @@ class FragmentTvs : Fragment(R.layout.fragment_tvs) {
         }
         see_more_on_air.setOnClickListener {
             navigateToCategory(TvsViewModel.ON_AIR)
+        }
+        see_more_favorited.setOnClickListener {
+            navigateToCategory(TvsViewModel.FAVORITED)
         }
     }
 
@@ -79,4 +89,11 @@ class FragmentTvs : Fragment(R.layout.fragment_tvs) {
         tvs_favorited_rv.adapter = tvsFavoritesAdapter
     }
 
+    private fun showFavorites(list: List<TvUI>) = with(favorite_items) {
+
+        favorite_items.isVisible = true
+        tvsFavoritesAdapter.submitList(list)
+        tvs_favorited_rv.scheduleLayoutAnimation()
+
+    }
 }

@@ -2,7 +2,6 @@ package com.jaozinfs.paging.movies.ui.fragments
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -74,13 +73,13 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         movies_rv.layoutManager = GridLayoutManager(context, 2)
         //Add Loading state on middle of view
         adapter.addLoadStateListener { loadState ->
+
             swipe_refresh_layout?.isRefreshing = loadState.source.refresh is LoadState.Loading
             if (loadState.source.refresh is LoadState.Error)
                 setNoConnectionNetworkError()
         }
         //empty state
         adapter.addDataRefreshListener {
-            Log.d("Teste", it.toString())
             movies_empty_animation.isVisible = it
         }
         //set adapter on recycler view and set adapter in header and footer

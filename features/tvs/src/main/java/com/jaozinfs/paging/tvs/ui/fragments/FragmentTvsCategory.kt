@@ -1,6 +1,8 @@
 package com.jaozinfs.paging.tvs.ui.fragments
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -8,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.jaozinfs.paging.tvs.R
+import com.jaozinfs.paging.tvs.data.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.tvs.ui.adapter.TvsCarouselAdapter
 import com.jaozinfs.paging.tvs.ui.viewmodels.TvsViewModel
 import kotlinx.android.synthetic.main.fragment_tvs_category.*
@@ -28,6 +31,14 @@ class FragmentTvsCategory : Fragment(R.layout.fragment_tvs_category) {
         lifecycleScope.launch {
             tvsViewModel.getTvsByCategory(args.category).collect {
                 adapter.submitList(it)
+                Log.d("Teste", it.map {
+                    val uriBg = Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
+                        .buildUpon()
+                        .appendEncodedPath(it.poster_path)
+                        .build()
+                    uriBg
+                    Pair(uriBg, it.overview)
+                }.toString())
                 tvs_category_rv.scheduleLayoutAnimation()
             }
         }

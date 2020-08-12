@@ -3,10 +3,7 @@ package com.jaozinfs.paging.movies.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
+import androidx.paging.*
 import com.jaozinfs.paging.database.local.entities.MovieEntity
 import com.jaozinfs.paging.extensions.handleErrors
 import com.jaozinfs.paging.movies.data.MoviesPagingSource

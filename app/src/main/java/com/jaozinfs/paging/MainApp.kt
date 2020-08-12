@@ -2,6 +2,8 @@ package com.jaozinfs.paging
 
 import android.app.Application
 import android.content.Context
+import android.os.Build
+import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.play.core.splitcompat.SplitCompat
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -28,5 +30,6 @@ class MainApp : Application() {
     private fun startKoin() = startKoin {
         androidContext(this@MainApp)
     }
+
 
 }

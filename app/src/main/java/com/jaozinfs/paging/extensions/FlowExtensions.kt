@@ -1,5 +1,6 @@
 package com.jaozinfs.paging.extensions
 
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
@@ -22,4 +23,6 @@ fun flipModuleFlow(startPosition: Int, count: Int, delayMillis: Long = 2_000) = 
         s = (s + 1) % count
     } while (true)
 }
+
+
 
