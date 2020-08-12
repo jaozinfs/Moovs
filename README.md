@@ -51,6 +51,7 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Paging 3
 * Databinding
 
+
 #### - Base
 * Android KTX
 
@@ -59,6 +60,7 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Constraint Layout
 * Fragment Animations
 * Material Design
+* DarkTheme
 
 ## Dependecy Injection
 * Koin
