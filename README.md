@@ -14,15 +14,20 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 ## Features
 #### Movies
 * Tranding Movies
+* Movies on Cinema
+* Filter Movies
+* Search Movies
 * Movie Details
 * Favorite Movies
-* Cinema
 
-#### TV Seasons [FUTURE]
+#### TV Seasons 
 * Séries
-* Séries Epoisodes
-* Séries Details
+* Séries Categories
+* Séries Season Details
 * Favore Séries
+-
+* Séries Season Epoisodes         [ FUTURE ] 
+* Séries Season Epoisodes Details [ FUTURE ] 
 
 ## Arquitecture and Pattern's
 * Modularization
@@ -44,6 +49,8 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Navigation Components
 * Room Database
 * Paging 3
+* Databinding
+
 
 #### - Base
 * Android KTX
@@ -53,6 +60,7 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Constraint Layout
 * Fragment Animations
 * Material Design
+* DarkTheme
 
 ## Dependecy Injection
 * Koin
