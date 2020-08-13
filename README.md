@@ -24,10 +24,8 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Séries
 * Séries Categories
 * Séries Season Details
+* Séries Season Epoisode Details
 * Favore Séries
--
-* Séries Season Epoisodes         [ FUTURE ] 
-* Séries Season Epoisodes Details [ FUTURE ] 
 
 ## Arquitecture and Pattern's
 * Modularization
@@ -50,7 +48,7 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
 * Room Database
 * Paging 3
 * Databinding
-
+* ViewBinding
 
 #### - Base
 * Android KTX
