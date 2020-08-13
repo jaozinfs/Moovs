@@ -1,6 +1,8 @@
 package com.jaozinfs.paging.tvs.data.mappers
 
 import com.jaozinfs.paging.database.local.entities.series.TvEntity
+import com.jaozinfs.paging.tvs.data.network.response.EpisodeResponse
+import com.jaozinfs.paging.tvs.data.network.response.SeasonDetailsResponse
 import com.jaozinfs.paging.tvs.data.network.response.TvDetailsResponse
 import com.jaozinfs.paging.tvs.data.network.response.TvResponse
 import com.jaozinfs.paging.tvs.domain.model.*
@@ -21,6 +23,7 @@ fun TvResponse.toUI(): TvUI =
         name,
         original_name
     )
+
 fun TvEntity.toUI(): TvUI =
     TvUI(
         poster_path,
@@ -90,3 +93,31 @@ fun TvDetailsResponse.toUI(): TvDetailsUI = TvDetailsUI(
     vote_average,
     vote_count
 )
+
+fun SeasonDetailsResponse.toUI(): SeasonDetailsUI = SeasonDetailsUI(
+    _id,
+    air_date,
+    episodes.map {
+        it.toUI()
+    },
+    id,
+    name,
+    overview,
+    poster_path,
+    season_number
+)
+
+fun EpisodeResponse.toUI() =
+    EpisodeUI(
+        air_date,
+        episode_number,
+        id,
+        name,
+        overview,
+        production_code,
+        season_number,
+        show_id,
+        still_path,
+        vote_average,
+        vote_count
+    )

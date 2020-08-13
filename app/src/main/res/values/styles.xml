@@ -52,8 +52,13 @@
         <item name="android:textSize">@dimen/default_title_text_size</item>
         <item name="android:textColor">@color/colorWhite</item>
     </style>
+    <style name="TextAppearanceDefaultColor">
+        <item name="fontFamily">@font/alfa_slab_one</item>
+        <item name="android:textSize">@dimen/default_title_text_size</item>
+    </style>
 
     <dimen name="default_title_text_size">22sp</dimen>
+    <dimen name="default_title_text_size_medium">18sp</dimen>
 
     <!-- Splash screen theme -->
     <style name="SplashScreenTheme" parent="AppTheme">

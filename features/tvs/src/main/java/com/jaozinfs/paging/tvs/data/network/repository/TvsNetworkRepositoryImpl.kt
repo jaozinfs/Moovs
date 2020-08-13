@@ -4,6 +4,8 @@ import com.jaozinfs.paging.network.NetworkRepositoryManager
 import com.jaozinfs.paging.tvs.data.mappers.toUI
 import com.jaozinfs.paging.tvs.data.network.TvsApi
 import com.jaozinfs.paging.tvs.domain.TvsNetworkRepository
+import com.jaozinfs.paging.tvs.domain.model.EpisodeUI
+import com.jaozinfs.paging.tvs.domain.model.SeasonDetailsUI
 import com.jaozinfs.paging.tvs.domain.model.TvDetailsUI
 import com.jaozinfs.paging.tvs.domain.model.TvUI
 
@@ -25,4 +27,14 @@ class TvsNetworkRepositoryImpl(private val tvsApi: TvsApi) :
     override suspend fun getTvDetails(tvId: Int): TvDetailsUI = NetworkRepositoryManager.getData {
         tvsApi.getTvDetails(tvId)
     }.toUI()
+
+    override suspend fun getTvEpisodesBySeasons(tvId: Int, seasonId: Int): SeasonDetailsUI =
+        NetworkRepositoryManager.getData {
+            tvsApi.getTvSeasonEpisodes(tvId, seasonId)
+        }.toUI()
+
+    override suspend fun getTvSeasonEpisode(tvId: Int, seasonId: Int, episodeID: Int): EpisodeUI =
+        NetworkRepositoryManager.getData {
+            tvsApi.getTvSeasonEpisode(tvId, seasonId, episodeID)
+        }.toUI()
 }

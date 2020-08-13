@@ -21,7 +21,9 @@ class TvsViewModel(
     private val getTvsFavoritedUseCase: GetTvsFavoritedUseCase,
     private val saveTvFavoriteUseCase: SaveTvFavoriteUseCase,
     private val removeTvFavoriteUseCase: RemoveTvFavoriteUseCase,
-    private val checkTvIsFavoriteUseCase: CheckTvIsFavoriteUseCase
+    private val checkTvIsFavoriteUseCase: CheckTvIsFavoriteUseCase,
+    private val getSeasonEpisodesUseCase: GetSeasonEpisodesUseCase,
+    private val getSeasonEpisodeUseCase: GetSeasonEpisodeUseCase
 ) : ViewModel() {
     companion object {
         const val POPULAR = "popular"
@@ -33,10 +35,6 @@ class TvsViewModel(
         checkTvIsFavoriteUseCase.execute(tvId).asLiveData(viewModelScope.coroutineContext)
 
 
-    fun getTvsPopularFirstItem() = getTvsPopularUseCase.execute(null).map { it.take(10) }
-    fun getTvsOnAir() = getTvsOnAirUseCase.execute(null).map { it.take(10) }
-    fun getTvDetails(tvId: Int) = getTvDetailsUseCase.execute(tvId)
-
     /**
      * Get combine flow with all categories
      * @return [Flow] Triple<List<TvUI>, List<TvUI>, List<TvUi>> -> with segments of combined
@@ -47,6 +45,12 @@ class TvsViewModel(
         }.zip(getTvsFavoritedUseCase.execute(Unit)) { first, second ->
             Triple(first.first, first.second, second)
         }.flowOn(Dispatchers.IO)
+
+    private fun getTvsPopularFirstItem() = getTvsPopularUseCase.execute(null).map { it.take(10) }
+    private fun getTvsOnAir() = getTvsOnAirUseCase.execute(null).map { it.take(10) }
+
+
+    fun getTvDetails(tvId: Int) = getTvDetailsUseCase.execute(tvId)
 
     /**
      * Get all items by category
@@ -85,8 +89,10 @@ class TvsViewModel(
             }
             .flowOn(Dispatchers.IO)
 
+    fun getSeasonEpisodes(tvId: Int, seaonsId: Int) =
+        getSeasonEpisodesUseCase.execute(GetSeasonEpisodesUseCase.Params(tvId, seaonsId))
 
-    fun getTvsFavorite(tvUI: TvUI) = getTvsFavoritedUseCase.execute(Unit).flowOn(Dispatchers.IO)
-
+    fun getEpisodeDetails(tvID: Int, seasonID: Int, episodeID: Int) =
+        getSeasonEpisodeUseCase.execute(GetSeasonEpisodeUseCase.Params(tvID, seasonID, episodeID))
 
 }

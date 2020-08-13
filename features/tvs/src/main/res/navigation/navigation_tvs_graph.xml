@@ -31,5 +31,36 @@
         <argument
             android:name="tvID"
             app:argType="integer"/>
+        <action
+            android:id="@+id/action_nav_tv_details_to_nav_season_details"
+            app:destination="@id/nav_season_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_season_details"
+        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvSeasonDetails"
+        tools:layout="@layout/fragment_season_details">
+        <argument
+            android:name="tvID"
+            app:argType="integer"/>
+        <argument
+            android:name="seasonID"
+            app:argType="integer"/>
+        <action
+            android:id="@+id/action_nav_season_details_to_nav_episode_details"
+            app:destination="@id/nav_episode_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_episode_details"
+        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvEpisodeDetails"
+        tools:layout="@layout/fragment_episode_details">
+        <argument
+            android:name="tvID"
+            app:argType="integer"/>
+        <argument
+            android:name="seasonID"
+            app:argType="integer"/>
+        <argument
+            android:name="episodeID"
+            app:argType="integer"/>
     </fragment>
 </navigation>

@@ -9,6 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.ethanhua.skeleton.RecyclerViewSkeletonScreen
+import com.ethanhua.skeleton.Skeleton
 import com.jaozinfs.paging.tvs.R
 import com.jaozinfs.paging.tvs.data.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.paging.tvs.ui.adapter.TvsCarouselAdapter
@@ -21,7 +23,11 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FragmentTvsCategory : Fragment(R.layout.fragment_tvs_category) {
     private val tvsViewModel: TvsViewModel by viewModel()
     private val adapter = TvsCarouselAdapter {
-        findNavController().navigate(FragmentTvsCategoryDirections.actionNavTvsCategoryToNavTvDetails(it))
+        findNavController().navigate(
+            FragmentTvsCategoryDirections.actionNavTvsCategoryToNavTvDetails(
+                it
+            )
+        )
     }
     private val args: FragmentTvsCategoryArgs by navArgs()
 
@@ -31,14 +37,6 @@ class FragmentTvsCategory : Fragment(R.layout.fragment_tvs_category) {
         lifecycleScope.launch {
             tvsViewModel.getTvsByCategory(args.category).collect {
                 adapter.submitList(it)
-                Log.d("Teste", it.map {
-                    val uriBg = Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
-                        .buildUpon()
-                        .appendEncodedPath(it.poster_path)
-                        .build()
-                    uriBg
-                    Pair(uriBg, it.overview)
-                }.toString())
                 tvs_category_rv.scheduleLayoutAnimation()
             }
         }

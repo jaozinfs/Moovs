@@ -1,17 +1,22 @@
 package com.jaozinfs.paging.tvs.ui.fragments
 
+import android.animation.ObjectAnimator
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.animation.doOnStart
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionManager
+import com.ethanhua.skeleton.RecyclerViewSkeletonScreen
+import com.ethanhua.skeleton.Skeleton
 import com.jaozinfs.paging.extensions.loadImageCoil
 import com.jaozinfs.paging.tvs.R
 import com.jaozinfs.paging.tvs.data.BASE_BACKDROP_IMAGE_PATTER
@@ -30,21 +35,27 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class FragmentTvDetails : Fragment() {
     private val tvsViewModel: TvsViewModel by viewModel()
     private val args: FragmentTvDetailsArgs by navArgs()
-    private val adapter = SeasonsAdapter {}
+
     private var saveFavoriteJob: Job? = null
     private var removeFavoriteJob: Job? = null
     private lateinit var tvDetailsUI: TvDetailsUI
-    private var favorited: Boolean = false
     lateinit var binding: FragmentTvDetailsBinding
+    private lateinit var skeletonScreen: RecyclerViewSkeletonScreen
+
+
+    private val adapter = SeasonsAdapter { seasonId ->
+        findNavController()
+            .navigate(
+                FragmentTvDetailsDirections.actionNavTvDetailsToNavSeasonDetails(args.tvID, seasonId)
+            )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTvDetailsBinding.inflate(layoutInflater, container, false).apply {
-
-        }
+        binding = FragmentTvDetailsBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -69,7 +80,6 @@ class FragmentTvDetails : Fragment() {
 
     private fun constructDetails(tvDetailsUI: TvDetailsUI) {
         this@FragmentTvDetails.tvDetailsUI = tvDetailsUI
-        //load image
         val uri = Uri.parse(BASE_BACKDROP_IMAGE_PATTER)
             .buildUpon()
             .appendEncodedPath(tvDetailsUI.poster_path)
@@ -77,20 +87,22 @@ class FragmentTvDetails : Fragment() {
 
         binding.backdrop.loadImageCoil(uri)
         binding.titleTv.text = tvDetailsUI.name
-        //update adapter
         adapter.submitList(tvDetailsUI.seasons)
     }
 
     private fun setupList() {
+        skeletonScreen = Skeleton.bind(seasons_rv)
+            .adapter(adapter)
+            .load(R.layout.item_tvs_seasons_loading)
+            .show()
         seasons_rv.adapter = adapter
     }
 
     private fun observeLiveData() {
         tvsViewModel.observeTvIsFavorite(args.tvID)
             .observe(viewLifecycleOwner, Observer { favorite ->
-                favorited = favorite
                 binding.fabFullBtn.setOnClickListener(getListenerFavoriteButtonFromState(favorite))
-                binding.chatFabText.text = getLabelFromFavoriteState(favorite)
+                changeFabText(getLabelFromFavoriteState(favorite))
             })
     }
 
@@ -100,6 +112,7 @@ class FragmentTvDetails : Fragment() {
 
 
     private fun getListenerFavoriteButtonFromState(favorite: Boolean) = View.OnClickListener {
+        disableFabButton()
         when (favorite) {
             true -> {
                 removeTvFavorite()
@@ -116,6 +129,7 @@ class FragmentTvDetails : Fragment() {
             tvsViewModel.saveTvFavorite(
                 tvDetailsUI
             ).collect {
+                enableFabButton()
                 Toast.makeText(context, getString(R.string.msg_favorite_tv), Toast.LENGTH_LONG)
                     .show()
             }
@@ -127,10 +141,25 @@ class FragmentTvDetails : Fragment() {
         removeFavoriteJob?.cancel()
         removeFavoriteJob = lifecycleScope.launch {
             tvsViewModel.removeTvFavorite(args.tvID).collect {
+                enableFabButton()
                 Toast.makeText(context, getString(R.string.msg_unfavorite_tv), Toast.LENGTH_LONG)
                     .show()
             }
         }
     }
 
+    private fun changeFabText(text: String) {
+        ObjectAnimator.ofFloat(binding.chatFabText, "alpha", 0f, 1f).apply {
+            duration = 500
+            doOnStart { binding.chatFabText.text = text }
+        }.start()
+    }
+
+    private fun disableFabButton() {
+        fab_full_btn.isEnabled = false
+    }
+
+    private fun enableFabButton() {
+        fab_full_btn.isEnabled = true
+    }
 }

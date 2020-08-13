@@ -4,27 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:id="@+id/item_tvs_season_container"
     >
 
-    <TextView
+    <View
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:layout_width="60dp"
+        android:layout_height="20dp"
         android:layout_marginStart="@dimen/default_margin_tvs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="O Começo de tudo" />
+        tools:text="O Começo de tudo"
+        android:background="@color/dark_transparent"/>
 
-    <TextView
+    <View
         android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="20dp"
         android:layout_marginEnd="@dimen/default_margin_tvs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/dark_transparent"
         tools:text="1:31" />
 
     <View
