@@ -11,18 +11,18 @@
         android:label="@string/title_movies"
         app:moduleName="@string/module_movies"
         app:graphResName="navigation_movies"
-        app:graphPackage="com.jaozinfs.paging.movies"/>
+        app:graphPackage="com.jaozinfs.moovs.movies"/>
 
     <include-dynamic
         android:id="@+id/navigation_tvs_graph"
         android:label="@string/title_tvs"
         app:moduleName="@string/module_tvs"
         app:graphResName="navigation_tvs_graph"
-        app:graphPackage="com.jaozinfs.paging.tvs"/>
+        app:graphPackage="com.jaozinfs.moovs.tvs"/>
 
     <activity
         android:id="@+id/nav_features_splash"
-        android:name="com.jaozinfs.paging.SplashScreenActivity"
+        android:name="com.jaozinfs.moovs.SplashScreenActivity"
         android:label="@string/title_movies"
         />
 

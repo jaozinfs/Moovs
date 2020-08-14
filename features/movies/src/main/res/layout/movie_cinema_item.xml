@@ -44,7 +44,7 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.jaozinfs.paging.ui.view.RatingView
+    <com.jaozinfs.moovs.ui.view.RatingView
         android:id="@+id/rating"
         android:layout_width="50dp"
         android:layout_height="50dp"

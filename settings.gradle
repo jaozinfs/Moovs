@@ -1,6 +1,6 @@
-include ':features:tvs'
+include ':app'
 include ':database'
 include ':network'
 include ':features:movies'
-include ':app'
-rootProject.name = "Paging 3"
+include ':features:tvs'
+rootProject.name = "Moovs"

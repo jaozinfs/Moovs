@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jaozinfs.paging">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.jaozinfs.moovs">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.jaozinfs.paging.MainApp"
+        android:name="com.jaozinfs.moovs.MainApp"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/moovs_ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/moovs_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:hasCode="true"
+        tools:replace="android:hasCode"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.jaozinfs.paging.MainActivity"
+            android:name="com.jaozinfs.moovs.MainActivity"
             android:label="@string/app_name"
             >
             <intent-filter>
@@ -23,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.jaozinfs.paging.SplashScreenActivity"
+            android:name="com.jaozinfs.moovs.SplashScreenActivity"
             android:label="@string/app_name"
             android:theme="@style/SplashScreenTheme">
             <intent-filter>

@@ -97,7 +97,7 @@ Guerra, Ação, Drama
         app:layout_constraintStart_toEndOf="@id/banner"
         app:layout_constraintTop_toBottomOf="@id/movie_details" />
 
-    <com.jaozinfs.paging.ui.view.AgeView
+    <com.jaozinfs.moovs.ui.view.AgeView
         android:id="@+id/age_view"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -128,7 +128,7 @@ Guerra, Ação, Drama
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <com.jaozinfs.paging.ui.view.RatingView
+    <com.jaozinfs.moovs.ui.view.RatingView
         android:id="@+id/rating_view"
         android:layout_width="60dp"
         android:layout_height="60dp"

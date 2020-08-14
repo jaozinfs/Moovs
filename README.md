@@ -8,7 +8,7 @@
 <div align="center">
 A Simple app with features using [Api TMDB][themoviedb] and published on Play Store.
 
-https://play.google.com/store/apps/details?id=com.jaozinfs.paging&hl=pt_BR
+https://play.google.com/store/apps/details?id=com.jaozinfs.moovs&hl=pt_BR
 </div>
 
 ## Features

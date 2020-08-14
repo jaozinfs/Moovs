@@ -1,27 +1,13 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.jaozinfs.paging.movies">
+<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.jaozinfs.moovs.movies">
 
     <dist:module
         dist:instant="false"
-        dist:onDemand="false"
         dist:title="@string/title_movies">
+        <dist:delivery>
+            <dist:install-time />
+        </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>
 
-
-    <application>
-        <activity
-            android:name=".ui.MoviesActivity"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.MaterialComponents.NoActionBar">
-            <intent-filter>
-                <action android:name="mobile.features.movies" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
-    </application>
 </manifest>

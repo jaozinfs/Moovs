@@ -1,6 +1,5 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.jaozinfs.paging.tvs">
+<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.jaozinfs.moovs.tvs">
 
     <dist:module
         dist:instant="false"

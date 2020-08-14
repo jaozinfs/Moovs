@@ -5,7 +5,7 @@
     app:startDestination="@+id/nav_movies">
     <fragment
         android:id="@+id/nav_movies"
-        android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesFragment"
+        android:name="com.jaozinfs.moovs.movies.ui.fragments.MoviesFragment"
         android:label="@string/title_movies"
         tools:layout="@layout/fragment_movies"
         >
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/nav_movies_detail"
-        android:name="com.jaozinfs.paging.movies.ui.fragments.MovieDetailFragment"
+        android:name="com.jaozinfs.moovs.movies.ui.fragments.MovieDetailFragment"
         android:label="@string/title_movies"
         tools:layout="@layout/fragment_movie_details"
         >
@@ -28,13 +28,13 @@
     </fragment>
     <fragment
         android:id="@+id/nav_movies_filter"
-        android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesFilterFragment"
+        android:name="com.jaozinfs.moovs.movies.ui.fragments.MoviesFilterFragment"
         android:label="@string/title_movies"
         tools:layout="@layout/fragment_movies_filter"
         />
     <fragment
         android:id="@+id/nav_movies_favorites"
-        android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesFavoritesFragment"
+        android:name="com.jaozinfs.moovs.movies.ui.fragments.MoviesFavoritesFragment"
         android:label="@string/title_movies"
         tools:layout="@layout/fragment_movies_favorites"
         >
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_movies_cinema"
-        android:name="com.jaozinfs.paging.movies.ui.fragments.MoviesCinemaFragment"
+        android:name="com.jaozinfs.moovs.movies.ui.fragments.MoviesCinemaFragment"
         android:label="@string/title_cinema"
         tools:layout="@layout/fragment_movies_cinema">
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_movie_cinema_details"
-        android:name="com.jaozinfs.paging.movies.ui.fragments.MovieCinemaDetails"
+        android:name="com.jaozinfs.moovs.movies.ui.fragments.MovieCinemaDetails"
         android:label="@string/title_cinema"
         tools:layout="@layout/fragment_movie_cinema_details">
         <argument

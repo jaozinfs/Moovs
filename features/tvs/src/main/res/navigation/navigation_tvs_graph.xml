@@ -5,7 +5,7 @@
     app:startDestination="@id/nav_tvs">
     <fragment
         android:id="@+id/nav_tvs"
-        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvs"
+        android:name="com.jaozinfs.moovs.tvs.ui.fragments.FragmentTvs"
         tools:layout="@layout/fragment_tvs">
         <action
             android:id="@+id/action_nav_tvs_to_nav_tvs_category"
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_tvs_category"
-        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvsCategory"
+        android:name="com.jaozinfs.moovs.tvs.ui.fragments.FragmentTvsCategory"
         tools:layout="@layout/fragment_tvs_category">
         <argument android:name="category"
             app:argType="string"/>
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_tv_details"
-        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvDetails"
+        android:name="com.jaozinfs.moovs.tvs.ui.fragments.FragmentTvDetails"
         tools:layout="@layout/fragment_tv_details">
         <argument
             android:name="tvID"
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_season_details"
-        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvSeasonDetails"
+        android:name="com.jaozinfs.moovs.tvs.ui.fragments.FragmentTvSeasonDetails"
         tools:layout="@layout/fragment_season_details">
         <argument
             android:name="tvID"
@@ -51,7 +51,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_episode_details"
-        android:name="com.jaozinfs.paging.tvs.ui.fragments.FragmentTvEpisodeDetails"
+        android:name="com.jaozinfs.moovs.tvs.ui.fragments.FragmentTvEpisodeDetails"
         tools:layout="@layout/fragment_episode_details">
         <argument
             android:name="tvID"

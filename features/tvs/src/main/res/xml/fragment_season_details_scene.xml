@@ -18,11 +18,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:alpha="1"
-            android:background="@drawable/shape_season_details"
-            app:layout_constraintBottom_toTopOf="@id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline3"/>
+
         <Constraint
             android:id="@+id/backdrop"
             android:layout_width="match_parent"
