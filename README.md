@@ -8,7 +8,7 @@
 <div align="center">
 A Simple app with features using [Api TMDB][themoviedb] and published on Play Store.
 
-https://play.google.com/store/apps/details?id=com.jaozinfs.moovs&hl=pt_BR
+[Play Store][moovsps]
 </div>
 
 ## Features
@@ -65,3 +65,4 @@ https://play.google.com/store/apps/details?id=com.jaozinfs.moovs&hl=pt_BR
 
    
    [themoviedb]: <https://developers.themoviedb.org/3/getting-started/introduction>
+    [moovsps]: <https://play.google.com/store/apps/details?id=com.jaozinfs.moovs>
