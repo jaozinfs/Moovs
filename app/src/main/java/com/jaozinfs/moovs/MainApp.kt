@@ -2,17 +2,20 @@ package com.jaozinfs.moovs
 
 import android.app.Application
 import android.content.Context
-import android.os.Build
-import androidx.appcompat.app.AppCompatDelegate
 import com.google.android.play.core.splitcompat.SplitCompat
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
+import timber.log.Timber
 
 class MainApp : Application() {
 
     override fun onCreate() {
         super.onCreate()
         startKoin()
+
+        if (BuildConfig.DEBUG) {
+            startTimber()
+        }
     }
 
     /**
@@ -31,5 +34,8 @@ class MainApp : Application() {
         androidContext(this@MainApp)
     }
 
+    private fun startTimber() {
+        Timber.plant(Timber.DebugTree())
+    }
 
 }

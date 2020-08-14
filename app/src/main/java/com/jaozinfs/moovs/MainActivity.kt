@@ -1,8 +1,11 @@
 package com.jaozinfs.moovs
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.model.InstallStatus
 import com.jaozinfs.moovs.extensions.setupWithNavController
 import kotlinx.android.synthetic.main.main.*
 
@@ -18,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main)
         setupNavigationBar()
-
     }
 
 

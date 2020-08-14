@@ -5,6 +5,8 @@ import com.jaozinfs.moovs.database.local.entities.MovieEntity
 import com.jaozinfs.moovs.movies.data.mappers.toUI
 import com.jaozinfs.moovs.movies.domain.movies.MovieUi
 import com.jaozinfs.moovs.movies.domain.movies.MoviesLocalRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class MoviesLocalRepositoryImpl(private val moviesDatabase: MoviesDatabase) :
     MoviesLocalRepository {
@@ -39,11 +41,15 @@ class MoviesLocalRepositoryImpl(private val moviesDatabase: MoviesDatabase) :
     }
 
     override fun removeMovieFavorite(movieId: Int): Int {
-            return moviesDatabase.moviesDao().removeMovieFavorite(movieId)
+        return moviesDatabase.moviesDao().removeMovieFavorite(movieId)
     }
 
-    override fun getMovieFavorited(movieUi: MovieUi): MovieUi? {
-        return moviesDatabase.moviesDao().getMovieFavorited(movieUi.id)?.toUI()
+    override fun getMovieFavorited(movieUi: MovieUi): Flow<List<MovieUi>> {
+        return moviesDatabase.moviesDao().getMovieFavorited(movieUi.id).map {
+            it.map {movie->
+                movie.toUI()
+            }
+        }
     }
 
 }

@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.zip
+import timber.log.Timber
 
 class TvsViewModel(
     private val getTvsPopularUseCase: GetTvsPopularUseCase,
@@ -77,7 +78,7 @@ class TvsViewModel(
         saveTvFavoriteUseCase
             .execute(tvUI)
             .handleErrors {
-                Log.d("Teste", "Error: $it")
+                Timber.e( "Error: $it")
             }
             .flowOn(Dispatchers.IO)
 
@@ -85,7 +86,7 @@ class TvsViewModel(
         removeTvFavoriteUseCase
             .execute(tvId)
             .handleErrors {
-                Log.d("Teste", "Error: $it")
+                Timber.e( "Error: $it")
             }
             .flowOn(Dispatchers.IO)
 

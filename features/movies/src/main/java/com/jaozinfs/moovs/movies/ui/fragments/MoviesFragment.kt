@@ -65,7 +65,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     private fun setSwipeRefreshListener() {
         swipe_refresh_layout.setOnRefreshListener {
             resetFilter()
-            getMovies()
+            getMovies(isRefresh = true)
         }
     }
 
@@ -114,24 +114,30 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         }
     }
 
-    //persist list of movies on viewmodel
     private fun getMovies(
         voteAvarage: String? = null,
         nameFilter: String? = null,
         isAdult: Boolean? = null,
-        genres: List<Int>? = null
+        genres: List<Int>? = null,
+        isRefresh: Boolean = false
     ) {
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
-            viewModel.getMovies(voteAvarage, nameFilter, isAdult, genres).collectLatest {
+            viewModel.getMovies(
+                MoviesViewModel.MoviesFilterObject(
+                    voteAvarage,
+                    nameFilter,
+                    isAdult,
+                    genres,
+                    isRefresh
+                )
+            ).collectLatest {
                 adapter.submitData(it)
             }
         }
     }
 
-    //inflate menu on fragment
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        // TODO Add your menu entries here
         inflater.inflate(R.menu.movies_menu, menu)
         val searchItem = menu.findItem(R.id.action_search)
         (searchItem.actionView as? SearchView)?.let {
@@ -142,7 +148,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
                 }
 
                 override fun onMenuItemActionCollapse(p0: MenuItem?): Boolean {
-                    getMovies()
+                    getMovies(isRefresh = true)
                     return true
                 }
             })
@@ -153,10 +159,6 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
                 }
 
                 override fun onQueryTextChange(newText: String?): Boolean {
-//                    newText?.let {
-//                        if (it.isEmpty())
-//                            getMovies()
-//                    }
                     return false
                 }
             })
@@ -189,7 +191,11 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
             MoviesFilterFragment.FILTER_OBJECT
         )?.observe(viewLifecycleOwner, Observer {
             it?.let {
-                getMovies(it.voteAvarege, isAdult = it.isAdult, genres = it.genres)
+                getMovies(
+                    it.voteAvarege,
+                    isAdult = it.isAdult,
+                    genres = it.genres
+                )
             }
         })
 

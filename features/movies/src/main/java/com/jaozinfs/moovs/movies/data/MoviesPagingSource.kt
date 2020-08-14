@@ -10,7 +10,6 @@ class MoviesPagingSource(
 ) : PagingSource<Int, MovieEntity>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieEntity> {
         return try {
-            Log.d("Teste", "Page :${params.key}")
             val page = params.key ?: 1
             val movies = service.getMovies(page)
             return LoadResult.Page(

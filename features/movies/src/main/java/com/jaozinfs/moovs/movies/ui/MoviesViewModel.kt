@@ -2,6 +2,7 @@ package com.jaozinfs.moovs.movies.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.jaozinfs.moovs.database.local.entities.MovieEntity
@@ -18,7 +19,11 @@ import com.jaozinfs.moovs.movies.domain.usecase.movies.GetMovieDetailsUseCase
 import com.jaozinfs.moovs.movies.domain.usecase.movies.GetMovieImagesUseCase
 import com.jaozinfs.moovs.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import timber.log.Timber
 
 class MoviesViewModel(
     private val moviesRepository: MoviesRepository,
@@ -31,23 +36,35 @@ class MoviesViewModel(
     private val removeMovieFavoriteUseCase: RemoveMovieFavoriteUseCase
 ) : ViewModel() {
 
+    data class MoviesFilterObject(
+        val voteAvarage: String? = null,
+        val nameFilter: String? = null,
+        val isAdult: Boolean? = null,
+        val genres: List<Int>? = null,
+        val isRefresh: Boolean = false
+    )
 
     companion object {
         private const val NETWORK_PAGE_SIZE = 20
     }
+
     val handleErrorImages = SingleLiveEvent<String>()
     val handlerErrorMovieDetails = SingleLiveEvent<Unit?>()
     val disableFavoriteButton = SingleLiveEvent<Unit?>()
     val handleErroMovies = SingleLiveEvent<String?>()
 
-
+    private var flow: Flow<PagingData<MovieEntity>>? = null
+    private var currentFilterObject: MoviesFilterObject? = null
 
     fun getMovies(
-        voteAvarage: String? = null,
-        nameFilter: String? = null,
-        isAdult: Boolean? = null,
-        genres: List<Int>? = null
-    ): Flow<PagingData<MovieEntity>> {
+        moviesFilterObject: MoviesFilterObject
+    ): Flow<PagingData<MovieEntity>> = with(moviesFilterObject) {
+        val lastResult = flow
+
+        if ( moviesFilterObject == currentFilterObject && lastResult != null && !isRefresh) {
+            return lastResult
+        }
+        currentFilterObject = moviesFilterObject
         //create flow
         var flow = Pager(
             config = PagingConfig(pageSize = NETWORK_PAGE_SIZE, enablePlaceholders = false),
@@ -81,8 +98,8 @@ class MoviesViewModel(
         }?.apply {
             flow = this
         }
-
-        return flow
+        this@MoviesViewModel.flow = flow
+        return this@MoviesViewModel.flow!!
     }
 
     /**
@@ -125,7 +142,7 @@ class MoviesViewModel(
      * Save movie
      */
     fun saveMovie(movieUi: MovieUi) = saveMovieFavoriteUseCase.execute(movieUi).handleErrors {
-        Log.d("Teste", "Error $it")
+        Timber.e( "Error $it")
     }.flowOn(Dispatchers.IO)
 
     /**
@@ -139,6 +156,7 @@ class MoviesViewModel(
             ).handleErrors {
                 disableFavoriteButton.call()
             }.flowOn(Dispatchers.Main)
+            .asLiveData()
 
     /**
      * Remove movie favorite

@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.jaozinfs.moovs.database.local.entities.MovieEntity
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -19,6 +20,6 @@ interface MoviesDao {
     fun removeMovieFavorite(movieId: Int): Int
 
     @Query("SELECT * FROM movieentity WHERE id is :movieId")
-    fun getMovieFavorited(movieId: Int): MovieEntity?
+    fun getMovieFavorited(movieId: Int): Flow<List<MovieEntity>>
 
 }

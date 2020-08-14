@@ -31,6 +31,7 @@ import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
+
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
 
     companion object {
@@ -72,7 +73,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
                 movieViewModel.getMovieDetails(it).collectLatest {
                     movieUi = it
                     updateView(it)
-                    checkIsFavorited()
+                    observeMovieIsFavorite()
                 }
             }
             getImagesJob(it)
@@ -80,7 +81,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         }
     }
 
-    private fun setViewTransitionsNames(){
+    private fun setViewTransitionsNames() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             banner.transitionName = BANNER_ENTER_TRANSITION_NAME
             rating_view.transitionName = RATING_ENTER_TRANSITION_NAME
@@ -115,27 +116,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
     private fun setRetryCollectImagesListener(movieId: Int) {
         retry_button.setOnClickListener {
             getImagesJob(movieId)
-        }
-    }
-
-    /**
-     * Animations
-     */
-    private fun setFavoriteButtonListener(favorited: Boolean) {
-        followCustomView.setOnClickListener {
-            if (favorited)
-                removeMovieFavorited()
-            else
-                animateFavorite()
-        }
-    }
-
-    private fun removeMovieFavorited() {
-        removeMovieFavorite?.cancel()
-        lifecycleScope.launch {
-            movieViewModel.removeMovieFavorited(args.movieId).collectLatest {
-                checkIsFavorited()
-            }
         }
     }
 
@@ -240,41 +220,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         }
     }
 
-
-    /**
-     * Start animation when favorite movie
-     */
-    private fun animateFavorite() = lifecycleScope.launch {
-        with(movie_details_motion_container) {
-            setTransition(Animations.BANNER_EXPAND.id)
-            transitionToEnd()
-        }
-        delay(500)
-        with(movie_details_motion_container) {
-            setTransition(Animations.BANNER_DOWN.id)
-            transitionToEnd()
-        }
-        delay(1000)
-        movieViewModel.saveMovie(movieUi).collect {
-            with(movie_details_motion_container) {
-                setTransition(Animations.BANNER_RETURN.id)
-                transitionToEnd()
-            }
-            checkIsFavorited(false)
-        }
-    }
-
-    /**
-     * Verify if movie is favorite and change UI
-     */
-    suspend fun checkIsFavorited(animate: Boolean = true) {
-        movieViewModel.checkIsFavorited(movieUi).collect {
-            if (animate)
-                setMovieFavoriteBackground(it)
-            setFavoriteButtonListener(it)
-        }
-    }
-
     /**
      * Callback to register on viewPager
      * call startSlide every page change
@@ -298,14 +243,21 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         })
     }
 
-    private fun setMovieFavoriteBackground(status: Boolean) {
-        if (status)
-            setMovieFavorite()
-        else
-            setMovieDesfavorited()
+    private fun observeMovieIsFavorite() {
+        movieViewModel.checkIsFavorited(movieUi).observe(viewLifecycleOwner, Observer {
+            setMovieFavoriteBackground(it)
+            followCustomView.setOnClickListener(getListenerFromFavoriteState(it))
+        })
     }
 
-    private fun setMovieDesfavorited() = with(followCustomView) {
+    private fun setMovieFavoriteBackground(isFavorite: Boolean) {
+        if (isFavorite)
+            setMovieFavorite()
+        else
+            setMovieNormal()
+    }
+
+    private fun setMovieNormal() = with(followCustomView) {
         setBackgroundColor(
             ContextCompat.getColor(
                 context,
@@ -325,5 +277,45 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         )
         text = getString(R.string.title_remove_favorite)
         setTextColor(ContextCompat.getColor(context, R.color.colorWhite))
+    }
+
+    private fun getListenerFromFavoriteState(isFavorite: Boolean) = View.OnClickListener {
+        when (isFavorite) {
+            true -> {
+                removeMovieFavorited()
+            }
+            else -> {
+                animateFavorite()
+            }
+        }
+    }
+
+    /**
+     * Start animation when favorite movie
+     */
+    private fun animateFavorite() = lifecycleScope.launch {
+        with(movie_details_motion_container) {
+            setTransition(Animations.BANNER_EXPAND.id)
+            transitionToEnd()
+        }
+        delay(500)
+        with(movie_details_motion_container) {
+            setTransition(Animations.BANNER_DOWN.id)
+            transitionToEnd()
+        }
+        delay(1000)
+        movieViewModel.saveMovie(movieUi).collect {
+            with(movie_details_motion_container) {
+                setTransition(Animations.BANNER_RETURN.id)
+                transitionToEnd()
+            }
+        }
+    }
+
+    private fun removeMovieFavorited() {
+        removeMovieFavorite?.cancel()
+        lifecycleScope.launch {
+            movieViewModel.removeMovieFavorited(args.movieId).collect()
+        }
     }
 }
