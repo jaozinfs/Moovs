@@ -166,7 +166,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         movie_details.text = movie.shortDescription
         movie_subtitle.text = movie.tagline
         setToolbarTitle(movie.original_title)
-
+        overview_tv.text = movie.overview
     }
 
     /**

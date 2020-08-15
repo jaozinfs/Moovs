@@ -114,6 +114,28 @@ Guerra, Ação, Drama
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+    <TextView
+        android:id="@+id/overview_tv"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="@dimen/movies_space"
+        android:layout_marginTop="@dimen/movies_space"
+        android:layout_marginEnd="@dimen/movies_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guideline3"
+        app:layout_constraintTop_toBottomOf="@+id/followCustomView"
+        tools:text="asa asa asaasaasaasaasaasaasaasa \n asaasaasaasaasaasa\nasaasaasaasaasa\nasaasaasaasa" />
+    <TextView
+        android:id="@+id/see_more_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/overview_tv"
+        android:text="@string/see_more"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginEnd="@dimen/default_title_text_size"
+        android:layout_marginTop="@dimen/default_title_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <ImageView
         android:id="@+id/banner"
@@ -170,7 +192,7 @@ Guerra, Ação, Drama
         android:layout_height="wrap_content"
 
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4733242" />
+        app:layout_constraintGuide_percent="0.4746922" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

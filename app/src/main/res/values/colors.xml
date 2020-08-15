@@ -10,7 +10,7 @@
     <color name="colorChipBackgroundSelected">@color/colorPrimary</color>
     <color name="colorChipBackgroundUnselected">#00FFFFFF</color>
     <color name="colorChipTextSelected">@color/colorAccent</color>
-    <color name="colorChipTextUnselected">@color/colorWhite</color>
+    <color name="colorChipTextUnselected">@color/colorPrimary</color>
 
 
 </resources>

@@ -41,6 +41,7 @@
         <item name="cornerRadius">8dp</item>
         <item name="strokeColor">@color/colorAccent</item>
     </style>
+
     <!--  Estilização do Texto do item no BottomNavigationView  -->
     <style name="NavTextAppearanceTheme" parent="TextAppearance.MaterialComponents.Caption">
         <item name="fontFamily">@font/alfa_slab_one</item>
