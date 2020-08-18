@@ -7,4 +7,8 @@
     <dimen name="text_size_description">9sp</dimen>
     <dimen name="pageMargin">20dp</dimen>
     <dimen name="offset">30dp</dimen>
+    <dimen name="movie_item_height">266dp</dimen>
+    <dimen name="movie_card_height">166dp</dimen>
+    <dimen name="movie_favorite_background_height">280dp</dimen>
+    <dimen name="container_favorite_corner_radius">12dp</dimen>
 </resources>

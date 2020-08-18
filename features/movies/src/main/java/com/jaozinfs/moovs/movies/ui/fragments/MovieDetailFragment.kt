@@ -164,7 +164,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
             age_view.setIsAdult(it)
         }
         movie_details.text = movie.shortDescription
-        movie_subtitle.text = movie.tagline
         setToolbarTitle(movie.original_title)
         overview_tv.text = movie.overview
     }
@@ -264,9 +263,7 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
                 com.jaozinfs.moovs.R.color.colorChipBackgroundUnselected
             )
         )
-        text = getString(R.string.title_favorite)
-        setTextColor(ContextCompat.getColor(context, R.color.colorWhite))
-    }
+        text = getString(R.string.title_favorite) }
 
     private fun setMovieFavorite() = with(followCustomView) {
         setBackgroundColor(
@@ -276,7 +273,6 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
             )
         )
         text = getString(R.string.title_remove_favorite)
-        setTextColor(ContextCompat.getColor(context, R.color.colorWhite))
     }
 
     private fun getListenerFromFavoriteState(isFavorite: Boolean) = View.OnClickListener {

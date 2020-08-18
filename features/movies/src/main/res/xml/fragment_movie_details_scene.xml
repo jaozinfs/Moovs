@@ -38,7 +38,6 @@
             android:id="@+id/banner"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
             android:layout_marginStart="@dimen/movies_space"
             android:layout_marginTop="@dimen/movies_space"
             android:alpha="0"
@@ -56,13 +55,21 @@
             app:layout_constraintEnd_toEndOf="@+id/banner"
             app:layout_constraintTop_toBottomOf="@+id/guideline"
             app:primaryColor="@color/colorPrimary" />
+        <Constraint
+            android:id="@+id/movie_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/movies_space"
+            app:layout_constraintBottom_toTopOf="@+id/movie_name"
+            app:layout_constraintStart_toStartOf="@+id/movie_name"
+         />
+
     </ConstraintSet>
-    <ConstraintSet android:id="@+id/bannerReturnEnd">
+    <ConstraintSet android:id="@+id/bannerReturnEnd" app:deriveConstraintsFrom="@+id/bannerReturnStart">
         <Constraint
             android:id="@+id/banner"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
             android:layout_marginStart="@dimen/movies_space"
             android:layout_marginTop="@dimen/movies_space"
             android:alpha="1"
@@ -72,24 +79,22 @@
             app:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/followCustomView"
+            style="@style/OutlineDeselected"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/movies_space"
             android:layout_marginStart="@dimen/movies_space"
-            android:layout_marginTop="@dimen/movies_space"
             android:layout_marginEnd="@dimen/movies_space"
-            android:layout_marginBottom="@dimen/movies_space"
+            android:text="@string/title_favorite"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/banner"
-            app:layout_constraintTop_toBottomOf="@id/movie_details">
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@id/guideline">
             <CustomAttribute
                 app:attributeName="backgroundColor"
                 app:customColorValue="#6200EE" />
             <CustomAttribute
                 app:attributeName="text"
                 app:customStringValue="@string/title_remove_favorite" />
-            <CustomAttribute
-                app:attributeName="textColor"
-                app:customColorValue="@color/colorWhite" />
         </Constraint>
         <Constraint
             android:id="@+id/rating_view"
@@ -100,7 +105,23 @@
             app:layout_constraintEnd_toEndOf="@+id/banner"
             app:layout_constraintTop_toBottomOf="@+id/guideline"
             app:primaryColor="@color/colorPrimary" />
-
+        <Constraint android:id="@+id/movie_age">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/movies_space"
+                app:layout_constraintBottom_toTopOf="@+id/movie_name"
+                app:layout_constraintStart_toStartOf="@+id/movie_name" />
+        </Constraint>
+        <Constraint
+            android:id="@+id/see_more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_title_text_size"
+            android:layout_marginBottom="@dimen/movies_space_medium"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="1"/>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/constraintStart">
@@ -117,6 +138,15 @@
             app:layout_constraintTop_toTopOf="parent"
 
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <Constraint
+            android:id="@+id/see_more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_title_text_size"
+            android:layout_marginBottom="@dimen/movies_space_medium"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0"/>
     </ConstraintSet>
     <ConstraintSet android:id="@+id/constraintEnd">
         <Constraint
@@ -141,6 +171,15 @@
             app:layout_constraintEnd_toEndOf="@+id/banner"
             app:layout_constraintTop_toBottomOf="@+id/guideline"
             app:primaryColor="@color/colorPrimary" />
+        <Constraint
+            android:id="@+id/see_more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_title_text_size"
+            android:layout_marginBottom="@dimen/movies_space_medium"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0"/>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/transLationStart">
@@ -157,6 +196,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <Constraint
+            android:id="@+id/see_more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_title_text_size"
+            android:layout_marginBottom="@dimen/movies_space_medium"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0"/>
     </ConstraintSet>
     <ConstraintSet android:id="@+id/transLationEnd">
         <Constraint
@@ -168,6 +216,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <Constraint
+            android:id="@+id/see_more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_title_text_size"
+            android:layout_marginBottom="@dimen/movies_space_medium"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0"/>
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/returnStart">
@@ -185,6 +242,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <Constraint
+            android:id="@+id/see_more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_title_text_size"
+            android:layout_marginBottom="@dimen/movies_space_medium"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="0"/>
     </ConstraintSet>
     <ConstraintSet android:id="@+id/returnEnd">
         <Constraint
@@ -198,6 +264,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <Constraint
+            android:id="@+id/see_more_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_title_text_size"
+            android:layout_marginBottom="@dimen/movies_space_medium"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:alpha="1"
+            />
     </ConstraintSet>
 
 
@@ -235,7 +311,7 @@
             android:fontFamily="@font/alfa_slab_one"
             android:textSize="@dimen/text_size_subtitle"
             app:layout_constraintBottom_toTopOf="@+id/movie_name"
-            app:layout_constraintStart_toEndOf="@+id/banner"
+            app:layout_constraintStart_toStartOf="@+id/movie_name"
             tools:text="(2020)" />
         <Constraint
             android:id="@+id/movie_name"
@@ -252,21 +328,6 @@
             app:layout_constraintTop_toTopOf="@+id/banner"
             tools:text="Coringa" />
         <Constraint
-            android:id="@+id/movie_subtitle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/movies_space"
-            android:layout_marginTop="@dimen/movies_space_medium"
-            android:layout_marginEnd="@dimen/movies_space"
-            android:alpha="1"
-            android:fontFamily="@font/alfa_slab_one"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/text_size_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/banner"
-            app:layout_constraintTop_toBottomOf="@+id/movie_name"
-            tools:text="Coringa é um filme muito bom que eu gosto" />
-        <Constraint
             android:id="@+id/movie_details"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -279,7 +340,7 @@
             android:textSize="@dimen/text_size_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/banner"
-            app:layout_constraintTop_toBottomOf="@+id/movie_subtitle"
+            app:layout_constraintTop_toBottomOf="@+id/movie_name"
             tools:text="10/07/2020 (BR)
 Guerra, Ação, Drama
 1h 31m" />
@@ -289,11 +350,12 @@ Guerra, Ação, Drama
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/movies_space"
-            android:alpha="1"
+            android:layout_marginStart="@dimen/movies_space"
+            android:layout_marginEnd="@dimen/movies_space"
             android:text="@string/title_favorite"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/banner"
-            app:layout_constraintTop_toBottomOf="@id/movie_details" />
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@id/guideline" />
         <Constraint
             android:id="@+id/banner"
             android:layout_width="0dp"
@@ -310,27 +372,33 @@ Guerra, Ação, Drama
         <Constraint
             android:id="@+id/overview_tv"
             android:layout_width="0dp"
-            android:layout_height="50dp"
+            android:layout_height="0dp"
             android:layout_marginStart="@dimen/movies_space"
-            android:layout_marginEnd="@dimen/movies_space"
             android:layout_marginTop="@dimen/movies_space"
+            android:layout_marginEnd="@dimen/movies_space"
+            android:layout_marginBottom="@dimen/movies_space"
+            app:layout_constraintBottom_toTopOf="@+id/see_more_tv"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/guideline3"
-            app:layout_constraintTop_toBottomOf="@+id/followCustomView"
-            tools:text="asa asa asaasaasaasaasaasaasaasa \n asaasaasaasaasaasa\nasaasaasaasaasa\nasaasaasaasa" />
+            app:layout_constraintTop_toBottomOf="@+id/movie_details"
+            tools:text="asa asa asaasaasaasaasaasaasaasa \n asaasaasaasaasaasa\nasaasaasaasaasa\nasaasaasaasa">
+            <CustomAttribute
+                app:attributeName="maxLines"
+                app:customIntegerValue="2" />
+        </Constraint>
         <Constraint
             android:id="@+id/see_more_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="1"
             android:layout_marginEnd="@dimen/default_title_text_size"
-            android:layout_marginTop="@dimen/default_title_text_size"
+            android:layout_marginBottom="@dimen/movies_space_medium"
+            android:text="@string/see_more"
             android:textColor="@color/colorPrimary"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/overview_tv">
+            app:layout_constraintBottom_toTopOf="@id/guideline"
+            app:layout_constraintEnd_toEndOf="parent">
             <CustomAttribute
                 app:attributeName="text"
-                app:customStringValue="@string/see_more"/>
+                app:customStringValue="@string/see_more" />
         </Constraint>
         <Constraint
             android:id="@+id/age_view"
@@ -338,8 +406,17 @@ Guerra, Ação, Drama
             android:layout_height="24dp"
             android:layout_marginEnd="@dimen/text_size"
             app:ageview_conrner_radius="2"
-            app:layout_constraintTop_toTopOf="@+id/title"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/title" />
+        <Constraint
+            android:id="@+id/rating_view"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="@dimen/movies_space"
+
+            app:layout_constraintEnd_toEndOf="@+id/banner"
+            app:layout_constraintTop_toBottomOf="@+id/guideline"
+            app:primaryColor="@color/colorPrimary" />
     </ConstraintSet>
 
     <ConstraintSet
@@ -351,26 +428,22 @@ Guerra, Ação, Drama
         <Constraint android:id="@+id/age_view">
             <PropertySet android:alpha="0" />
         </Constraint>
-        <Constraint android:id="@+id/see_more_tv"
-            >
+        <Constraint android:id="@+id/see_more_tv">
             <Layout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="@dimen/movies_space"
                 app:layout_constraintBottom_toTopOf="@+id/guideline"
-                android:layout_marginBottom="@dimen/movies_space"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
             <CustomAttribute
                 app:attributeName="text"
-                app:customStringValue="Ler menos"/>
+                app:customStringValue="Ler menos" />
         </Constraint>
         <Constraint android:id="@+id/followCustomView">
             <PropertySet android:alpha="0" />
         </Constraint>
         <Constraint android:id="@+id/movie_details">
-            <PropertySet android:alpha="0" />
-        </Constraint>
-        <Constraint android:id="@+id/movie_subtitle">
             <PropertySet android:alpha="0" />
         </Constraint>
         <Constraint android:id="@+id/movie_age">
@@ -379,17 +452,22 @@ Guerra, Ação, Drama
         <Constraint android:id="@+id/movie_name">
             <PropertySet android:alpha="0" />
         </Constraint>
+        <Constraint android:id="@+id/rating_view">
+            <PropertySet android:alpha="0" />
+        </Constraint>
         <Constraint android:id="@+id/overview_tv">
             <Layout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="@dimen/movies_space"
-                android:layout_marginEnd="@dimen/movies_space"
                 android:layout_marginTop="@dimen/movies_space"
-                />
+                android:layout_marginEnd="@dimen/movies_space"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <CustomAttribute
+                app:attributeName="maxLines"
+                app:customIntegerValue="20" />
         </Constraint>
     </ConstraintSet>
 

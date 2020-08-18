@@ -34,6 +34,7 @@ fun ImageView.loadImageCoil(
 class CoilLoadBuilder(
     var uri: Uri? = null,
     var corners: Boolean = false,
+    var cornersRadius: Float = 6f,
     var onSuccess: () -> Unit = {}
 )
 
@@ -45,7 +46,7 @@ fun ImageView.loadImageCoil(
         load(uri) {
             scale(Scale.FIT)
             if (corners)
-                transformations(RoundedCornersTransformation(6f))
+                transformations(RoundedCornersTransformation(cornersRadius))
             listener { _, _ ->
                 onSuccess.invoke()
             }

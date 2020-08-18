@@ -43,20 +43,6 @@
         app:layout_constraintTop_toTopOf="@+id/banner"
         tools:text="Coringa" />
 
-    <TextView
-        android:id="@+id/movie_subtitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/movies_space"
-        android:layout_marginTop="@dimen/movies_space_medium"
-        android:layout_marginEnd="@dimen/movies_space"
-        android:fontFamily="@font/alfa_slab_one"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/text_size_description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/banner"
-        app:layout_constraintTop_toBottomOf="@+id/movie_name"
-        tools:text="Coringa é um filme muito bom que eu gosto" />
 
     <TextView
         android:id="@+id/movie_age"
@@ -66,7 +52,7 @@
         android:fontFamily="@font/alfa_slab_one"
         android:textSize="@dimen/text_size_subtitle"
         app:layout_constraintBottom_toTopOf="@+id/movie_name"
-        app:layout_constraintStart_toEndOf="@+id/banner"
+        app:layout_constraintStart_toStartOf="@+id/movie_name"
         tools:text="(2020)" />
 
     <TextView
@@ -81,21 +67,11 @@
         android:textSize="@dimen/text_size_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/banner"
-        app:layout_constraintTop_toBottomOf="@+id/movie_subtitle"
+        app:layout_constraintTop_toBottomOf="@+id/movie_name"
         tools:text="10/07/2020 (BR)
 Guerra, Ação, Drama
 1h 31m" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/followCustomView"
-        style="@style/OutlineDeselected"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/movies_space"
-        android:text="@string/title_favorite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/banner"
-        app:layout_constraintTop_toBottomOf="@id/movie_details" />
 
     <com.jaozinfs.moovs.ui.view.AgeView
         android:id="@+id/age_view"
@@ -103,8 +79,8 @@ Guerra, Ação, Drama
         android:layout_height="24dp"
         android:layout_marginEnd="@dimen/text_size"
         app:ageview_conrner_radius="2"
-        app:layout_constraintTop_toTopOf="@+id/title"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
@@ -114,28 +90,47 @@ Guerra, Ação, Drama
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+
     <TextView
         android:id="@+id/overview_tv"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
         android:layout_marginStart="@dimen/movies_space"
         android:layout_marginTop="@dimen/movies_space"
         android:layout_marginEnd="@dimen/movies_space"
+        android:layout_marginBottom="@dimen/movies_space"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAlignment="textStart"
+        app:layout_constraintBottom_toTopOf="@+id/see_more_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/followCustomView"
+        app:layout_constraintTop_toBottomOf="@+id/movie_details"
         tools:text="asa asa asaasaasaasaasaasaasaasa \n asaasaasaasaasaasa\nasaasaasaasaasa\nasaasaasaasa" />
+
     <TextView
         android:id="@+id/see_more_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/overview_tv"
+        android:layout_marginEnd="@dimen/default_title_text_size"
+        android:layout_marginBottom="@dimen/movies_space_medium"
         android:text="@string/see_more"
         android:textColor="@color/colorPrimary"
-        android:layout_marginEnd="@dimen/default_title_text_size"
-        android:layout_marginTop="@dimen/default_title_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/followCustomView"
+        style="@style/OutlineDeselected"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/movies_space"
+        android:layout_marginStart="@dimen/movies_space"
+        android:layout_marginEnd="@dimen/movies_space"
+        android:text="@string/title_favorite"
         app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        app:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <ImageView
         android:id="@+id/banner"
@@ -156,8 +151,8 @@ Guerra, Ação, Drama
         android:layout_height="60dp"
         android:layout_marginBottom="@dimen/movies_space"
 
-        app:layout_constraintTop_toBottomOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="@+id/banner"
+        app:layout_constraintTop_toBottomOf="@+id/guideline"
         app:primaryColor="@color/colorPrimary" />
 
 

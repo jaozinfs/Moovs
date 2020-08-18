@@ -13,5 +13,6 @@
     <string name="title_movies_empty">Nenhum filme encontrado</string>
     <string name="title_remove_filter">Remover Filtros</string>
     <string name="see_more">Ler mais</string>
+    <string name="title_trending">Populares</string>
 
 </resources>

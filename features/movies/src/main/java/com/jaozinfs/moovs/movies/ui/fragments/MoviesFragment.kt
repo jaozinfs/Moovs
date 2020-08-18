@@ -14,14 +14,23 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.lottie.LottieDrawable
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.android.material.transition.platform.MaterialElevationScale
+import com.jaozinfs.moovs.extensions.loadImageCoil
+import com.jaozinfs.moovs.extensions.transformCarroucel
 import com.jaozinfs.moovs.movies.R
+import com.jaozinfs.moovs.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.moovs.movies.di.moviesModules
+import com.jaozinfs.moovs.movies.domain.movies.MovieUi
 import com.jaozinfs.moovs.movies.ui.MoviesViewModel
 import com.jaozinfs.moovs.movies.ui.adapter.MoviesAdapter
+import com.jaozinfs.moovs.movies.ui.adapter.MoviesFavoriteAdapter
 import com.jaozinfs.moovs.movies.ui.adapter.ReposLoadStateAdapter
+import com.jaozinfs.moovs.utils.UriUtils
 import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
@@ -38,6 +47,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     private val viewModel: MoviesViewModel by sharedViewModel()
     private var searchJob: Job? = null
     private val adapter = MoviesAdapter()
+    private val favoriteAdapter = MoviesFavoriteAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +65,12 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeLiveData()
         setAdapterClickListener()
         setSwipeRefreshListener()
+        initFavoritePager()
         initList()
+        getFavoriteMovies()
         observeFilter()
     }
 
@@ -70,10 +83,15 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     }
 
     private fun initList() {
-        movies_rv.layoutManager = GridLayoutManager(context, 2)
+        movies_rv.layoutManager =
+            object : LinearLayoutManager(context, HORIZONTAL, false) {
+                override fun checkLayoutParams(lp: RecyclerView.LayoutParams?): Boolean {
+                    lp?.width = width / 2
+                    return true
+                }
+            }
         //Add Loading state on middle of view
         adapter.addLoadStateListener { loadState ->
-
             swipe_refresh_layout?.isRefreshing = loadState.source.refresh is LoadState.Loading
             if (loadState.source.refresh is LoadState.Error)
                 setNoConnectionNetworkError()
@@ -112,6 +130,12 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
                 extras
             )
         }
+    }
+
+    private fun observeLiveData() {
+        viewModel.emptyMovies.observe(viewLifecycleOwner, Observer { isEmpty ->
+            favorites_container.isVisible = !isEmpty
+        })
     }
 
     private fun getMovies(
@@ -202,6 +226,35 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     }
 
 
+    private fun initFavoritePager() = with(movies_favorites_pager) {
+        offscreenPageLimit = 3
+        transformCarroucel()
+        adapter = favoriteAdapter
+        favoriteAdapter.setMovieClickListener{_, movieEntity, bannerImageView ->
+            val extras = FragmentNavigatorExtras(
+                bannerImageView to MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME
+            )
+            val direction =
+                MoviesFragmentDirections.actionNavMoviesToNavMoviesDetail(movieEntity.id)
+
+            findNavController().navigate(
+                direction,
+                extras
+            )
+        }
+        TabLayoutMediator(tab_layout, this) { _, _->}.attach()
+    }
+
+    private fun getFavoriteMovies() {
+        lifecycleScope.launch {
+            viewModel.getFavoriteMovies().collectLatest {
+                favoriteAdapter.submitList(it)
+                movies_favorites_pager.registerOnPageChangeCallback(FavoriteMovieItemChange(it))
+            }
+        }
+    }
+
+
     private fun resetFilter() {
         findNavController().currentBackStackEntry?.savedStateHandle?.set(
             MoviesFilterFragment.FILTER_OBJECT,
@@ -209,4 +262,20 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         )
     }
 
+    private fun changeBackGroundImage(movieUi: MovieUi) {
+        background.loadImageCoil {
+            uri = UriUtils.getUriFromBaseAndBackdrop(
+                BASE_BACKDROP_IMAGE_PATTER,
+                movieUi.backdrop_path
+            )
+        }
+    }
+
+    private inner class FavoriteMovieItemChange(private val list: List<MovieUi>) :
+        ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            changeBackGroundImage(list[position])
+        }
+    }
 }

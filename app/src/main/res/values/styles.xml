@@ -30,10 +30,10 @@
     </style>
 
     <style name="OutlineDeselected" parent="Widget.MaterialComponents.Button.OutlinedButton">
-        <item name="fontFamily">@font/alfa_slab_one</item>
         <item name="background">@color/chip_background_color_selected</item>
         <item name="cornerRadius">8dp</item>
         <item name="strokeColor">@color/colorPrimary</item>
+        <item name="android:textColor">?android:colorPrimaryDark</item>
     </style>
     <style name="OutlineSelected" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="fontFamily">@font/alfa_slab_one</item>

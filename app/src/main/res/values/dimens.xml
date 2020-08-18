@@ -2,5 +2,7 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="error_text_size">12sp</dimen>
     <dimen name="default_fade_edge">20dp</dimen>
-
+    <dimen name="default_elevation">8dp</dimen>
+    <dimen name="defaultPagerMargin">20dp</dimen>
+    <dimen name="defaultPagerOffset">30dp</dimen>
 </resources>

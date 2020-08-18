@@ -59,10 +59,9 @@ class MoviesFavoritesFragment : Fragment(R.layout.fragment_movies_favorites) {
 
     //Click lister of adapter movies
     private fun setAdapterClickListener() {
-        adapter.setMovieClickListener { _, movieEntity, bannerImageView, ratingView ->
+        adapter.setMovieClickListener { _, movieEntity, bannerImageView ->
             val extras = FragmentNavigatorExtras(
-                bannerImageView to MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME,
-                ratingView to MovieDetailFragment.RATING_ENTER_TRANSITION_NAME
+                bannerImageView to MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME
             )
             val direction =
                 MoviesFavoritesFragmentDirections.actionNavMoviesFavoritesToNavMoviesDetail(

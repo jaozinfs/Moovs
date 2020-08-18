@@ -44,9 +44,9 @@ class MoviesAdapter() :
             //set views transition name of each different view
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 imageview.transitionName =
-                    "${MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME}-${moviesEntity.id}"
+                    "${MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME}-popular-${moviesEntity.id}"
                 rating.transitionName =
-                    "${MovieDetailFragment.RATING_ENTER_TRANSITION_NAME}-${moviesEntity.id}"
+                    "${MovieDetailFragment.RATING_ENTER_TRANSITION_NAME}-popular-${moviesEntity.id}"
             }
 
             view.setClickListener {
@@ -65,6 +65,7 @@ class MoviesAdapter() :
                     imageview.loadImageCoil{
                         uri = this@apply
                         corners = true
+                        cornersRadius = 14f
                     }
                 }
         }

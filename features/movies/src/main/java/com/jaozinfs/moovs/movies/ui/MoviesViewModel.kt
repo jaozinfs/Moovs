@@ -1,16 +1,18 @@
 package com.jaozinfs.moovs.movies.ui
 
-import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.jaozinfs.moovs.database.local.entities.MovieEntity
+import com.jaozinfs.moovs.extensions.asLiveData
 import com.jaozinfs.moovs.extensions.handleErrors
 import com.jaozinfs.moovs.movies.data.MoviesPagingSource
 import com.jaozinfs.moovs.movies.domain.movies.MovieUi
 import com.jaozinfs.moovs.movies.domain.movies.MoviesRepository
 import com.jaozinfs.moovs.movies.domain.usecase.favorites.CheckIsMovieFavoritedUseCase
+import com.jaozinfs.moovs.movies.domain.usecase.favorites.GetMoviesFavoritesUseCase
 import com.jaozinfs.moovs.movies.domain.usecase.favorites.RemoveMovieFavoriteUseCase
 import com.jaozinfs.moovs.movies.domain.usecase.favorites.SaveMovieFavoriteUseCase
 import com.jaozinfs.moovs.movies.domain.usecase.movies.GetGenresUseCase
@@ -19,10 +21,7 @@ import com.jaozinfs.moovs.movies.domain.usecase.movies.GetMovieDetailsUseCase
 import com.jaozinfs.moovs.movies.domain.usecase.movies.GetMovieImagesUseCase
 import com.jaozinfs.moovs.utils.SingleLiveEvent
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import timber.log.Timber
 
 class MoviesViewModel(
@@ -33,7 +32,8 @@ class MoviesViewModel(
     private val getMovieImagesUseCase: GetMovieImagesUseCase,
     private val saveMovieFavoriteUseCase: SaveMovieFavoriteUseCase,
     private val checkIsMovieFavoritedUseCase: CheckIsMovieFavoritedUseCase,
-    private val removeMovieFavoriteUseCase: RemoveMovieFavoriteUseCase
+    private val removeMovieFavoriteUseCase: RemoveMovieFavoriteUseCase,
+    private val getMoviesFavoritesUseCase: GetMoviesFavoritesUseCase
 ) : ViewModel() {
 
     data class MoviesFilterObject(
@@ -52,6 +52,9 @@ class MoviesViewModel(
     val handlerErrorMovieDetails = SingleLiveEvent<Unit?>()
     val disableFavoriteButton = SingleLiveEvent<Unit?>()
     val handleErroMovies = SingleLiveEvent<String?>()
+    private val _emptyMovies = MutableLiveData<Boolean>().apply { value = false }
+    val emptyMovies = _emptyMovies.asLiveData
+
 
     private var flow: Flow<PagingData<MovieEntity>>? = null
     private var currentFilterObject: MoviesFilterObject? = null
@@ -61,7 +64,7 @@ class MoviesViewModel(
     ): Flow<PagingData<MovieEntity>> = with(moviesFilterObject) {
         val lastResult = flow
 
-        if ( moviesFilterObject == currentFilterObject && lastResult != null && !isRefresh) {
+        if (moviesFilterObject == currentFilterObject && lastResult != null && !isRefresh) {
             return lastResult
         }
         currentFilterObject = moviesFilterObject
@@ -142,7 +145,7 @@ class MoviesViewModel(
      * Save movie
      */
     fun saveMovie(movieUi: MovieUi) = saveMovieFavoriteUseCase.execute(movieUi).handleErrors {
-        Timber.e( "Error $it")
+        Timber.e("Error $it")
     }.flowOn(Dispatchers.IO)
 
     /**
@@ -168,4 +171,11 @@ class MoviesViewModel(
             .map { it == 1 }
             .filter { it }
             .flowOn(Dispatchers.IO)
+
+
+    fun getFavoriteMovies() = getMoviesFavoritesUseCase.execute(null)
+        .flowOn(Dispatchers.IO)
+        .onEmpty {
+            _emptyMovies.value = true
+        }.flowOn(Dispatchers.Main)
 }

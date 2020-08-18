@@ -104,7 +104,7 @@ val moviesModules = module {
 
     //ViewModels
     viewModel {
-        MoviesViewModel(get(), get(), get(), get(), get(), get(), get(), get())
+        MoviesViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get())
     }
     viewModel {
         MoviesFavoritesViewModel(get())
