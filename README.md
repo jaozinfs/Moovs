@@ -60,6 +60,9 @@ A Simple app with features using [Api TMDB][themoviedb] and published on Play St
 * Material Design
 * DarkTheme
 
+### - Core
+* R8 compiler
+
 ## Dependecy Injection
 * Koin
 
