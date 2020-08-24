@@ -24,6 +24,7 @@ import com.jaozinfs.moovs.extensions.loadImageCoil
 import com.jaozinfs.moovs.extensions.transformCarroucel
 import com.jaozinfs.moovs.movies.R
 import com.jaozinfs.moovs.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
+import com.jaozinfs.moovs.movies.data.network.BASE_BACKDROP_IMAGE_PATTER_ORIGINAL
 import com.jaozinfs.moovs.movies.di.moviesModules
 import com.jaozinfs.moovs.movies.domain.movies.MovieUi
 import com.jaozinfs.moovs.movies.ui.MoviesViewModel
@@ -35,10 +36,12 @@ import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.dsl.koinApplication
+import java.io.Closeable
 
 
 class MoviesFragment : Fragment(R.layout.fragment_movies) {
@@ -265,7 +268,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
     private fun changeBackGroundImage(movieUi: MovieUi) {
         background.loadImageCoil {
             uri = UriUtils.getUriFromBaseAndBackdrop(
-                BASE_BACKDROP_IMAGE_PATTER,
+                BASE_BACKDROP_IMAGE_PATTER_ORIGINAL,
                 movieUi.backdrop_path
             )
         }

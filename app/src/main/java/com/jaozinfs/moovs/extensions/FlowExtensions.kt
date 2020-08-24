@@ -1,10 +1,11 @@
 package com.jaozinfs.moovs.extensions
 
-import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 fun <T> Flow<T>.handleErrors(onError: (String?) -> Unit = {}): Flow<T> =
     catch { e -> onError.invoke(e.message) }
@@ -21,8 +22,18 @@ fun flipModuleFlow(startPosition: Int, count: Int, delayMillis: Long = 2_000) = 
         emit(s)
         delay(delayMillis)
         s = (s + 1) % count
-    } while (true)
+    } while (coroutineContext.isActive)
 }
 
+suspend fun incress(delay: Long) = flow {
+    var start = 0
+    do {
+        emit(start)
+        delay(delay)
+        start++
+    } while (coroutineContext.isActive)
+}
 
+fun b() {
 
+}

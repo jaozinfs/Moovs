@@ -80,7 +80,7 @@ class TvsViewModel(
             .handleErrors {
                 Timber.e( "Error: $it")
             }
-            .flowOn(Dispatchers.IO)
+
 
     fun removeTvFavorite(tvId: Int) =
         removeTvFavoriteUseCase
@@ -88,7 +88,6 @@ class TvsViewModel(
             .handleErrors {
                 Timber.e( "Error: $it")
             }
-            .flowOn(Dispatchers.IO)
 
     fun getSeasonEpisodes(tvId: Int, seaonsId: Int) =
         getSeasonEpisodesUseCase.execute(GetSeasonEpisodesUseCase.Params(tvId, seaonsId))

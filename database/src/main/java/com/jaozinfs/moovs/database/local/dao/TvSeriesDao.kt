@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface TvSeriesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun addTvDetails(tvDetailsEntity: TvEntity): Long
+    suspend fun addTvDetails(tvDetailsEntity: TvEntity): Long
 
     @Query("SELECT * FROM tventity ORDER by id DESC")
     suspend fun getTvsFavorited(): List<TvEntity>
@@ -19,5 +19,5 @@ interface TvSeriesDao {
     fun checkTvFavorited(tvId: Int): Flow<List<TvEntity>>
 
     @Query("DELETE FROM tventity WHERE id is :tvId")
-    fun removeTvFavorited(tvId: Int): Int
+    suspend fun removeTvFavorited(tvId: Int): Int
 }
