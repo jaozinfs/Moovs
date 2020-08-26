@@ -1,6 +1,7 @@
 package com.jaozinfs.moovs.movies.ui.fragments
 
 import android.gesture.GestureOverlayView.ORIENTATION_HORIZONTAL
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -10,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -18,6 +18,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.jaozinfs.moovs.extensions.flipModuleFlow
 import com.jaozinfs.moovs.extensions.loadImageCoil
+import com.jaozinfs.moovs.extensions.themeColor
 import com.jaozinfs.moovs.movies.R
 import com.jaozinfs.moovs.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.moovs.movies.domain.movies.MovieUi
@@ -30,7 +31,6 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.android.viewmodel.ext.android.sharedViewModel
-
 
 
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
@@ -67,8 +67,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         setViewTransitionsNames()
         setMovieImagesAdapter()
         observeEvents()
-//
-//        //collect data for this view
+        readMore()
+        //collect data for this view
         args.movieId.let {
             lifecycleScope.launch {
                 movieViewModel.getMovieDetails(it).collectLatest {
@@ -125,7 +125,12 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
      */
     private fun setSharedElementTransitionOnEnter() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            sharedElementEnterTransition = MaterialContainerTransform()
+            sharedElementEnterTransition = MaterialContainerTransform().apply {
+                drawingViewId = com.jaozinfs.moovs.R.id.main_fragmnet_container
+                isElevationShadowEnabled = true
+                scrimColor = Color.TRANSPARENT
+                setAllContainerColors(requireContext().themeColor(com.jaozinfs.moovs.R.attr.colorSurface))
+            }
         }
     }
 
@@ -264,7 +269,8 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
                 com.jaozinfs.moovs.R.color.colorChipBackgroundUnselected
             )
         )
-        text = getString(R.string.title_favorite) }
+        text = getString(R.string.title_favorite)
+    }
 
     private fun setMovieFavorite() = with(followCustomView) {
         setBackgroundColor(
@@ -313,6 +319,12 @@ class MovieDetailFragment : Fragment(R.layout.fragment_movie_details) {
         removeMovieFavorite?.cancel()
         lifecycleScope.launch {
             movieViewModel.removeMovieFavorited(args.movieId).collect()
+        }
+    }
+
+    private fun readMore() = with(see_more_tv){
+        setOnClickListener {
+            movie_details_motion_container.transitionToState(R.id.overViewTransition)
         }
     }
 }

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings_dark_theme">Dark Theme</string>
+    <string name="settings_summary_dark_theme">Defina o tema da aplicação.</string>
+</resources>

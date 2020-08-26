@@ -1,17 +1,19 @@
 package com.jaozinfs.moovs.tvs.ui.fragments
 
 import android.content.res.Configuration
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.transition.platform.MaterialElevationScale
 import com.jaozinfs.moovs.extensions.loadImageCoil
-import com.jaozinfs.moovs.tvs.R
 import com.jaozinfs.moovs.tvs.data.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.moovs.tvs.databinding.FragmentSeasonDetailsBinding
 import com.jaozinfs.moovs.tvs.domain.model.SeasonDetailsUI
@@ -29,6 +31,14 @@ class FragmentTvSeasonDetails : Fragment() {
     private lateinit var fragmentSeasonDetailsBinding: FragmentSeasonDetailsBinding
 
     private val adapter = EpisodesAdapter { episodeID, root, backDrop, title, overView ->
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            exitTransition = MaterialElevationScale(false).apply {
+                duration = 300L
+            }
+            reenterTransition = MaterialElevationScale(true).apply {
+                duration = 170L
+            }
+        }
         val extras = FragmentNavigatorExtras(
             root to FragmentTvEpisodeDetails.ROOT_TRANSITION_NAME,
             backDrop to FragmentTvEpisodeDetails.BACKDROP_TRANSITION_NAME,
@@ -51,12 +61,17 @@ class FragmentTvSeasonDetails : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        fragmentSeasonDetailsBinding = FragmentSeasonDetailsBinding.inflate(inflater, container, false)
+        fragmentSeasonDetailsBinding =
+            FragmentSeasonDetailsBinding.inflate(inflater, container, false)
         return fragmentSeasonDetailsBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
+
+
         setShadow()
         setAdapter()
 

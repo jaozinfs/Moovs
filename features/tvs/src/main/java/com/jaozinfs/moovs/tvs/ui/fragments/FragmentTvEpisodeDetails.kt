@@ -1,5 +1,6 @@
 package com.jaozinfs.moovs.tvs.ui.fragments
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.transition.TransitionInflater
@@ -9,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.jaozinfs.moovs.extensions.loadImageCoil
+import com.jaozinfs.moovs.extensions.themeColor
 import com.jaozinfs.moovs.tvs.R
 import com.jaozinfs.moovs.tvs.data.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.moovs.tvs.domain.model.EpisodeUI
@@ -35,8 +37,13 @@ class FragmentTvEpisodeDetails : Fragment(R.layout.fragment_episode_details) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            enterTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-            sharedElementEnterTransition = MaterialContainerTransform()
+            sharedElementEnterTransition = MaterialContainerTransform().apply {
+                drawingViewId = com.jaozinfs.moovs.R.id.main_fragmnet_container
+                duration = 300L
+                isElevationShadowEnabled = true
+                scrimColor = Color.TRANSPARENT
+                setAllContainerColors(requireContext().themeColor(com.jaozinfs.moovs.R.attr.colorSurface))
+            }
         }
     }
 

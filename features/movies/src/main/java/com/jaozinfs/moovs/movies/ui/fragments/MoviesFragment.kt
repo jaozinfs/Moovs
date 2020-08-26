@@ -23,7 +23,6 @@ import com.google.android.material.transition.platform.MaterialElevationScale
 import com.jaozinfs.moovs.extensions.loadImageCoil
 import com.jaozinfs.moovs.extensions.transformCarroucel
 import com.jaozinfs.moovs.movies.R
-import com.jaozinfs.moovs.movies.data.network.BASE_BACKDROP_IMAGE_PATTER
 import com.jaozinfs.moovs.movies.data.network.BASE_BACKDROP_IMAGE_PATTER_ORIGINAL
 import com.jaozinfs.moovs.movies.di.moviesModules
 import com.jaozinfs.moovs.movies.domain.movies.MovieUi
@@ -31,17 +30,17 @@ import com.jaozinfs.moovs.movies.ui.MoviesViewModel
 import com.jaozinfs.moovs.movies.ui.adapter.MoviesAdapter
 import com.jaozinfs.moovs.movies.ui.adapter.MoviesFavoriteAdapter
 import com.jaozinfs.moovs.movies.ui.adapter.ReposLoadStateAdapter
+import com.jaozinfs.moovs.navigator.NavigatorManager
+import com.jaozinfs.moovs.navigator.navigateFeature
 import com.jaozinfs.moovs.utils.UriUtils
 import kotlinx.android.synthetic.main.fragment_movies.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.dsl.koinApplication
-import java.io.Closeable
 
 
 class MoviesFragment : Fragment(R.layout.fragment_movies) {
@@ -58,12 +57,8 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
             unloadKoinModules(moviesModules)
             loadKoinModules(moviesModules)
         }
-
         setHasOptionsMenu(true)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            exitTransition = MaterialElevationScale(/* growing= */ false)
-            reenterTransition = MaterialElevationScale(/* growing= */ true)
-        }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -120,6 +115,14 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
 
     //Click lister of adapter movies
     private fun setAdapterClickListener() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            exitTransition = MaterialElevationScale(false).apply {
+                duration = 300L
+            }
+            reenterTransition = MaterialElevationScale(true).apply {
+                duration = 170L
+            }
+        }
         adapter.setMovieClickListener { _, movieEntity, bannerImageView, ratingView ->
             val extras = FragmentNavigatorExtras(
                 bannerImageView to MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME,
@@ -193,13 +196,18 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    //listener menu item click
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.filter ->
                 findNavController().navigate(
                     R.id.nav_movies_filter
                 )
+            R.id.settings -> {
+                findNavController().navigateFeature {
+                    id = NavigatorManager.FEATURE_SETTINGS
+                }
+            }
+
         }
         return true
     }
@@ -233,7 +241,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
         offscreenPageLimit = 3
         transformCarroucel()
         adapter = favoriteAdapter
-        favoriteAdapter.setMovieClickListener{_, movieEntity, bannerImageView ->
+        favoriteAdapter.setMovieClickListener { _, movieEntity, bannerImageView ->
             val extras = FragmentNavigatorExtras(
                 bannerImageView to MovieDetailFragment.BANNER_ENTER_TRANSITION_NAME
             )
@@ -245,7 +253,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movies) {
                 extras
             )
         }
-        TabLayoutMediator(tab_layout, this) { _, _->}.attach()
+        TabLayoutMediator(tab_layout, this) { _, _ -> }.attach()
     }
 
     private fun getFavoriteMovies() {

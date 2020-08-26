@@ -8,7 +8,7 @@
         app:constraintSetEnd="@+id/overViewExpandEnd"
         app:constraintSetStart="@id/overViewExpandStart"
         app:duration="500">
-        <OnClick app:targetId="@id/see_more_tv" />
+
     </Transition>
     <Transition
         android:id="@+id/bannerExpand"

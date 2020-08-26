@@ -12,5 +12,10 @@
         android:icon="@drawable/ic_baseline_filter_list_24"
         android:title="@string/title_filter"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="@string/title_settings"
+        app:showAsAction="always"/>
 
 </menu>

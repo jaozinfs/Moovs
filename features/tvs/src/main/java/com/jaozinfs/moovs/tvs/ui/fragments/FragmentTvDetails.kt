@@ -101,7 +101,7 @@ class FragmentTvDetails : Fragment() {
     private fun observeLiveData() {
         tvsViewModel.observeTvIsFavorite(args.tvID)
             .observe(viewLifecycleOwner, Observer { favorite ->
-                binding.fabFullBtn.setOnClickListener(getListenerFavoriteButtonFromState(favorite))
+                binding.favoriteButtonClickListener = getListenerFavoriteButtonFromState(favorite)
                 changeFabText(getLabelFromFavoriteState(favorite))
             })
     }
